@@ -1,0 +1,353 @@
+---
+// Section G — CTA Devenir partenaire
+// Adaptation du composant Feature108 (shadcnblocks) en Astro+GSAP.
+// Fond : dégradé signature rose-violet. Card panel : blanc cassé avec texte sombre.
+// 3 tabs présentent 3 angles de la valeur du sponsoring SWSM :
+// Visibilité, Ancrage territorial, Activation B2B.
+// Photos : /public/images/cta/01.JPG, 02.JPG, 03.JPG
+---
+
+<section
+  class="cta relative bg-gradient-signature text-swsm-white py-24 md:py-32 overflow-hidden"
+  aria-label="Devenir partenaire de SWSM Racing Team"
+>
+  <div class="max-w-[1240px] mx-auto px-6 md:px-10 relative z-10">
+    <!-- Header centré -->
+    <header class="flex flex-col items-center gap-5 text-center max-w-3xl mx-auto">
+      <span class="cta-eyebrow inline-block text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-white border border-swsm-white/40 rounded-full px-4 py-1.5 backdrop-blur-sm">
+        Investir dans l'écurie
+      </span>
+
+      <h2
+        class="cta-title font-display font-bold text-swsm-white tracking-caps-tight leading-[1.05] text-3xl md:text-5xl lg:text-6xl"
+        data-split-mask
+      >
+        Faites partie de l'écurie.
+      </h2>
+
+      <p class="cta-sub font-body text-base md:text-lg text-swsm-white/90 leading-relaxed">
+        Cinq partenaires nous accompagnent déjà. Découvrez comment associer votre marque à SWSM Racing Team.
+      </p>
+    </header>
+
+    <!-- Tabs -->
+    <div class="cta-tabs mt-16 md:mt-20">
+      <!-- Tab triggers -->
+      <div
+        role="tablist"
+        aria-label="Angles du partenariat SWSM Racing Team"
+        class="cta-tablist flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-3"
+      >
+        <!-- Tab 1 : Visibilité -->
+        <button
+          type="button"
+          role="tab"
+          id="cta-tab-1"
+          aria-controls="cta-panel-1"
+          aria-selected="true"
+          data-tab="1"
+          class="cta-tab is-active flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-display font-semibold uppercase tracking-caps-loose transition-all duration-300 text-swsm-white/70 hover:text-swsm-white"
+        >
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+          <span>Visibilité</span>
+        </button>
+
+        <!-- Tab 2 : Ancrage -->
+        <button
+          type="button"
+          role="tab"
+          id="cta-tab-2"
+          aria-controls="cta-panel-2"
+          aria-selected="false"
+          data-tab="2"
+          class="cta-tab flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-display font-semibold uppercase tracking-caps-loose transition-all duration-300 text-swsm-white/70 hover:text-swsm-white"
+        >
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span>Ancrage</span>
+        </button>
+
+        <!-- Tab 3 : Activation -->
+        <button
+          type="button"
+          role="tab"
+          id="cta-tab-3"
+          aria-controls="cta-panel-3"
+          aria-selected="false"
+          data-tab="3"
+          class="cta-tab flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-display font-semibold uppercase tracking-caps-loose transition-all duration-300 text-swsm-white/70 hover:text-swsm-white"
+        >
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="8.5" cy="7" r="4"></circle>
+            <path d="M22 11h-6"></path>
+            <path d="M19 8v6"></path>
+          </svg>
+          <span>Activation</span>
+        </button>
+      </div>
+
+      <!-- Tab panels — card BLANC sur fond dégradé -->
+      <div class="cta-panels-wrap relative mt-8 rounded-2xl bg-swsm-white shadow-[0_24px_60px_-15px_rgba(0,0,0,0.35)] overflow-hidden">
+        <div class="cta-panels p-6 md:p-12 lg:p-16 text-swsm-black">
+          <!-- Panel 1 : Visibilité -->
+          <div
+            role="tabpanel"
+            id="cta-panel-1"
+            aria-labelledby="cta-tab-1"
+            data-panel="1"
+            class="cta-panel grid place-items-center gap-12 lg:grid-cols-2 lg:gap-16"
+          >
+            <div class="flex flex-col gap-5">
+              <span class="inline-flex items-center w-fit text-[10px] uppercase tracking-eyebrow font-display font-medium text-swsm-pink border border-swsm-pink/40 rounded-full px-3 py-1">
+                Présence racing
+              </span>
+              <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.1] text-2xl md:text-3xl lg:text-4xl">
+                Votre marque sur la piste.
+              </h3>
+              <p class="font-body text-base text-swsm-black/75 leading-relaxed">
+                Logo sur les motos, les combinaisons, dans le paddock et sur tous nos supports digitaux. Six à huit week-ends de course par saison en Championnat de France de Supermotard, devant un public spécialisé et la presse motarde.
+              </p>
+              <ul class="font-body text-sm text-swsm-black/70 space-y-2 mt-2">
+                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Combi pilote, carénage moto, supports paddock</span></li>
+                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Réseaux sociaux : LinkedIn, Instagram, Facebook, TikTok</span></li>
+                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Comptes rendus de course publiés sous 48h</span></li>
+              </ul>
+            </div>
+            <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-swsm-black/5">
+              <img src="/images/cta/01.JPG" alt="Visibilité racing SWSM Racing Team" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Panel 2 : Ancrage -->
+          <div
+            role="tabpanel"
+            id="cta-panel-2"
+            aria-labelledby="cta-tab-2"
+            data-panel="2"
+            class="cta-panel hidden grid place-items-center gap-12 lg:grid-cols-2 lg:gap-16"
+          >
+            <div class="flex flex-col gap-5">
+              <span class="inline-flex items-center w-fit text-[10px] uppercase tracking-eyebrow font-display font-medium text-swsm-pink border border-swsm-pink/40 rounded-full px-3 py-1">
+                Sud-Ouest
+              </span>
+              <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.1] text-2xl md:text-3xl lg:text-4xl">
+                Une écurie ancrée dans le territoire.
+              </h3>
+              <p class="font-body text-base text-swsm-black/75 leading-relaxed">
+                Structure privée du Sud-Ouest, racines en Nouvelle-Aquitaine. Pour une PME locale, c'est l'opportunité d'associer son image à un projet sportif identitaire, durable, et reconnu sur le territoire.
+              </p>
+              <ul class="font-body text-sm text-swsm-black/70 space-y-2 mt-2">
+                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Communauté locale de partenaires (5 déjà engagés)</span></li>
+                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Visibilité sur les retombées presse régionales</span></li>
+                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Réseau Sud-Ouest activé via 360 Franchises</span></li>
+              </ul>
+            </div>
+            <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-swsm-black/5">
+              <img src="/images/cta/02.JPG" alt="Ancrage territorial SWSM Racing Team" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Panel 3 : Activation -->
+          <div
+            role="tabpanel"
+            id="cta-panel-3"
+            aria-labelledby="cta-tab-3"
+            data-panel="3"
+            class="cta-panel hidden grid place-items-center gap-12 lg:grid-cols-2 lg:gap-16"
+          >
+            <div class="flex flex-col gap-5">
+              <span class="inline-flex items-center w-fit text-[10px] uppercase tracking-eyebrow font-display font-medium text-swsm-pink border border-swsm-pink/40 rounded-full px-3 py-1">
+                Hospitalité B2B
+              </span>
+              <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.1] text-2xl md:text-3xl lg:text-4xl">
+                Un terrain d'activation client.
+              </h3>
+              <p class="font-body text-base text-swsm-black/75 leading-relaxed">
+                Le sponsoring SWSM, ce n'est pas qu'un logo. C'est un outil de relation client : invitations paddock le week-end de course, événements dédiés, contenu éditorial pour vos canaux internes ou externes.
+              </p>
+              <ul class="font-body text-sm text-swsm-black/70 space-y-2 mt-2">
+                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Invitations paddock pour vos clients VIP</span></li>
+                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Photos / vidéos exclusives pour vos contenus</span></li>
+                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Co-création d'événements (séminaires, soirées)</span></li>
+              </ul>
+            </div>
+            <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-swsm-black/5">
+              <img src="/images/cta/03.JPG" alt="Activation B2B SWSM Racing Team" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTAs globaux -->
+    <div class="cta-buttons mt-12 md:mt-16 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
+      <a
+        href="/dossier-sponsoring.pdf"
+        download
+        id="cta-download"
+        class="btn-cta btn-cta-pink font-display font-bold text-sm uppercase tracking-caps-loose px-8 py-4"
+      >
+        <span>Télécharger le dossier</span>
+        <span class="btn-cta-arrow">→</span>
+      </a>
+      <a
+        href="/devenir-partenaire"
+        id="cta-contact"
+        class="btn-cta btn-cta-glass font-display font-bold text-sm uppercase tracking-caps-loose px-8 py-4"
+      >
+        <span>Prendre contact</span>
+        <span class="btn-cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Liseré décoratif en bas -->
+  <div
+    class="absolute w-full h-px bottom-0 left-0 z-0 pointer-events-none"
+    style="background:radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);"
+    aria-hidden="true"
+  ></div>
+</section>
+
+<style>
+  /* Tab actif : bg blanc semi-opaque, texte blanc plein */
+  .cta-tab.is-active {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff !important;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35) inset;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Tailwind : `hidden` = display:none (override grid) ; quand JS retire `hidden`,
+     la classe `grid` reprend la main et display:grid s'applique. */
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const section = document.querySelector<HTMLElement>(".cta");
+  const eyebrow = document.querySelector<HTMLElement>(".cta-eyebrow");
+  const sub = document.querySelector<HTMLElement>(".cta-sub");
+  const tablist = document.querySelector<HTMLElement>(".cta-tablist");
+  const panelsWrap = document.querySelector<HTMLElement>(".cta-panels-wrap");
+  const buttons = document.querySelector<HTMLElement>(".cta-buttons");
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>(".cta-tab"));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>(".cta-panel"));
+
+  // ─── Animation d'entrée ───────────────────────────────────────────
+  if (section && eyebrow && sub && tablist && panelsWrap && buttons) {
+    if (reduce) {
+      gsap.set([eyebrow, sub, tablist, panelsWrap, buttons], { opacity: 1, y: 0 });
+    } else {
+      gsap.set([eyebrow, sub, tablist, panelsWrap, buttons], { opacity: 0, y: 25 });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          toggleActions: "play none none none",
+        },
+      })
+        .to(eyebrow, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+        .to(sub, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+        .to(tablist, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")
+        .to(panelsWrap, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.3")
+        .to(buttons, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.4");
+    }
+  }
+
+  // ─── Logique de switch tabs ──────────────────────────────────────
+  const showPanel = (index: number) => {
+    const targetPanel = panels[index];
+    const currentPanel = panels.find((p) => !p.classList.contains("hidden"));
+
+    tabs.forEach((t, i) => {
+      const active = i === index;
+      t.classList.toggle("is-active", active);
+      t.setAttribute("aria-selected", active ? "true" : "false");
+    });
+
+    if (!targetPanel || targetPanel === currentPanel) return;
+
+    if (reduce) {
+      panels.forEach((p) => p.classList.add("hidden"));
+      targetPanel.classList.remove("hidden");
+      return;
+    }
+
+    if (currentPanel) {
+      gsap.to(currentPanel, {
+        opacity: 0,
+        y: 10,
+        duration: 0.25,
+        ease: "power2.in",
+        onComplete: () => {
+          currentPanel.classList.add("hidden");
+          gsap.set(currentPanel, { opacity: 1, y: 0 });
+          targetPanel.classList.remove("hidden");
+          gsap.fromTo(
+            targetPanel,
+            { opacity: 0, y: -10 },
+            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+          );
+        },
+      });
+    } else {
+      targetPanel.classList.remove("hidden");
+      gsap.fromTo(
+        targetPanel,
+        { opacity: 0, y: -10 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+      );
+    }
+  };
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => showPanel(i));
+  });
+
+  tablist?.addEventListener("keydown", (e: KeyboardEvent) => {
+    const currentIndex = tabs.findIndex((t) => t === document.activeElement);
+    if (currentIndex === -1) return;
+    let nextIndex = currentIndex;
+    if (e.key === "ArrowRight") nextIndex = (currentIndex + 1) % tabs.length;
+    else if (e.key === "ArrowLeft") nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    else return;
+    e.preventDefault();
+    tabs[nextIndex].focus();
+    showPanel(nextIndex);
+  });
+
+  // ─── Plausible events ───────────────────────────────────────────
+  document.getElementById("cta-download")?.addEventListener("click", () => {
+    if ((window as any).plausible) {
+      (window as any).plausible("Download dossier sponsoring");
+    }
+  });
+  document.getElementById("cta-contact")?.addEventListener("click", () => {
+    if ((window as any).plausible) {
+      (window as any).plausible("Click CTA Devenir partenaire");
+    }
+  });
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => {
+      if ((window as any).plausible) {
+        const labels = ["Visibilité", "Ancrage", "Activation"];
+        (window as any).plausible("Click CTA tab", { props: { tab: labels[i] || `tab-${i + 1}` } });
+      }
+    });
+  });
+</script>

@@ -1,0 +1,73 @@
+---
+// CTA Newsletter en bas de /coulisses — section sombre, formulaire simple.
+// Pas de backend pour l'instant : capture l'email puis affiche un message.
+---
+
+<section class="coul-newsletter relative bg-swsm-black text-swsm-white py-24 md:py-32 px-6 md:px-10 overflow-hidden" style="z-index:3;">
+  <!-- Halo subtil rose-violet -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-50"
+    aria-hidden="true"
+    style="background: radial-gradient(ellipse at 30% 50%, rgba(236,45,124,0.15) 0%, transparent 55%), radial-gradient(ellipse at 70% 50%, rgba(91,33,182,0.15) 0%, transparent 55%);"
+  ></div>
+
+  <div class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center gap-6">
+    <p class="coul-news-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink">
+      Ne ratez aucun article
+    </p>
+
+    <h2
+      class="coul-news-title font-display font-bold text-swsm-white tracking-caps-tight leading-[1.05] text-3xl md:text-5xl"
+      data-split-mask
+    >
+      Suivez la saison 2026.
+    </h2>
+
+    <p class="coul-news-sub font-body text-base md:text-lg text-swsm-white/70 max-w-xl">
+      Comptes rendus de course, portraits, coulisses techniques. Un mail tous les quinze jours, jamais plus.
+    </p>
+
+    <form
+      class="coul-news-form mt-6 flex flex-col sm:flex-row items-stretch gap-3 w-full max-w-lg"
+      novalidate
+    >
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="votre@email.fr"
+        class="flex-1 bg-swsm-white/8 border border-swsm-white/20 rounded-md px-5 py-3 text-sm font-body text-swsm-white placeholder:text-swsm-white/40 focus:outline-none focus:border-swsm-pink transition-colors"
+      />
+      <button
+        type="submit"
+        class="btn-cta btn-cta-pink font-display font-bold text-sm uppercase tracking-caps-loose px-6 py-3"
+      >
+        <span>S'inscrire</span>
+        <span class="btn-cta-arrow">→</span>
+      </button>
+    </form>
+
+    <p class="coul-news-feedback font-body text-sm text-swsm-pink mt-2 hidden">
+      Merci. À très vite en piste.
+    </p>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>(".coul-news-form");
+  const feedback = document.querySelector<HTMLElement>(".coul-news-feedback");
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = form.querySelector<HTMLInputElement>("input[type=email]");
+    if (!input || !input.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+      input?.classList.add("border-swsm-pink");
+      return;
+    }
+    feedback?.classList.remove("hidden");
+    form.reset();
+    if ((window as any).plausible) {
+      (window as any).plausible("Newsletter signup", { props: { source: "coulisses" } });
+    }
+  });
+</script>

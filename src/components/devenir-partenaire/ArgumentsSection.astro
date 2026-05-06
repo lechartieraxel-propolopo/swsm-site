@@ -1,0 +1,85 @@
+---
+const args = [
+  {
+    num: "01",
+    title: "Une structure en construction",
+    desc: "SWSM Racing Team est une écurie privée du Sud-Ouest engageant trois pilotes en Championnat de France. Une opportunité d'accompagner une structure dès ses débuts, à un moment où chaque sponsor prend une place visible et durable.",
+  },
+  {
+    num: "02",
+    title: "Un écosystème B2B",
+    desc: "Soutenue par 360 Franchises et ATL Capital, SWSM s'inscrit dans un réseau B2B local actif. Un sponsoring, c'est aussi rejoindre une communauté de dirigeants qui se croisent et collaborent au-delà du paddock.",
+  },
+  {
+    num: "03",
+    title: "Une exposition ciblée",
+    desc: "Au-delà des courses, SWSM est présente sur LinkedIn, Instagram et les rendez-vous business du Sud-Ouest. Un partenariat se mesure en visibilité réelle, retombées presse et activations terrain — pas en logos collés sur une moto.",
+  },
+];
+---
+
+<section class="dp-args has-grain bg-swsm-white py-24 md:py-32 px-6 md:px-10" style="z-index:2;">
+  <div class="max-w-[1240px] mx-auto">
+    <header class="mb-16 md:mb-20 max-w-2xl">
+      <p class="dp-args-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
+        L'opportunité
+      </p>
+      <h2
+        class="dp-args-title font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl"
+        data-split-mask
+      >
+        Trois raisons d'investir.
+      </h2>
+    </header>
+
+    <div class="grid md:grid-cols-3 gap-12 md:gap-10">
+      {args.map((arg) => (
+        <article class="dp-arg relative">
+          <span
+            class="dp-arg-num absolute -top-4 -left-2 font-display font-bold text-swsm-black/[0.08] leading-none tracking-caps-tight pointer-events-none"
+            style="font-size: clamp(5rem, 10vw, 8rem);"
+            aria-hidden="true"
+          >
+            {arg.num}
+          </span>
+          <div class="relative z-10 pt-12 md:pt-16">
+            <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-4">
+              {arg.num}
+            </p>
+            <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.15] text-xl md:text-2xl mb-4">
+              {arg.title}
+            </h3>
+            <p class="font-body text-base text-swsm-black/75 leading-relaxed">
+              {arg.desc}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const section = document.querySelector<HTMLElement>(".dp-args");
+  const eyebrow = document.querySelector<HTMLElement>(".dp-args-eyebrow");
+  const args = Array.from(document.querySelectorAll<HTMLElement>(".dp-arg"));
+
+  if (section && eyebrow && args.length) {
+    if (reduce) {
+      gsap.set([eyebrow, ...args], { opacity: 1, y: 0 });
+    } else {
+      gsap.set(eyebrow, { opacity: 0, y: 20 });
+      gsap.set(args, { opacity: 0, y: 40 });
+      gsap.timeline({
+        scrollTrigger: { trigger: section, start: "top 75%", toggleActions: "play none none none" },
+      })
+        .to(eyebrow, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+        .to(args, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.18 }, "-=0.2");
+    }
+  }
+</script>

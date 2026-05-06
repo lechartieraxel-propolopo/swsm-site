@@ -1,0 +1,231 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroAlbum from "../components/album/HeroAlbum.astro";
+import InteractiveImageBentoGallery, { type ImageItem } from "../components/ui/bento-gallery";
+import { FeatureCarousel, type Feature } from "../components/ui/feature-carousel";
+import { MomentsCarousel } from "../components/album/MomentsCarousel";
+import { SmoothScrollHero } from "../components/ui/smooth-scroll-hero";
+
+// ─── Cinq chapitres pour le FeatureCarousel ─────────────────────
+// Icônes : SVG inline ultra-sobres (charte SWSM = pas d'emoji, lignes nettes)
+const chapitres: Feature[] = [
+  {
+    id: "atelier",
+    label: "Atelier",
+    image: "/images/general/IMG_9351.JPG",
+    description: "Le silence avant le départ. La moto se prépare, on vérifie deux fois.",
+    icon: "wrench",
+  },
+  {
+    id: "pregrille",
+    label: "Pré-grille",
+    image: "/images/general/IMG_9408.JPG",
+    description: "Le casque vissé. Le rythme cardiaque qui monte tranquille.",
+    icon: "flag",
+  },
+  {
+    id: "course",
+    label: "Course",
+    image: "/images/general/IMG_9442.JPG",
+    description: "Le moment où tout s'accélère et où plus rien n'existe en dehors du virage.",
+    icon: "bolt",
+  },
+  {
+    id: "stand",
+    label: "Stand",
+    image: "/images/general/IMG_9379.JPG",
+    description: "Cinq minutes pour ajuster. Une butée, un cran de plus, on retourne.",
+    icon: "tools",
+  },
+  {
+    id: "coulisses",
+    label: "Coulisses",
+    image: "/images/general/IMG_9451.JPG",
+    description: "Discussion technique. Les data parlent, mais le ressenti aussi.",
+    icon: "camera",
+  },
+];
+
+// ─── Quatre moments pour le ProgressiveCarousel ─────────────────
+const moments = [
+  {
+    img: "/images/general/IMG_9430.JPG",
+    title: "Le tracé",
+    desc: "Connu par cœur. Et appris à chaque tour.",
+    name: "trace",
+  },
+  {
+    img: "/images/general/IMG_9446.JPG",
+    title: "Le drift",
+    desc: "Quand l'arrière sort un peu. On contre, on relance.",
+    name: "drift",
+  },
+  {
+    img: "/images/general/IMG_9499.JPG",
+    title: "La fin",
+    desc: "Le bilan. Ce qui a marché, ce qu'on travaille pour la prochaine.",
+    name: "fin",
+  },
+  {
+    img: "/images/general/IMG_9459.JPG",
+    title: "Le soir",
+    desc: "La fatigue qui s'installe, mais le sourire.",
+    name: "soir",
+  },
+];
+
+// ─── Vingt photos pour le Bento ─────────────────────────────────
+const albumItems: ImageItem[] = [
+  { id: 1, title: "Atelier · Préparation", desc: "Le silence avant le départ.", url: "/images/general/IMG_9351.JPG", span: "md:col-span-2 md:row-span-2" },
+  { id: 2, title: "Paddock · Tôt le matin", desc: "La rosée sur les pneus.", url: "/images/general/IMG_9360.JPG", span: "md:row-span-1" },
+  { id: 3, title: "Piste · Essais libres", desc: "On cherche les appuis.", url: "/images/general/IMG_9368.JPG", span: "md:row-span-1" },
+  { id: 4, title: "Stand · Entre deux runs", desc: "Cinq minutes pour ajuster.", url: "/images/general/IMG_9379.JPG", span: "md:row-span-2" },
+  { id: 5, title: "Trajectoire · Course", desc: "Plus rien n'existe en dehors du virage.", url: "/images/general/IMG_9384.JPG", span: "md:row-span-1" },
+  { id: 6, title: "Sortie de courbe", desc: "Pleine accélération, avec méthode.", url: "/images/general/IMG_9392.JPG", span: "md:col-span-2 md:row-span-1" },
+  { id: 7, title: "Paddock · Pause", desc: "Discussion technique.", url: "/images/general/IMG_9399.JPG", span: "md:row-span-2" },
+  { id: 8, title: "Box · Mécanique", desc: "Tout dépend de ce moment-là.", url: "/images/general/IMG_9403.JPG", span: "md:row-span-1" },
+  { id: 9, title: "Pré-grille", desc: "Le casque vissé.", url: "/images/general/IMG_9408.JPG", span: "md:col-span-2 md:row-span-2" },
+  { id: 10, title: "Ligne droite · Course", desc: "On regarde devant. Jamais derrière.", url: "/images/general/IMG_9412.JPG", span: "md:row-span-1" },
+  { id: 11, title: "Combinaison · Détail", desc: "Les sliders qui ont vu du bitume.", url: "/images/general/IMG_9416.JPG", span: "md:row-span-1" },
+  { id: 12, title: "Équipement · Atelier", desc: "Tout ce qu'il faut. Rien de plus.", url: "/images/general/IMG_9421.JPG", span: "md:row-span-2" },
+  { id: 13, title: "Piste · Manche", desc: "Le tracé qu'on connaît par cœur.", url: "/images/general/IMG_9430.JPG", span: "md:col-span-2 md:row-span-1" },
+  { id: 14, title: "Pilote · Concentration", desc: "Le regard. Les visualisations du tour.", url: "/images/general/IMG_9440.JPG", span: "md:row-span-1" },
+  { id: 15, title: "Action · Course", desc: "Pleine charge.", url: "/images/general/IMG_9442.JPG", span: "md:row-span-2" },
+  { id: 16, title: "Drift · Course", desc: "On contre, on relance.", url: "/images/general/IMG_9446.JPG", span: "md:row-span-1" },
+  { id: 17, title: "Photographe · Coulisses", desc: "L'image fait partie du sport.", url: "/images/general/IMG_9451.JPG", span: "md:col-span-2 md:row-span-2" },
+  { id: 18, title: "Détail moto · Stand", desc: "Les heures de prépa qu'on ne voit pas.", url: "/images/general/IMG_9456.JPG", span: "md:row-span-1" },
+  { id: 19, title: "Coulisses · Soir", desc: "Le sourire.", url: "/images/general/IMG_9459.JPG", span: "md:row-span-1" },
+  { id: 20, title: "Fin de manche", desc: "Le bilan.", url: "/images/general/IMG_9499.JPG", span: "md:col-span-2 md:row-span-2" },
+];
+---
+
+<BaseLayout
+  title="Album"
+  description="L'album photo de SWSM Racing Team. Coulisses, courses, instants. Une saison vue de près."
+>
+  <!-- 1. HERO immersif : photo + spiral animation overlay -->
+  <HeroAlbum />
+
+  <!-- 2. FEATURE CAROUSEL : la saison en 5 chapitres -->
+  <section
+    class="album-chapters relative bg-swsm-black text-swsm-white py-24 md:py-32 px-6 md:px-10"
+    style="z-index:2;box-shadow:0 -40px 80px -10px rgba(0,0,0,0.6);"
+    aria-label="La saison en cinq chapitres"
+  >
+    <div class="max-w-[1240px] mx-auto">
+      <header class="max-w-2xl mb-12 md:mb-16">
+        <p class="text-xs uppercase tracking-[0.05em] font-display font-medium text-swsm-pink mb-5">
+          Cinq chapitres
+        </p>
+        <h2
+          class="font-display font-bold tracking-[-0.01em] leading-[1.05] text-3xl md:text-5xl mb-4"
+          data-split-mask
+        >
+          Une saison, cinq temps.
+        </h2>
+        <p class="font-body text-base md:text-lg text-swsm-white/70 leading-relaxed">
+          De l'atelier à la pré-grille, du stand à la course. Chaque moment a son rythme,
+          son rituel, sa lumière.
+        </p>
+      </header>
+
+      <FeatureCarousel features={chapitres} client:visible />
+    </div>
+  </section>
+
+  <!-- 3. SMOOTH SCROLL HERO : révélation parallax au scroll -->
+  <section class="album-reveal relative" aria-label="Photo emblématique">
+    <SmoothScrollHero
+      scrollHeight={1200}
+      desktopImage="/images/general/IMG_9412.JPG"
+      mobileImage="/images/general/IMG_9412.JPG"
+      initialClipPercentage={20}
+      finalClipPercentage={80}
+      client:visible
+    >
+      <div class="text-center px-6 max-w-3xl pointer-events-none">
+        <p class="text-xs uppercase tracking-[0.05em] font-display font-medium text-swsm-pink mb-5 drop-shadow-lg">
+          En course
+        </p>
+        <h2 class="font-display font-bold text-swsm-white tracking-[-0.01em] leading-[1.05] text-4xl md:text-6xl drop-shadow-2xl">
+          On regarde devant.<br/>Jamais derrière.
+        </h2>
+      </div>
+    </SmoothScrollHero>
+  </section>
+
+  <!-- 4. PROGRESSIVE CAROUSEL : moments forts en autoplay -->
+  <section
+    class="album-moments relative bg-swsm-white text-swsm-black py-24 md:py-32 px-6 md:px-10 has-grain"
+    aria-label="Moments forts"
+  >
+    <div class="max-w-[1240px] mx-auto">
+      <header class="max-w-2xl mb-12 md:mb-16">
+        <p class="text-xs uppercase tracking-[0.05em] font-display font-medium text-swsm-pink mb-5">
+          Moments
+        </p>
+        <h2
+          class="font-display font-bold text-swsm-black tracking-[-0.01em] leading-[1.05] text-3xl md:text-5xl mb-4"
+          data-split-mask
+        >
+          Quatre instants qui résument tout.
+        </h2>
+        <p class="font-body text-base md:text-lg text-swsm-black/70 leading-relaxed">
+          Le tracé, le drift, la fin, le soir. Quatre photos qui racontent ce que c'est, une journée de course.
+        </p>
+      </header>
+
+      <div class="relative max-w-[1100px] mx-auto">
+        <MomentsCarousel moments={moments} client:visible />
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. BENTO GALLERY : l'album complet drag horizontal -->
+  <section
+    class="album-bento bg-swsm-white text-swsm-black border-t border-swsm-black/10"
+    aria-label="L'album complet"
+  >
+    <div class="max-w-[1240px] mx-auto px-6 md:px-10 pt-24 md:pt-32 pb-4">
+      <header class="max-w-2xl">
+        <p class="text-xs uppercase tracking-[0.05em] font-display font-medium text-swsm-pink mb-5">
+          L'album complet
+        </p>
+        <h2
+          class="font-display font-bold text-swsm-black tracking-[-0.01em] leading-[1.05] text-3xl md:text-5xl mb-4"
+          data-split-mask
+        >
+          Faites votre choix.
+        </h2>
+      </header>
+    </div>
+    <InteractiveImageBentoGallery
+      imageItems={albumItems}
+      title=""
+      description="Vingt instants captés sur une saison. Glissez pour parcourir, cliquez sur une image pour la voir en grand format avec son contexte."
+      client:visible
+    />
+  </section>
+
+  <!-- 6. OUTRO -->
+  <section class="album-outro bg-swsm-black text-swsm-white py-24 md:py-32 px-6 md:px-10">
+    <div class="max-w-[800px] mx-auto text-center">
+      <p class="text-[10px] md:text-xs uppercase tracking-[0.05em] font-display font-medium text-swsm-pink mb-6">
+        Fin de l'album
+      </p>
+      <h2 class="font-display font-bold tracking-[-0.01em] leading-[1.05] text-2xl md:text-4xl mb-6">
+        Et la saison continue.
+      </h2>
+      <p class="font-body text-sm md:text-base text-swsm-white/70 leading-relaxed mb-10">
+        D'autres images, d'autres manches, d'autres histoires arrivent. L'album se construit en continu.
+      </p>
+      <a
+        href="/coulisses"
+        class="btn-cta btn-cta-light font-display font-bold text-sm uppercase tracking-[0.05em] px-7 py-4"
+      >
+        <span>Lire les coulisses</span>
+        <span class="btn-cta-arrow">→</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

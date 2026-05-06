@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page introuvable"
+  description="Cette page n'existe pas ou n'existe plus."
+>
+  <section class="bg-swsm-white min-h-[80vh] flex items-center justify-center py-24 md:py-32 px-6 md:px-10">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+        Erreur 404
+      </p>
+      <h1 class="font-display font-bold text-swsm-black tracking-caps-tight leading-none text-7xl md:text-9xl mb-8">
+        404
+      </h1>
+      <p class="font-display font-bold text-swsm-black text-xl md:text-2xl mb-4">
+        Cette page n'existe pas.
+      </p>
+      <p class="font-body text-base text-swsm-black/70 mb-12 max-w-md mx-auto">
+        Le lien que vous avez suivi est peut-être obsolète, ou l'adresse a été mal saisie.
+      </p>
+      <a
+        href="/"
+        class="inline-block font-display font-bold text-sm uppercase tracking-caps-loose text-swsm-black border-2 border-swsm-black hover:bg-swsm-black hover:text-swsm-white px-8 py-4 transition-colors duration-300"
+      >
+        Retour à l'accueil →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

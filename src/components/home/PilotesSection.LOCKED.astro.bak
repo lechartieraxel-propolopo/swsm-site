@@ -1,0 +1,147 @@
+---
+// Section Pilotes — pin GSAP horizontal scroll (version originale qui marchait)
+import { getCollection } from "astro:content";
+
+const pilotes = (await getCollection("pilotes")).sort(
+  (a, b) => a.data.ordre - b.data.ordre,
+);
+const totalSlides = pilotes.length;
+---
+
+<section class="pilotes pilotes-section" style="position:relative;background:#F7F7F5;z-index:3;">
+  <header style="padding:6rem 1.5rem 3rem;max-width:1240px;margin:0 auto;">
+    <p style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#EC2D7C;margin-bottom:1.5rem;">
+      L'écurie
+    </p>
+    <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;letter-spacing:-0.01em;color:#0D0D0D;max-width:900px;">
+      Trois pilotes. Un seul collectif.
+    </h2>
+  </header>
+
+  <div class="pilotes-pin" style="position:relative;height:100vh;overflow:hidden;">
+    <div
+      class="pilotes-track"
+      style={`position:relative;display:flex;height:100%;width:${totalSlides * 100}vw;`}
+    >
+      {pilotes.map((p) => {
+        const charWidthVw = 14;
+        const numLen = p.data.numero.length;
+        let paddingRight = 18 + (3 - numLen) * charWidthVw;
+        if (p.data.numero === "500") paddingRight -= 2;
+        return (
+        <article
+          class="pilote-slide"
+          style="flex:0 0 100vw;height:100%;display:flex;align-items:center;justify-content:center;padding:2rem 3rem;position:relative;"
+        >
+          <span
+            aria-hidden="true"
+            style={`position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:${paddingRight}vw;font-family:var(--font-display);font-weight:700;font-size:28vw;color:rgba(13,13,13,0.05);line-height:1;letter-spacing:-0.02em;pointer-events:none;user-select:none;`}
+          >
+            {p.data.numero}
+          </span>
+
+          <div style="position:relative;z-index:1;display:grid;grid-template-columns:3fr 2fr;gap:4rem;align-items:center;width:100%;max-width:1240px;">
+            <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:transparent;max-height:70vh;margin-left:auto;width:100%;">
+              <img
+                src={p.data.photo}
+                alt={`${p.data.prenom} ${p.data.nom}`}
+                style="width:100%;height:100%;object-fit:contain;object-position:center bottom;display:block;"
+                loading="lazy"
+              />
+            </div>
+
+            <div>
+              <p style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#EC2D7C;margin-bottom:1rem;">
+                Pilote {String(p.data.ordre).padStart(2, "0")}
+              </p>
+              <p style="font-family:var(--font-display);font-weight:700;font-size:clamp(4rem,8vw,7rem);line-height:0.9;letter-spacing:-0.01em;color:#0D0D0D;margin:0;">
+                #{p.data.numero}
+              </p>
+              <h3 style="font-family:var(--font-display);font-weight:700;font-size:clamp(1.5rem,2.5vw,2rem);letter-spacing:-0.01em;color:#0D0D0D;margin-top:1.25rem;">
+                {p.data.prenom} {p.data.nom}
+              </h3>
+              <p style="font-family:var(--font-body);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:rgba(13,13,13,0.7);margin-top:0.5rem;">
+                {p.data.categorie}{p.data.trophee && " — Trophée de France"}
+              </p>
+              <p style="font-family:var(--font-body);font-size:1rem;line-height:1.6;color:rgba(13,13,13,0.85);margin-top:1.5rem;max-width:28rem;">
+                {p.data.bio}
+              </p>
+            </div>
+          </div>
+        </article>
+        );
+      })}
+    </div>
+
+    <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:1rem;pointer-events:none;">
+      <span class="pilotes-counter" style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(13,13,13,0.6);">
+        01 / {String(totalSlides).padStart(2, "0")}
+      </span>
+      <div style="width:8rem;height:1px;background:rgba(13,13,13,0.15);position:relative;">
+        <div class="pilotes-progress" style="position:absolute;inset-block:0;left:0;background:#EC2D7C;width:0%;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    .pilotes-pin { height: auto !important; overflow: visible !important; }
+    .pilotes-track { display: block !important; width: 100% !important; transform: none !important; }
+    .pilote-slide {
+      flex: none !important;
+      width: 100% !important;
+      height: auto !important;
+      padding-top: 4rem !important;
+      padding-bottom: 4rem !important;
+      border-bottom: 1px solid rgba(13, 13, 13, 0.08);
+    }
+    .pilote-slide:last-child { border-bottom: none; }
+    .pilote-slide > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initPilotesPin() {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (reduce || isMobile) return;
+
+    const pin = document.querySelector<HTMLElement>(".pilotes-pin");
+    const track = document.querySelector<HTMLElement>(".pilotes-track");
+    const counter = document.querySelector<HTMLElement>(".pilotes-counter");
+    const progress = document.querySelector<HTMLElement>(".pilotes-progress");
+    const slides = document.querySelectorAll<HTMLElement>(".pilote-slide");
+    if (!pin || !track || slides.length < 2) return;
+
+    const slideCount = slides.length;
+    const distance = (slideCount - 1) * window.innerWidth;
+
+    gsap.to(track, {
+      x: -distance,
+      ease: "none",
+      scrollTrigger: {
+        trigger: pin,
+        start: "top top",
+        end: `+=${distance}`,
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const current = Math.min(Math.floor(self.progress * slideCount) + 1, slideCount);
+          if (counter) counter.textContent = `${String(current).padStart(2, "0")} / ${String(slideCount).padStart(2, "0")}`;
+          if (progress) progress.style.width = `${self.progress * 100}%`;
+        },
+      },
+    });
+  }
+
+  if (document.readyState === "complete") initPilotesPin();
+  else window.addEventListener("load", initPilotesPin);
+
+  window.addEventListener("load", () => setTimeout(() => ScrollTrigger.refresh(), 200));
+</script>

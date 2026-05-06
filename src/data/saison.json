@@ -1,0 +1,66 @@
+{
+  "annee": 2026,
+  "championnat": "Championnat de France Supermotard — Challenger",
+  "manches": [
+    {
+      "id": 1,
+      "lieu": "Le Val d'Argenton",
+      "departement": "79",
+      "organisateur": "MC Angevin",
+      "date": "2026-04-25",
+      "date_fin": "2026-04-26",
+      "statut": "passe",
+      "resultats": {
+        "axel": { "position": 12, "categorie": "Challenger" },
+        "tristan": { "position": 18, "categorie": "Challenger" },
+        "edouardo": { "position": 25, "categorie": "Challenger" }
+      },
+      "lien_compte_rendu": "/coulisses/val-d-argenton-2026"
+    },
+    {
+      "id": 2,
+      "lieu": "Lohéac",
+      "departement": "35",
+      "organisateur": "MC Roazhon Supermot'",
+      "date": "2026-06-06",
+      "date_fin": "2026-06-07",
+      "statut": "a_venir"
+    },
+    {
+      "id": 3,
+      "lieu": "Rouen",
+      "departement": "76",
+      "organisateur": "TDG Motors",
+      "date": "2026-07-04",
+      "date_fin": "2026-07-05",
+      "statut": "a_venir"
+    },
+    {
+      "id": 4,
+      "lieu": "Saint-Amand-Colombiers",
+      "departement": "18",
+      "organisateur": "MC Boischaut",
+      "date": "2026-07-25",
+      "date_fin": "2026-07-26",
+      "statut": "a_venir"
+    },
+    {
+      "id": 5,
+      "lieu": "Circuit d'Albi",
+      "departement": "81",
+      "organisateur": "MC du Circuit d'Albi",
+      "date": "2026-08-29",
+      "date_fin": "2026-08-30",
+      "statut": "a_venir"
+    },
+    {
+      "id": 6,
+      "lieu": "Villars-sous-Écot",
+      "departement": "25",
+      "organisateur": "MC Villars-sous-Écot",
+      "date": "2026-09-12",
+      "date_fin": "2026-09-13",
+      "statut": "a_venir"
+    }
+  ]
+}

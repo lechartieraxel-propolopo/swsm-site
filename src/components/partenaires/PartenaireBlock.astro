@@ -1,0 +1,134 @@
+---
+// Bloc partenaire individuel — alterne photo gauche/droite et fond clair/sombre.
+// Props :
+//   partenaire : objet content collection (data + id)
+//   index      : 0-based, pilote l'alternance (pair = clair + photo gauche)
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  partenaire: CollectionEntry<"partenaires">;
+  index: number;
+}
+
+const { partenaire, index } = Astro.props;
+const { data, id } = partenaire;
+
+const isOdd = index % 2 === 1;
+const bgClass = isOdd ? "bg-swsm-black text-swsm-white" : "bg-swsm-white text-swsm-black has-grain";
+const photoOnLeft = !isOdd;
+
+const eyebrowColor = "text-swsm-pink";
+const titleColor = isOdd ? "text-swsm-white" : "text-swsm-black";
+const subColor = isOdd ? "text-swsm-white/70" : "text-swsm-black/70";
+const bodyColor = isOdd ? "text-swsm-white/85" : "text-swsm-black/85";
+const filigraneColor = isOdd ? "text-swsm-white/[0.04]" : "text-swsm-black/[0.05]";
+const linkColor = isOdd ? "text-swsm-white/80 hover:text-swsm-white" : "text-swsm-black/80 hover:text-swsm-pink";
+const linkBorder = isOdd ? "border-swsm-white/20" : "border-swsm-black/15";
+const citationBorder = isOdd ? "border-swsm-pink" : "border-swsm-pink";
+---
+
+<section
+  class={`part-block relative ${bgClass} min-h-screen flex items-center py-24 md:py-32 overflow-hidden`}
+  data-part-id={id}
+  data-part-index={index}
+  aria-label={`Partenaire ${data.nom}`}
+>
+  <!-- Filigrane gigantesque du nom -->
+  <span
+    class={`part-block-filigrane absolute font-display font-bold ${filigraneColor} leading-none tracking-caps-tight select-none whitespace-nowrap pointer-events-none`}
+    style={`font-size: 25vw; ${photoOnLeft ? "right: -5vw;" : "left: -5vw;"} top: 50%; transform: translateY(-50%);`}
+    aria-hidden="true"
+  >
+    {data.nom.split(" ")[0]}
+  </span>
+
+  <div class="relative z-10 max-w-[1240px] mx-auto px-6 md:px-10 w-full">
+    <div class={`grid md:grid-cols-2 gap-12 md:gap-16 items-center ${photoOnLeft ? "" : "md:[&>:first-child]:order-2"}`}>
+      <!-- Colonne photo -->
+      <div class="part-block-photo-wrap relative">
+        <div class="aspect-[4/5] overflow-hidden rounded-sm bg-swsm-black/30 relative">
+          {data.photo ? (
+            <img
+              src={data.photo}
+              alt={`Photo ${data.nom}`}
+              class="w-full h-full object-cover"
+              data-photo-reveal
+              loading="lazy"
+            />
+          ) : (
+            <div class="w-full h-full bg-gradient-to-br from-swsm-pink/30 to-swsm-violet/30 flex items-center justify-center">
+              <span class={`font-display font-bold text-2xl uppercase tracking-caps-tight ${titleColor}`}>
+                {data.nom}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <!-- Colonne contenu -->
+      <div class="part-block-content flex flex-col gap-5 max-w-xl">
+        <p class={`part-block-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium ${eyebrowColor}`}>
+          {data.niveau}
+        </p>
+
+        <h2
+          class={`part-block-title font-display font-bold ${titleColor} tracking-caps-tight leading-[1.05] text-4xl md:text-5xl lg:text-6xl`}
+          data-split-mask
+        >
+          {data.nom}
+        </h2>
+
+        <p class={`part-block-role font-body text-sm uppercase tracking-caps-loose ${subColor}`}>
+          {data.role}
+        </p>
+
+        <p class={`part-block-desc font-body text-base md:text-lg ${bodyColor} leading-relaxed mt-2`}>
+          {data.description}
+        </p>
+
+        {data.citation && (
+          <blockquote class={`part-block-citation mt-4 pl-6 border-l-2 ${citationBorder} italic font-body text-base ${bodyColor}`}>
+            {data.citation}
+          </blockquote>
+        )}
+
+        {(data.site || data.linkedin || data.instagram || data.email || data.telephone) && (
+          <ul class={`part-block-contacts mt-6 pt-6 border-t ${linkBorder} grid grid-cols-2 gap-2 text-sm font-body`}>
+            {data.site && (
+              <li><a href={data.site} target="_blank" rel="noopener noreferrer" class={`part-link ${linkColor} transition-colors inline-flex items-center gap-1.5`}>
+                <span>Site web</span><span class="part-link-arrow transition-transform">→</span>
+              </a></li>
+            )}
+            {data.linkedin && (
+              <li><a href={data.linkedin} target="_blank" rel="noopener noreferrer" class={`part-link ${linkColor} transition-colors inline-flex items-center gap-1.5`}>
+                <span>LinkedIn</span><span class="part-link-arrow transition-transform">→</span>
+              </a></li>
+            )}
+            {data.instagram && (
+              <li><a href={data.instagram} target="_blank" rel="noopener noreferrer" class={`part-link ${linkColor} transition-colors inline-flex items-center gap-1.5`}>
+                <span>Instagram</span><span class="part-link-arrow transition-transform">→</span>
+              </a></li>
+            )}
+            {data.email && (
+              <li><a href={`mailto:${data.email}`} class={`part-link ${linkColor} transition-colors inline-flex items-center gap-1.5`}>
+                <span>{data.email}</span>
+              </a></li>
+            )}
+            {data.telephone && (
+              <li><a href={`tel:${data.telephone}`} class={`part-link ${linkColor} transition-colors inline-flex items-center gap-1.5`}>
+                <span>{data.telephone}</span>
+              </a></li>
+            )}
+          </ul>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hover des liens contact : flèche qui glisse */
+  .part-link:hover .part-link-arrow {
+    transform: translateX(4px);
+  }
+</style>

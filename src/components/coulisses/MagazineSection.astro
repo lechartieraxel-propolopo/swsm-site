@@ -1,0 +1,207 @@
+---
+// Section "Le magazine" — articles éditoriaux dans un layout magazine asymétrique.
+// 1 article featured en grand à gauche, 2 articles plus petits empilés à droite.
+import { getCollection } from "astro:content";
+
+const articles = (await getCollection("articles", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const categoryLabel: Record<string, string> = {
+  "compte-rendu": "Compte rendu",
+  portrait: "Portrait",
+  coulisses: "Coulisses",
+  partenaire: "Partenaire",
+  ecurie: "Vie d'écurie",
+};
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+
+const featured = articles[0];
+const rest = articles.slice(1);
+---
+
+{articles.length > 0 && (
+  <section class="magazine bg-swsm-white py-24 md:py-32 px-6 md:px-10" aria-labelledby="magazine-title">
+    <div class="max-w-[1240px] mx-auto">
+      <!-- Header magazine masthead -->
+      <header class="magazine-masthead flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16 pb-6 border-b-2 border-swsm-black">
+        <div>
+          <p class="text-[10px] md:text-xs uppercase tracking-[0.25em] font-display font-medium text-swsm-pink mb-3">
+            Issue n°{String(2026)} — Le magazine
+          </p>
+          <h2
+            id="magazine-title"
+            class="font-display font-bold text-swsm-black tracking-caps-tight leading-[0.95] text-4xl md:text-6xl lg:text-7xl"
+            data-split-mask
+          >
+            Le carnet éditorial.
+          </h2>
+        </div>
+        <div class="md:text-right">
+          <p class="font-body italic text-sm text-swsm-black/60 max-w-xs leading-snug">
+            Comptes rendus de manche, portraits de pilotes, coulisses techniques. Le quotidien de l'écurie en mots.
+          </p>
+        </div>
+      </header>
+
+      <!-- Layout asymétrique : 1 featured grand + 2 petits stackés -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10">
+        {/* Featured article — col-span-7 sur desktop */}
+        {featured && (
+          <a
+            href={`/coulisses/${featured.id}`}
+            class="magazine-feature group lg:col-span-7 block relative"
+          >
+            <!-- Numéro filigrane en haut -->
+            <span
+              class="absolute -top-4 left-0 font-display font-bold text-swsm-black/[0.08] text-[8rem] md:text-[12rem] leading-[0.8] tracking-caps-tight pointer-events-none select-none"
+              aria-hidden="true"
+            >
+              N°01
+            </span>
+
+            <div class="relative">
+              <div class="aspect-[16/10] overflow-hidden bg-swsm-black/5 rounded-sm">
+                <img
+                  src={featured.data.cover}
+                  alt={featured.data.title}
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+              </div>
+
+              <div class="mt-6 md:mt-8 max-w-3xl">
+                <div class="flex items-center gap-4 mb-4">
+                  <span class="text-[10px] md:text-xs uppercase tracking-[0.18em] font-display font-medium text-swsm-pink">
+                    {categoryLabel[featured.data.category] || featured.data.category}
+                  </span>
+                  <span class="font-body italic text-xs md:text-sm text-swsm-black/55">
+                    {formatDate(featured.data.pubDate)}
+                  </span>
+                </div>
+                <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-4 group-hover:text-swsm-pink transition-colors duration-300">
+                  {featured.data.title}
+                </h3>
+                <p class="font-body text-base md:text-lg text-swsm-black/70 leading-relaxed mb-6 max-w-2xl">
+                  {featured.data.description}
+                </p>
+                <span class="inline-flex items-center gap-2 text-xs md:text-sm uppercase tracking-[0.18em] font-display font-bold text-swsm-black group-hover:text-swsm-pink transition-colors">
+                  <span class="relative">
+                    Lire l'article
+                    <span class="absolute left-0 -bottom-0.5 w-full h-px bg-current scale-x-100 group-hover:scale-x-110 origin-left transition-transform"></span>
+                  </span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        )}
+
+        {/* Articles secondaires stackés — col-span-5 sur desktop */}
+        <div class="lg:col-span-5 flex flex-col gap-10 md:gap-12 lg:border-l lg:border-swsm-black/10 lg:pl-10">
+          {rest.map((article, i) => (
+            <a
+              href={`/coulisses/${article.id}`}
+              class="magazine-side group block relative"
+            >
+              <!-- Numéro -->
+              <span
+                class="absolute -top-2 right-0 font-display font-bold text-swsm-black/[0.06] text-[5rem] md:text-[7rem] leading-[0.8] tracking-caps-tight pointer-events-none select-none"
+                aria-hidden="true"
+              >
+                N°0{i + 2}
+              </span>
+
+              <div class="relative">
+                <div class="aspect-[4/3] overflow-hidden bg-swsm-black/5 rounded-sm mb-5">
+                  <img
+                    src={article.data.cover}
+                    alt={article.data.title}
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="text-[10px] uppercase tracking-[0.18em] font-display font-medium text-swsm-pink">
+                    {categoryLabel[article.data.category] || article.data.category}
+                  </span>
+                  <span class="font-body italic text-xs text-swsm-black/55">
+                    {formatDate(article.data.pubDate)}
+                  </span>
+                </div>
+                <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.1] text-xl md:text-2xl mb-3 group-hover:text-swsm-pink transition-colors duration-300">
+                  {article.data.title}
+                </h3>
+                <p class="font-body text-sm text-swsm-black/65 leading-relaxed line-clamp-2">
+                  {article.data.description}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Footer barre latérale magazine -->
+      <div class="mt-16 md:mt-20 pt-6 border-t border-swsm-black/10 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[10px] md:text-xs uppercase tracking-[0.18em] font-display font-medium text-swsm-black/50">
+        <span>SWSM Racing Team — Magazine éditorial</span>
+        <span class="font-body italic normal-case tracking-normal">{articles.length} articles publiés cette saison</span>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Reveal au scroll : fade + slide */
+  .magazine-feature,
+  .magazine-side {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 700ms ease-out, transform 700ms ease-out;
+  }
+  .magazine-feature.is-visible,
+  .magazine-side.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .magazine-feature,
+    .magazine-side {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>(".magazine-feature, .magazine-side");
+  if (items.length) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+    );
+    items.forEach((el, i) => {
+      // Stagger : 0ms, 100ms, 200ms entre les items
+      (el as HTMLElement).style.transitionDelay = `${i * 100}ms`;
+      io.observe(el);
+    });
+  }
+</script>

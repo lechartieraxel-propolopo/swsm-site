@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroScroll from "../../components/coulisses/HeroScroll.astro";
+import StoriesSection from "../../components/coulisses/StoriesSection.astro";
+import EquipeSection from "../../components/coulisses/EquipeSection.astro";
+import ManchesSection from "../../components/coulisses/ManchesSection.astro";
+import MagazineSection from "../../components/coulisses/MagazineSection.astro";
+import AlbumTeaser from "../../components/coulisses/AlbumTeaser.astro";
+import NewsletterCTA from "../../components/coulisses/NewsletterCTA.astro";
+---
+
+<BaseLayout
+  title="Coulisses"
+  description="L'envers du décor de SWSM Racing Team. L'équipe technique, le calendrier des manches, l'album de la saison."
+  lightNavbar={true}
+>
+  <HeroScroll />
+
+  <StoriesSection />
+
+  <EquipeSection />
+
+  <ManchesSection />
+
+  <MagazineSection />
+
+  <AlbumTeaser />
+
+  <NewsletterCTA />
+</BaseLayout>

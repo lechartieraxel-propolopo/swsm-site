@@ -1,0 +1,85 @@
+---
+interface Props {
+  url: string;
+  title: string;
+}
+
+const { url, title } = Astro.props;
+const encoded = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+---
+
+<aside class="art-share flex items-center gap-3 mt-12 pt-8 border-t border-swsm-black/10">
+  <span class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-black/55 mr-2">
+    Partager
+  </span>
+
+  <a
+    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Partager sur LinkedIn"
+    class="art-share-btn"
+  >
+    <span class="text-[10px] font-display font-bold tracking-caps-loose">IN</span>
+  </a>
+  <a
+    href={`https://twitter.com/intent/tweet?url=${encoded}&text=${encodedTitle}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Partager sur X"
+    class="art-share-btn"
+  >
+    <span class="text-[10px] font-display font-bold tracking-caps-loose">X</span>
+  </a>
+  <a
+    href={`https://www.facebook.com/sharer/sharer.php?u=${encoded}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Partager sur Facebook"
+    class="art-share-btn"
+  >
+    <span class="text-[10px] font-display font-bold tracking-caps-loose">FB</span>
+  </a>
+  <button type="button" class="art-share-btn" aria-label="Copier le lien" data-share-copy={url}>
+    <span class="text-[10px] font-display font-bold tracking-caps-loose">↗</span>
+  </button>
+  <span class="art-share-feedback text-xs font-body text-swsm-pink ml-2 opacity-0 transition-opacity duration-200">Copié.</span>
+</aside>
+
+<style>
+  .art-share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    border: 1px solid rgba(13, 13, 13, 0.18);
+    color: rgba(13, 13, 13, 0.65);
+    transition: all 0.25s ease;
+    cursor: pointer;
+    background: transparent;
+  }
+  .art-share-btn:hover {
+    background: #EC2D7C;
+    border-color: #EC2D7C;
+    color: #F7F7F5;
+    transform: translateY(-2px);
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-share-copy]");
+  const feedback = document.querySelector<HTMLElement>(".art-share-feedback");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const url = btn.dataset.shareCopy || "";
+      try {
+        await navigator.clipboard.writeText(url);
+        feedback?.classList.replace("opacity-0", "opacity-100");
+        setTimeout(() => feedback?.classList.replace("opacity-100", "opacity-0"), 1800);
+      } catch {}
+    });
+  });
+</script>

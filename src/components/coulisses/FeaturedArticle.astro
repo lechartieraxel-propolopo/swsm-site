@@ -1,0 +1,72 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  article: CollectionEntry<"articles">;
+}
+
+const { article } = Astro.props;
+const { id, data } = article;
+
+const categoryLabel: Record<string, string> = {
+  "compte-rendu": "Compte rendu",
+  portrait: "Portrait",
+  coulisses: "Coulisses",
+  partenaire: "Partenaire",
+  ecurie: "Vie d'écurie",
+};
+
+const dateFr = data.pubDate.toLocaleDateString("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<article
+  class="coul-featured has-grain bg-swsm-white py-20 md:py-28"
+  data-article-cat={data.category}
+>
+  <div class="max-w-[1240px] mx-auto px-6 md:px-10">
+    <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-8">
+      À la une
+    </p>
+    <a
+      href={`/coulisses/${id}`}
+      class="coul-featured-link group block"
+    >
+      <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+        <div class="md:col-span-7 relative aspect-[4/3] overflow-hidden rounded-sm bg-swsm-black/5">
+          <img
+            src={data.cover}
+            alt={data.title}
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+            data-photo-reveal
+            loading="eager"
+          />
+        </div>
+        <div class="md:col-span-5">
+          <p class="text-[11px] uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-4">
+            {categoryLabel[data.category]}
+          </p>
+          <h2
+            class="coul-featured-title font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-4xl lg:text-5xl mb-6 group-hover:text-swsm-pink transition-colors duration-300"
+            data-split-mask
+          >
+            {data.title}
+          </h2>
+          <p class="font-body text-base md:text-lg text-swsm-black/75 leading-relaxed mb-6">
+            {data.description}
+          </p>
+          <p class="font-body text-sm text-swsm-black/55 mb-8">
+            {dateFr}
+          </p>
+          <span class="btn-cta btn-cta-glass-dark font-display font-bold text-sm uppercase tracking-caps-loose px-6 py-3 inline-flex">
+            <span>Lire l'article</span>
+            <span class="btn-cta-arrow">→</span>
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
+</article>

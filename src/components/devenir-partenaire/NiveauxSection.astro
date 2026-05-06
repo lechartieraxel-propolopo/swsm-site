@@ -1,0 +1,168 @@
+---
+import { GlowCard } from "../ui/spotlight-card";
+
+const niveaux = [
+  {
+    nom: "Partenaire Titre",
+    eyebrow: "Top du dispositif",
+    desc: "Le nom de votre marque associé à l'écurie. Visibilité maximale sur tous les supports.",
+    contreparties: [
+      "Nom de votre marque associé à l'écurie",
+      "Logo majeur sur les motos et combinaisons des 3 pilotes",
+      "Présence dominante sur tous les supports digitaux",
+      "Communication dédiée sur LinkedIn / Instagram",
+      "Invitation paddock VIP sur l'ensemble des manches",
+      "Reporting personnalisé des retombées",
+    ],
+    note: "1 emplacement",
+    accent: true,
+    glow: "pink" as const,
+  },
+  {
+    nom: "Partenaire Principal",
+    eyebrow: "Premier niveau majeur",
+    desc: "Logo dominant sur la moto et la combinaison. Co-branding sur les supports digitaux et physiques.",
+    contreparties: [
+      "Logo dominant sur la moto",
+      "Logo sur les combinaisons des pilotes",
+      "Mention dans les publications de manche",
+      "Invitations paddock sur 2 manches",
+      "Citation dans un compte rendu et un portrait",
+      "Reporting trimestriel",
+    ],
+    note: "2 emplacements",
+    accent: false,
+    glow: "violet" as const,
+  },
+  {
+    nom: "Partenaire Officiel",
+    eyebrow: "Niveau intermédiaire",
+    desc: "Présence affirmée sans être dominante. Idéal pour les premiers sponsorings.",
+    contreparties: [
+      "Présence affirmée sur la moto",
+      "Mention dans les publications",
+      "Invitation paddock sur 1 manche",
+      "Mention dédiée dans un article",
+    ],
+    note: "Plusieurs emplacements",
+    accent: false,
+    glow: "pink" as const,
+  },
+  {
+    nom: "Partenaire Technique",
+    eyebrow: "Échange de prestations",
+    desc: "Pour les acteurs du secteur moto qui apportent expertise ou matériel.",
+    contreparties: [
+      "Reconnaissance \"Partenaire Technique\"",
+      "Citation dans la rubrique mécanique / équipement",
+      "Logo sur les supports techniques de l'écurie",
+      "Échange de prestations valorisées",
+    ],
+    note: "Échange en nature",
+    accent: false,
+    glow: "violet" as const,
+  },
+  {
+    nom: "Partenaire / Supporter",
+    eyebrow: "Palier d'entrée",
+    desc: "Pour les soutiens locaux qui veulent accompagner l'écurie.",
+    contreparties: [
+      "Logo \"Supporter\" sur les supports digitaux",
+      "Mention dans la rubrique partenaires du site",
+      "Invitation à l'événement annuel partenaires",
+      "Newsletter privée d'écurie",
+    ],
+    note: "Plusieurs emplacements",
+    accent: false,
+    glow: "pink" as const,
+  },
+];
+---
+
+<section id="niveaux" class="dp-niveaux has-grain bg-swsm-white py-24 md:py-32 px-6 md:px-10" style="z-index:4;">
+  <div class="max-w-[1240px] mx-auto">
+    <header class="mb-16 md:mb-20 max-w-2xl">
+      <p class="dp-niveaux-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
+        5 Niveaux
+      </p>
+      <h2
+        class="dp-niveaux-title font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-5"
+        data-split-mask
+      >
+        Choisissez votre engagement.
+      </h2>
+      <p class="font-body text-base md:text-lg text-swsm-black/65 leading-relaxed">
+        Tarifs personnalisés selon votre stratégie. Discussion en RDV.
+      </p>
+    </header>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {niveaux.map((n) => (
+        <GlowCard
+          customSize
+          glowColor={n.glow}
+          className={`dp-niveau group !rounded-md p-7 md:p-8 flex flex-col w-full h-full transition-all duration-300`}
+          client:visible
+        >
+          {n.accent && (
+            <span class="absolute -top-3 left-7 px-3 py-1 bg-swsm-pink text-swsm-white text-[10px] uppercase tracking-eyebrow font-display font-bold rounded-full z-10">
+              Premium
+            </span>
+          )}
+          <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-3 relative z-10">
+            {n.eyebrow}
+          </p>
+          <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.1] text-xl md:text-2xl mb-3 relative z-10">
+            {n.nom}
+          </h3>
+          <p class="font-body text-sm text-swsm-black/70 leading-relaxed mb-6 relative z-10">
+            {n.desc}
+          </p>
+          <ul class="space-y-2.5 mb-6 flex-1 relative z-10">
+            {n.contreparties.map((c) => (
+              <li class="flex items-start gap-2 text-sm font-body text-swsm-black/80">
+                <span class="text-swsm-pink font-bold mt-0.5">→</span>
+                <span>{c}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="font-body text-xs text-swsm-black/50 uppercase tracking-caps-loose pt-4 border-t border-swsm-black/10 relative z-10">
+            {n.note}
+          </p>
+        </GlowCard>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .dp-niveau {
+    will-change: transform;
+    background-color: rgba(247, 247, 245, 0.85) !important;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const section = document.querySelector<HTMLElement>(".dp-niveaux");
+  const eyebrow = document.querySelector<HTMLElement>(".dp-niveaux-eyebrow");
+  const niveaux = Array.from(document.querySelectorAll<HTMLElement>(".dp-niveau"));
+
+  if (section && eyebrow && niveaux.length) {
+    if (reduce) {
+      gsap.set([eyebrow, ...niveaux], { opacity: 1, y: 0 });
+    } else {
+      gsap.set(eyebrow, { opacity: 0, y: 20 });
+      gsap.set(niveaux, { opacity: 0, y: 30 });
+      gsap.timeline({
+        scrollTrigger: { trigger: section, start: "top 75%", toggleActions: "play none none none" },
+      })
+        .to(eyebrow, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+        .to(niveaux, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", stagger: 0.1 }, "-=0.2");
+    }
+  }
+</script>

@@ -1,0 +1,93 @@
+---
+// Section "Le calendrier des manches" sur la page Coulisses.
+// Map les 6 manches de saison.json en ExpandingCards interactives.
+import { ExpandingCards, type CardItem } from "../ui/expanding-cards";
+import saison from "../../data/saison.json";
+
+// Photo générique par lieu (à enrichir au fil des manches avec de vraies photos par circuit)
+const photoParLieu: Record<string, string> = {
+  "Le Val d'Argenton": "/images/general/IMG_9430.JPG",
+  "Lohéac": "/images/general/IMG_9442.JPG",
+  "Rouen": "/images/general/IMG_9384.JPG",
+  "Saint-Amand-Colombiers": "/images/general/IMG_9446.JPG",
+  "Circuit d'Albi": "/images/general/IMG_9412.JPG",
+  "Villars-sous-Écot": "/images/general/IMG_9499.JPG",
+};
+
+// Format date FR court : "25 avril" ou "25 avril 2026" si pas de date_fin
+const formatDay = (iso: string) => {
+  const d = new Date(iso);
+  return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
+};
+const formatDayYear = (iso: string) => {
+  const d = new Date(iso);
+  return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+};
+
+// Format week-end : "25 → 26 avril 2026" si même mois, sinon "25 juillet → 6 août 2026"
+const formatWeekend = (start: string, end?: string) => {
+  if (!end) return formatDayYear(start);
+  const ds = new Date(start);
+  const de = new Date(end);
+  const sameMonth = ds.getMonth() === de.getMonth() && ds.getFullYear() === de.getFullYear();
+  if (sameMonth) {
+    const startDay = ds.getDate();
+    return `${startDay} → ${formatDayYear(end)}`;
+  }
+  return `${formatDay(start)} → ${formatDayYear(end)}`;
+};
+
+// Construit la description selon le statut
+const buildDescription = (manche: typeof saison.manches[number]) => {
+  const dateStr = formatWeekend(manche.date, (manche as any).date_fin);
+  const orga = (manche as any).organisateur ? ` · ${(manche as any).organisateur}` : "";
+
+  if (manche.statut === "passe" && manche.resultats) {
+    const positions = Object.entries(manche.resultats)
+      .map(([nom, res]) => `${nom.charAt(0).toUpperCase() + nom.slice(1)} P${res.position}`)
+      .join(" · ");
+    return `${dateStr}${orga}. ${positions}.`;
+  }
+  return `${dateStr}${orga}. La structure se prépare pour ce rendez-vous.`;
+};
+
+// Titre avec département (ex: "Le Val d'Argenton (79)")
+const buildTitle = (m: typeof saison.manches[number]) => {
+  const dept = (m as any).departement;
+  return dept ? `${m.lieu} (${dept})` : m.lieu;
+};
+
+const cards: CardItem[] = saison.manches.map((m) => {
+  const isPassed = m.statut === "passe";
+  return {
+    id: m.id,
+    title: buildTitle(m),
+    description: buildDescription(m),
+    imgSrc: photoParLieu[m.lieu] || "/images/general/IMG_9430.JPG",
+    icon: isPassed ? "flag" : "calendar",
+    badge: isPassed ? "Manche passée" : "À venir",
+    linkHref: m.lien_compte_rendu,
+  };
+});
+---
+
+<section class="manches-section bg-swsm-white py-20 md:py-28 px-6 md:px-10 has-grain">
+  <div class="max-w-[1240px] mx-auto">
+    <header class="mb-12 md:mb-16 max-w-2xl">
+      <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
+        Le calendrier
+      </p>
+      <h2
+        class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-5"
+        data-split-mask
+      >
+        Six manches. Une saison.
+      </h2>
+      <p class="font-body text-base md:text-lg text-swsm-black/65 leading-relaxed">
+        Six rendez-vous du Championnat de France Supermotard 2026. Survolez chaque manche pour découvrir le débrief — cliquez sur les manches passées pour lire le compte rendu complet.
+      </p>
+    </header>
+
+    <ExpandingCards items={cards} defaultActiveIndex={0} client:visible />
+  </div>
+</section>

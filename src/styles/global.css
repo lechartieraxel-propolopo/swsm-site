@@ -1,0 +1,278 @@
+/* ─── Polices Google Fonts (doit précéder les autres @import) ─── */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap");
+
+@import "tailwindcss";
+
+/* ─── Thème SWSM Racing Team (Tailwind v4) ─── */
+@theme {
+  /* Palette */
+  --color-swsm-black: #0D0D0D;
+  --color-swsm-white: #F7F7F5;
+  --color-swsm-pink: #EC2D7C;
+  --color-swsm-violet: #5B21B6;
+
+  /* Polices */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Dégradé signature */
+  --background-image-gradient-signature: linear-gradient(135deg, #EC2D7C 0%, #5B21B6 100%);
+
+  /* Letter-spacing */
+  --tracking-eyebrow: 0.15em;
+  --tracking-caps-tight: -0.01em;
+  --tracking-caps-loose: 0.05em;
+}
+
+/* ─── Variables CSS de base ─── */
+:root {
+  --swsm-black: #0D0D0D;
+  --swsm-white: #F7F7F5;
+  --swsm-pink: #EC2D7C;
+  --swsm-violet: #5B21B6;
+  --gradient-signature: linear-gradient(135deg, #EC2D7C 0%, #5B21B6 100%);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--swsm-white);
+  color: var(--swsm-black);
+}
+
+/* ─── Locomotive Scroll : styles minimaux v5 (Lenis) ─── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ─── Grain texture utilitaire (matière "papier photo") ───
+ * À appliquer sur les sections claires : <section class="has-grain">.
+ * Overlay SVG fractalNoise très léger (opacity 0.04), pointer-events:none,
+ * pose le grain par-dessus tout sans interférer.
+ */
+.has-grain {
+  position: relative;
+}
+.has-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  z-index: 1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 240px 240px;
+  mix-blend-mode: multiply;
+}
+.has-grain > *:not(.absolute) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── Underline animé pour liens navbar ─── */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ─── Système liquid glass (boutons premium type Apple) ────────────
+ *
+ * Adapté du composant LiquidButton (21st.dev / shadcnblocks).
+ *
+ * .btn-cta              → base liquid glass : shadow stack en biseau,
+ *                         pop hover (scale + Y), pop click (scale down)
+ * .btn-cta-pink         → variante rose vif (CTA primaire)
+ * .btn-cta-light        → variante blanc cassé (CTA primaire sur fond foncé)
+ * .btn-cta-glass        → variante translucide + distortion SVG (verre liquide)
+ *
+ * Le filtre SVG #liquid-glass-filter est défini une fois dans BaseLayout.astro.
+ * ─────────────────────────────────────────────────────────────── */
+
+.btn-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000),
+    box-shadow 0.3s ease,
+    filter 0.2s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+  will-change: transform;
+  /* Bord glass discret sur tous les boutons (overridé par variantes) */
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.08) inset,
+    0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+/* Hover : pop up (translation + scale + brightness) */
+.btn-cta:hover {
+  transform: translateY(-2px) scale(1.04);
+  filter: brightness(1.08);
+}
+
+/* Active : pop click (compression rapide) */
+.btn-cta:active {
+  transform: translateY(0) scale(0.97);
+  filter: brightness(0.95);
+  transition-duration: 0.08s;
+}
+
+.btn-cta .btn-cta-arrow {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  will-change: transform;
+}
+.btn-cta:hover .btn-cta-arrow {
+  transform: translateX(5px);
+}
+
+/* ─── Variante ROSE — CTA primaire signature SWSM ───
+ * Gradient rose vif uniforme, glow rose marqué, bord glass blanc/sombre.
+ * Box-shadow posé DIRECTEMENT sur le bouton (pas de pseudo) pour éviter
+ * d'écraser le background gradient.
+ */
+.btn-cta-pink {
+  background: linear-gradient(180deg, #ff4f9c 0%, #ec2d7c 55%, #c4205c 100%);
+  color: #F7F7F5;
+  border: none;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.40) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.20) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+    0 8px 24px -4px rgba(236, 45, 124, 0.50),
+    0 2px 8px rgba(0, 0, 0, 0.20),
+    0 0 16px rgba(255, 100, 180, 0.20);
+}
+.btn-cta-pink:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.50) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.22) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.28) inset,
+    0 16px 40px -6px rgba(236, 45, 124, 0.65),
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    0 0 24px rgba(255, 100, 180, 0.30);
+}
+
+/* ─── Variante BLANC — CTA primaire sur fond foncé/dégradé ─── */
+.btn-cta-light {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f0ec 100%);
+  color: #0D0D0D;
+  border: none;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.10) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 8px 24px -4px rgba(0, 0, 0, 0.25),
+    0 0 12px rgba(255, 255, 255, 0.25);
+}
+.btn-cta-light:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.7) inset,
+    0 16px 40px -6px rgba(255, 255, 255, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.30);
+}
+
+/* ─── Variante GLASS — translucide pour fonds gradient/photo ─── */
+.btn-cta-glass {
+  background: rgba(255, 255, 255, 0.10);
+  color: #F7F7F5;
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.15) inset,
+    0 8px 24px -4px rgba(0, 0, 0, 0.30),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+.btn-cta-glass:hover {
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.50);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 16px 40px -6px rgba(0, 0, 0, 0.40),
+    0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+}
+
+/* ─── Variante GLASS-DARK — pour fonds clairs ─── */
+.btn-cta-glass-dark {
+  background: rgba(13, 13, 13, 0.04);
+  color: #0D0D0D;
+  border: 1px solid rgba(13, 13, 13, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.05) inset,
+    0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.btn-cta-glass-dark:hover {
+  background: rgba(13, 13, 13, 0.08);
+  border-color: rgba(13, 13, 13, 0.50);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 8px 24px -4px rgba(0, 0, 0, 0.20);
+}
+
+/* ─── Card hover : glow + lift ─── */
+.card-lift {
+  transition: transform 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000),
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
+  will-change: transform;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* ─── Reduce motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .btn-cta,
+  .btn-cta-arrow,
+  .card-lift,
+  .link-underline::after {
+    transition: none !important;
+  }
+  .btn-cta:hover,
+  .card-lift:hover {
+    transform: none !important;
+  }
+}

@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles", ({ data }) => !data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article, all: articles },
+  }));
+}
+
+const { article, all } = Astro.props;
+const { Content } = await render(article);
+
+// Estimation du temps de lecture (200 mots/min)
+const wordCount = article.body?.split(/\s+/).length ?? 0;
+const readingMinutes = Math.max(1, Math.round(wordCount / 200));
+
+// Articles liés : même catégorie d'abord, puis les plus récents
+const related = all
+  .filter((a) => a.id !== article.id)
+  .sort((a, b) => {
+    const sameCatA = a.data.category === article.data.category ? 0 : 1;
+    const sameCatB = b.data.category === article.data.category ? 0 : 1;
+    if (sameCatA !== sameCatB) return sameCatA - sameCatB;
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  })
+  .slice(0, 3);
+
+const url = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<ArticleLayout article={article} related={related} readingMinutes={readingMinutes} url={url}>
+  <Content />
+</ArticleLayout>

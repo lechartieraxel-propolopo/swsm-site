@@ -1,0 +1,209 @@
+---
+// Footer enrichi : 4 colonnes desktop, empilé mobile.
+import { getCollection } from "astro:content";
+
+const partenaires = (await getCollection("partenaires")).sort(
+  (a, b) => a.data.ordre - b.data.ordre,
+);
+
+const year = new Date().getFullYear();
+
+const socials = [
+  { name: "Instagram", href: "#", initial: "IG" },
+  { name: "LinkedIn", href: "#", initial: "IN" },
+  { name: "Facebook", href: "#", initial: "FB" },
+  { name: "TikTok", href: "#", initial: "TT" },
+  { name: "YouTube", href: "#", initial: "YT" },
+];
+
+const navLinks = [
+  { href: "/coulisses", label: "Coulisses" },
+  { href: "/partenaires", label: "Partenaires" },
+  { href: "/devenir-partenaire", label: "Devenir partenaire" },
+  { href: "/devenir-partenaire#contact", label: "Contact" },
+];
+---
+
+<footer class="bg-swsm-black text-swsm-white">
+  <!-- ─── Bandeau Partenaires — carousel auto-scroll infini, fond blanc ─── -->
+  <section class="footer-partners bg-swsm-white text-swsm-black" aria-label="Nos partenaires">
+    <div class="pt-20 md:pt-24 pb-12 md:pb-16">
+      <header class="text-center mb-12 md:mb-16 max-w-[1240px] mx-auto px-6 md:px-10">
+        <p class="text-[10px] md:text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-3">
+          Saison 2026
+        </p>
+        <h2 class="font-display font-bold text-swsm-black tracking-caps-tight uppercase text-2xl md:text-3xl">
+          Merci à nos partenaires.
+        </h2>
+        <p class="font-body text-sm md:text-base text-swsm-black/55 mt-4 max-w-md mx-auto">
+          Ils accompagnent l'écurie cette saison.
+        </p>
+      </header>
+
+      <!-- Carousel auto-scroll : track dupliqué x2 pour boucle infinie sans saut -->
+      <div class="footer-marquee relative overflow-hidden">
+        <div class="footer-marquee-track flex w-max animate-footer-scroll">
+          {[...partenaires, ...partenaires].map((p, i) => (
+            <div
+              class="footer-partner-cell shrink-0 px-10 md:px-16 flex items-center justify-center h-24 md:h-28"
+              aria-hidden={i >= partenaires.length ? "true" : undefined}
+            >
+              <img
+                src={p.data.logo || "/images/partenaires/Blanc_FondTransparent.png"}
+                alt={i < partenaires.length ? `${p.data.nom} — Partenaire SWSM Racing Team` : ""}
+                loading="lazy"
+                class="footer-partner-logo h-10 md:h-12 w-auto max-w-[180px] object-contain select-none pointer-events-none transition-opacity duration-300"
+              />
+            </div>
+          ))}
+        </div>
+        <!-- Voiles latéraux pour fade-in/out -->
+        <div class="absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-swsm-white to-transparent pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-swsm-white to-transparent pointer-events-none" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-[1240px] mx-auto px-6 md:px-10 py-20 md:py-24">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
+      <!-- Col 1 — Identité -->
+      <div>
+        <a
+          href="/"
+          class="font-display font-bold text-2xl tracking-caps-loose uppercase hover:opacity-80 transition-opacity inline-block"
+          aria-label="SWSM Racing Team — Accueil"
+        >
+          SWSM
+        </a>
+        <p class="font-body text-sm text-swsm-white/65 mt-4 max-w-[280px] leading-relaxed">
+          Écurie privée du Sud-Ouest. Trois pilotes en Championnat de France de Supermotard.
+        </p>
+
+        <ul class="flex items-center gap-3 mt-6">
+          {
+            socials.map((s) => (
+              <li>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.name}
+                  class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-swsm-white/20 hover:border-swsm-pink hover:bg-swsm-pink/10 hover:text-swsm-pink transition-colors text-[10px] font-display font-bold tracking-caps-loose"
+                >
+                  {s.initial}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Col 2 — Navigation -->
+      <div>
+        <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+          Navigation
+        </p>
+        <ul class="space-y-3">
+          {
+            navLinks.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  class="font-body text-sm text-swsm-white/70 hover:text-swsm-white hover:translate-x-1 inline-block transition-all duration-200"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Col 3 — Partenaires -->
+      <div>
+        <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+          Partenaires
+        </p>
+        <ul class="grid grid-cols-3 gap-3">
+          {
+            partenaires.map((p) => (
+              <li>
+                <span
+                  class="inline-block w-full text-center px-2 py-2 border border-swsm-white/10 font-display font-medium text-[10px] uppercase tracking-caps-loose text-swsm-white/55 truncate"
+                  title={p.data.nom}
+                >
+                  {p.data.nom.split(" ")[0]}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Col 4 — Contact -->
+      <div>
+        <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+          Contact
+        </p>
+        <a
+          href="mailto:contact@swsm-racing-team.fr"
+          class="font-body text-sm text-swsm-white hover:text-swsm-pink transition-colors block"
+        >
+          contact@swsm-racing-team.fr
+        </a>
+        <a
+          href="/devenir-partenaire"
+          class="font-body text-sm text-swsm-white/70 hover:text-swsm-white inline-block mt-3 transition-colors"
+        >
+          Formulaire de contact →
+        </a>
+      </div>
+    </div>
+
+    <!-- Bas du footer -->
+    <div class="mt-16 pt-8 border-t border-swsm-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <p class="font-body text-xs text-swsm-white/50">
+        © {year} SWSM Racing Team — Tous droits réservés
+      </p>
+      <ul class="flex items-center gap-6 text-xs">
+        <li>
+          <a href="/mentions-legales" class="font-body text-swsm-white/50 hover:text-swsm-white transition-colors">
+            Mentions légales
+          </a>
+        </li>
+        <li>
+          <a href="/confidentialite" class="font-body text-swsm-white/50 hover:text-swsm-white transition-colors">
+            Politique de confidentialité
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Logos partenaires : conversion en monochrome gris sobre, hover plus opaque */
+  .footer-partner-logo {
+    filter: brightness(0) opacity(0.45);
+  }
+  .footer-partner-cell:hover .footer-partner-logo {
+    filter: brightness(0) opacity(0.85);
+  }
+
+  /* Carousel auto-scroll : translate de 0 à -50% (la moitié = un cycle complet
+     vu que le track est dupliqué x2). Boucle infinie sans saut. */
+  @keyframes footer-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .animate-footer-scroll {
+    animation: footer-scroll 28s linear infinite;
+  }
+  /* Pause au hover pour donner un sentiment de contrôle */
+  .footer-marquee:hover .animate-footer-scroll {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-footer-scroll { animation: none; }
+  }
+</style>

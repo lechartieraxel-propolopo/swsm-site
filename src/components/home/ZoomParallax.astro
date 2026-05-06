@@ -1,0 +1,113 @@
+---
+// ZoomParallax — version DEBUG carrés colorés, JS-DRIVEN
+// APPROCHE PUREMENT JAVASCRIPT :
+// - Pas de CSS variables, pas de calc(), pas de flex centering
+// - À chaque tick GSAP, le JS calcule la valeur exacte du transform
+//   et l'applique directement en inline style
+// - Bulletproof : ce qui est calculé EST ce qui est appliqué
+
+const layout = [
+  { w: "25vw", h: "25vh", x: 0,     y: 0,     color: "#EC2D7C", label: "0 (centré)" },
+  { w: "35vw", h: "30vh", x: 5,     y: -30,   color: "#22d3ee", label: "1" },
+  { w: "20vw", h: "45vh", x: -25,   y: -10,   color: "#facc15", label: "2" },
+  { w: "25vw", h: "25vh", x: 27.5,  y: 0,     color: "#22c55e", label: "3" },
+  { w: "20vw", h: "25vh", x: 5,     y: 27.5,  color: "#f97316", label: "4" },
+  { w: "30vw", h: "25vh", x: -22.5, y: 27.5,  color: "#5B21B6", label: "5" },
+  { w: "15vw", h: "15vh", x: 25,    y: 22.5,  color: "#ef4444", label: "6" },
+];
+
+const scales = [4, 5, 6, 5, 6, 8, 9];
+---
+
+<section
+  class="zp-section relative h-[300vh] bg-swsm-black"
+  style="z-index:1;"
+  aria-label="Test Zoom Parallax"
+>
+  <div class="zp-sticky sticky top-0 h-screen w-full overflow-hidden">
+    {layout.map((l, i) => (
+      <div
+        class="zp-wrap"
+        style={`width:${l.w};height:${l.h};background:${l.color};`}
+        data-x={l.x}
+        data-y={l.y}
+        data-target-scale={scales[i]}
+      >
+        <span class="zp-label">{l.label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .zp-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Transform initial = identité ; sera écrasé par JS à chaque tick */
+    transform: translate(-50%, -50%) translate(0vw, 0vh) scale(1);
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  .zp-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 4vw;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const section = document.querySelector<HTMLElement>(".zp-section");
+  const wraps = Array.from(document.querySelectorAll<HTMLElement>(".zp-wrap"));
+
+  if (section && wraps.length && !reduce) {
+    // Préparation : extraire baseX, baseY, targetScale pour chaque wrap
+    const wrapsData = wraps.map((wrap) => ({
+      el: wrap,
+      baseX: parseFloat(wrap.dataset.x || "0"),
+      baseY: parseFloat(wrap.dataset.y || "0"),
+      targetScale: parseFloat(wrap.dataset.targetScale || "5"),
+    }));
+
+    // Un seul ScrollTrigger qui pilote progress de 0 à 1.
+    // À chaque update, on calcule scale et on applique le transform à TOUS les wraps.
+    const proxy = { progress: 0 };
+
+    gsap.to(proxy, {
+      progress: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        invalidateOnRefresh: true,
+      },
+      onUpdate: () => {
+        const p = proxy.progress;
+        wrapsData.forEach(({ el, baseX, baseY, targetScale }) => {
+          // Interpolation linéaire de 1 à targetScale
+          const s = 1 + p * (targetScale - 1);
+          // Offsets multipliés par scale (effet parallax-out)
+          const xOffset = baseX * s;
+          const yOffset = baseY * s;
+          // Transform composé exact, sans calc(), sans CSS variables
+          el.style.transform = `translate(-50%, -50%) translate(${xOffset}vw, ${yOffset}vh) scale(${s})`;
+        });
+      },
+    });
+  }
+</script>

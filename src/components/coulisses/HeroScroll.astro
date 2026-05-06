@@ -1,0 +1,72 @@
+---
+// Hero animé de la page Coulisses : titre éditorial + "écran" qui se redresse au scroll.
+// Composant React lazy-load — utilise framer-motion useScroll en local.
+// Aucun GSAP ScrollTrigger sur cette page → pas de conflit.
+import { ContainerScroll } from "../ui/container-scroll";
+---
+
+<section class="hero-scroll-wrapper relative bg-swsm-white overflow-x-hidden" aria-label="Bienvenue dans les coulisses">
+  <!-- Cadrillage en fond -->
+  <div class="hero-scroll-grid" aria-hidden="true"></div>
+
+  <!-- Fondu en bas pour transition douce vers la section suivante -->
+  <div class="hero-scroll-fade" aria-hidden="true"></div>
+
+  <ContainerScroll
+    eyebrow="Magazine SWSM"
+    titleTop="Bienvenue dans"
+    titleBottom="les coulisses."
+    description="L'écurie au quotidien. Sans filtre, sans mise en scène. Juste ce qui se passe quand on coupe la caméra principale."
+    client:visible
+  >
+    <img
+      src="/images/general/IMG_9442.JPG"
+      alt="SWSM Racing Team — l'écurie au quotidien"
+      class="mx-auto h-full w-full object-cover object-center"
+      draggable={false}
+      loading="eager"
+    />
+  </ContainerScroll>
+</section>
+
+<style>
+  .hero-scroll-wrapper {
+    position: relative;
+  }
+
+  /* Cadrillage moyen — lignes fines très discrètes, taille de cellule 56px */
+  .hero-scroll-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      linear-gradient(to right, rgba(13, 13, 13, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(13, 13, 13, 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+    /* Masque progressif : centre net, bords fondus pour ne pas heurter la palette épurée */
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+  }
+
+  /* Fondu de transition vers la section suivante (équipe — bg blanc) */
+  .hero-scroll-fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 18rem;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(247, 247, 245, 0) 0%, rgba(247, 247, 245, 0.6) 50%, #F7F7F5 100%);
+  }
+
+  @media (max-width: 768px) {
+    .hero-scroll-grid {
+      background-size: 40px 40px;
+    }
+    .hero-scroll-fade {
+      height: 12rem;
+    }
+  }
+</style>

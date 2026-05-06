@@ -1,0 +1,177 @@
+---
+// Formulaire qualifié — POST vers Formspree (URL placeholder à remplacer)
+const FORMSPREE_URL = "https://formspree.io/f/YOUR_FORM_ID"; // À remplacer
+---
+
+<section id="contact" class="dp-form has-grain bg-swsm-white py-24 md:py-32 px-6 md:px-10" style="z-index:7;">
+  <div class="max-w-3xl mx-auto">
+    <header class="mb-12 md:mb-16">
+      <p class="dp-form-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
+        Discutons
+      </p>
+      <h2
+        class="dp-form-title font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-5"
+        data-split-mask
+      >
+        Parlons de votre projet.
+      </h2>
+      <p class="font-body text-base md:text-lg text-swsm-black/70 leading-relaxed">
+        Remplissez le formulaire ci-dessous. Nous vous recontactons sous 48h pour un échange ou un RDV.
+      </p>
+    </header>
+
+    <form
+      class="dp-form-element grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"
+      action={FORMSPREE_URL}
+      method="POST"
+      novalidate
+    >
+      <div>
+        <label class="dp-form-label" for="dp-prenom">Prénom *</label>
+        <input id="dp-prenom" name="prenom" type="text" required class="dp-form-input" />
+      </div>
+      <div>
+        <label class="dp-form-label" for="dp-nom">Nom *</label>
+        <input id="dp-nom" name="nom" type="text" required class="dp-form-input" />
+      </div>
+      <div>
+        <label class="dp-form-label" for="dp-entreprise">Entreprise *</label>
+        <input id="dp-entreprise" name="entreprise" type="text" required class="dp-form-input" />
+      </div>
+      <div>
+        <label class="dp-form-label" for="dp-fonction">Fonction</label>
+        <input id="dp-fonction" name="fonction" type="text" class="dp-form-input" />
+      </div>
+      <div>
+        <label class="dp-form-label" for="dp-email">Email professionnel *</label>
+        <input id="dp-email" name="email" type="email" required class="dp-form-input" />
+      </div>
+      <div>
+        <label class="dp-form-label" for="dp-tel">Téléphone</label>
+        <input id="dp-tel" name="telephone" type="tel" class="dp-form-input" />
+      </div>
+      <div class="md:col-span-2">
+        <label class="dp-form-label" for="dp-niveau">Niveau de partenariat envisagé</label>
+        <select id="dp-niveau" name="niveau" class="dp-form-input">
+          <option value="">À déterminer ensemble</option>
+          <option value="titre">Partenaire Titre</option>
+          <option value="principal">Partenaire Principal</option>
+          <option value="officiel">Partenaire Officiel</option>
+          <option value="technique">Partenaire Technique</option>
+          <option value="supporter">Partenaire / Supporter</option>
+        </select>
+      </div>
+      <div class="md:col-span-2">
+        <label class="dp-form-label" for="dp-budget">Budget envisagé</label>
+        <select id="dp-budget" name="budget" class="dp-form-input">
+          <option value="">À déterminer</option>
+          <option value="<2k">Moins de 2 000 €</option>
+          <option value="2-5k">2 000 € à 5 000 €</option>
+          <option value="5-10k">5 000 € à 10 000 €</option>
+          <option value="10-25k">10 000 € à 25 000 €</option>
+          <option value=">25k">Plus de 25 000 €</option>
+        </select>
+      </div>
+      <div class="md:col-span-2">
+        <label class="dp-form-label" for="dp-message">Message libre</label>
+        <textarea id="dp-message" name="message" rows="5" class="dp-form-input resize-y" placeholder="Décrivez votre stratégie, vos objectifs, vos contraintes…"></textarea>
+      </div>
+      <div class="md:col-span-2 flex items-start gap-3">
+        <input type="checkbox" id="dp-rgpd" name="rgpd" required class="dp-form-checkbox mt-1" />
+        <label for="dp-rgpd" class="font-body text-sm text-swsm-black/70 leading-relaxed cursor-pointer">
+          J'accepte que SWSM Racing Team utilise mes données pour me recontacter dans le cadre de cette demande de partenariat.
+        </label>
+      </div>
+      <div class="md:col-span-2 mt-2">
+        <button type="submit" class="btn-cta btn-cta-pink font-display font-bold text-sm uppercase tracking-caps-loose px-8 py-4">
+          <span>Envoyer ma demande</span>
+          <span class="btn-cta-arrow">→</span>
+        </button>
+      </div>
+    </form>
+
+    <p class="dp-form-feedback hidden mt-6 font-body text-base text-swsm-pink">
+      Demande envoyée. Nous vous recontactons sous 48h.
+    </p>
+    <p class="dp-form-error hidden mt-6 font-body text-sm text-swsm-pink">
+      Une erreur est survenue. Réessayez ou écrivez-nous à contact@swsm-racing-team.fr.
+    </p>
+  </div>
+</section>
+
+<style>
+  .dp-form-label {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(13, 13, 13, 0.65);
+    margin-bottom: 0.5rem;
+  }
+  .dp-form-input {
+    width: 100%;
+    background: rgba(13, 13, 13, 0.03);
+    border: 1px solid rgba(13, 13, 13, 0.15);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--swsm-black);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .dp-form-input:focus {
+    outline: none;
+    border-color: #EC2D7C;
+    background: rgba(13, 13, 13, 0.05);
+  }
+  .dp-form-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #EC2D7C;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>(".dp-form-element");
+  const feedback = document.querySelector<HTMLElement>(".dp-form-feedback");
+  const errorEl = document.querySelector<HTMLElement>(".dp-form-error");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const action = form.action;
+
+    if (action.includes("YOUR_FORM_ID")) {
+      // Mode placeholder : on fait croire au succès
+      feedback?.classList.remove("hidden");
+      form.reset();
+      if ((window as any).plausible) {
+        (window as any).plausible("Submit form devenir partenaire");
+      }
+      return;
+    }
+
+    try {
+      const res = await fetch(action, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        feedback?.classList.remove("hidden");
+        errorEl?.classList.add("hidden");
+        form.reset();
+        if ((window as any).plausible) {
+          (window as any).plausible("Submit form devenir partenaire");
+        }
+      } else {
+        errorEl?.classList.remove("hidden");
+      }
+    } catch {
+      errorEl?.classList.remove("hidden");
+    }
+  });
+</script>

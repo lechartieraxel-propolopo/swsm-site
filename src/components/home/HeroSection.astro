@@ -1,0 +1,207 @@
+---
+// Section A — Hero — version crossfade + Ken Burns
+// Architecture en 5 calques (de bas en haut) :
+//   z-0   : Slideshow 3 photos (frame opacity + img Ken Burns) — couleur, vivante
+//   z-5   : Grain photographique permanent (SVG fractalNoise)
+//   z-15  : Light flare diagonal qui balaie le hero toutes les 11s
+//   z-18  : 30 particules blanches flottantes (6 variantes)
+//   z-20  : Overlay léger (bg-black/30) pour lisibilité
+//   z-30  : Texte (data-split-hero pour effet par mot blur 8px → 0)
+//   z-30  : Scroll indicator (souris stylisée + roue qui pulse)
+//
+// Conserve `position: sticky` pour la compatibilité stacking reveal vers Manifeste.
+---
+
+<section
+  class="hero relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-swsm-black"
+  style="z-index:1;"
+  aria-label="Présentation SWSM Racing Team"
+>
+  <!-- ─── CALQUE 0 — Slideshow 3 photos ─── -->
+  <div class="hero-photo-layer absolute inset-0 z-0" aria-hidden="true">
+    <div class="hero-frame hero-frame-1 absolute inset-0 overflow-hidden">
+      <img src="/images/hero/hero-1.jpg" alt="" class="hero-photo absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+    </div>
+    <div class="hero-frame hero-frame-2 absolute inset-0 overflow-hidden">
+      <img src="/images/hero/hero-2.jpg" alt="" class="hero-photo absolute inset-0 w-full h-full object-cover" loading="eager" />
+    </div>
+    <div class="hero-frame hero-frame-3 absolute inset-0 overflow-hidden">
+      <img src="/images/hero/hero-3.jpg" alt="" class="hero-photo absolute inset-0 w-full h-full object-cover" loading="eager" />
+    </div>
+  </div>
+
+  <!-- ─── CALQUE 5 — Grain photographique ─── -->
+  <div class="hero-grain absolute inset-0 z-[5] pointer-events-none" aria-hidden="true"></div>
+
+  <!-- ─── CALQUE 15 — Light flare diagonal ─── -->
+  <div class="hero-flare absolute inset-0 z-[15] pointer-events-none overflow-hidden" aria-hidden="true">
+    <div class="flare-beam"></div>
+  </div>
+
+  <!-- ─── CALQUE 18 — Particules ─── -->
+  <div class="hero-particles absolute inset-0 z-[18] pointer-events-none overflow-hidden" aria-hidden="true">
+    {Array.from({ length: 30 }).map((_, i) => (
+      <span class={`particle particle-${i % 6}`} style={`--i:${i};`}></span>
+    ))}
+  </div>
+
+  <!-- ─── CALQUE 20 — Overlay lisibilité ─── -->
+  <div class="absolute inset-0 z-20 bg-black/30" aria-hidden="true"></div>
+
+  <!-- ─── CALQUE 30 — Texte ─── -->
+  <div class="relative z-30 w-full max-w-[1240px] mx-auto px-6 md:px-10 text-center">
+    <p class="hero-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+      SWSM Racing Team
+    </p>
+
+    <h1
+      class="hero-title font-display font-bold text-swsm-white uppercase tracking-caps-tight leading-[0.95] text-5xl md:text-7xl lg:text-8xl mb-6"
+      data-split-hero
+    >
+      Une écurie. Une ambition.
+    </h1>
+
+    <p class="hero-sub font-body text-base md:text-lg text-swsm-white/95 max-w-xl mx-auto">
+      Trois pilotes. Une écurie. Une saison.
+    </p>
+  </div>
+
+  <!-- Scroll indicator : souris stylisée + chevrons -->
+  <div class="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-10 z-30 flex flex-col items-center gap-3 text-swsm-white/70" aria-hidden="true">
+    <div class="hero-mouse">
+      <span class="hero-mouse-wheel"></span>
+    </div>
+    <span class="text-[10px] uppercase tracking-[0.25em] font-display font-medium opacity-70">Scroll</span>
+  </div>
+</section>
+
+<style>
+  /* ═══ CALQUE 0 — Photos + Ken Burns ═══════════════════════════════ */
+  .hero-frame {
+    opacity: 0;
+    animation: hero-frame-fade 12s infinite ease-in-out;
+    will-change: opacity;
+  }
+  .hero-frame-1 { opacity: 1; animation-delay: 0s; }
+  .hero-frame-2 { animation-delay: -8s; }
+  .hero-frame-3 { animation-delay: -4s; }
+
+  @keyframes hero-frame-fade {
+    0%, 25%   { opacity: 1; }
+    33%, 92%  { opacity: 0; }
+    100%      { opacity: 1; }
+  }
+
+  .hero-photo {
+    transform-origin: center center;
+    animation: hero-photo-zoom 12s infinite ease-in-out;
+    will-change: transform;
+  }
+  .hero-frame-1 .hero-photo { animation-delay: 0s; }
+  .hero-frame-2 .hero-photo { animation-delay: -8s; }
+  .hero-frame-3 .hero-photo { animation-delay: -4s; }
+
+  @keyframes hero-photo-zoom {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.05); }
+    33%  { transform: scale(1.06); }
+    34%  { transform: scale(1); }
+    100% { transform: scale(1); }
+  }
+
+  /* ═══ CALQUE 5 — Grain photographique ═════════════════════════════ */
+  .hero-grain {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-size: 240px 240px;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+  }
+
+  /* ═══ CALQUE 15 — Light flare diagonal ═════════════════════════════ */
+  .flare-beam {
+    position: absolute;
+    top: -50%;
+    left: -30%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 30%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.06) 70%, transparent 100%);
+    transform: rotate(20deg) translateX(-100%);
+    animation: hero-flare-sweep 11s ease-in-out infinite;
+    will-change: transform;
+    mix-blend-mode: screen;
+    filter: blur(30px);
+  }
+  @keyframes hero-flare-sweep {
+    0%, 30%   { transform: rotate(20deg) translateX(-100%); opacity: 0; }
+    35%       { opacity: 1; }
+    65%       { opacity: 1; }
+    70%, 100% { transform: rotate(20deg) translateX(500%); opacity: 0; }
+  }
+
+  /* ═══ CALQUE 18 — Particules ══════════════════════════════════════ */
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+    --i: 0;
+    top: calc((var(--i) * 37%) - floor((var(--i) * 37%) / 100%) * 100%);
+    left: calc((var(--i) * 53%) - floor((var(--i) * 53%) / 100%) * 100%);
+    animation: particle-float 12s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -0.4s);
+    will-change: transform, opacity;
+  }
+  .particle-0 { animation-duration: 14s; opacity: 0.3; }
+  .particle-1 { animation-duration: 10s; opacity: 0.4; width: 3px; height: 3px; }
+  .particle-2 { animation-duration: 16s; opacity: 0.25; width: 5px; height: 5px; }
+  .particle-3 { animation-duration: 12s; opacity: 0.35; }
+  .particle-4 { animation-duration: 9s;  opacity: 0.3; width: 3px; height: 3px; }
+  .particle-5 { animation-duration: 13s; opacity: 0.4; width: 4px; height: 4px; }
+
+  @keyframes particle-float {
+    0%   { transform: translate(0, 0); opacity: 0; }
+    10%  { opacity: 0.4; }
+    50%  { transform: translate(20px, -40px); }
+    90%  { opacity: 0.4; }
+    100% { transform: translate(-10px, -80px); opacity: 0; }
+  }
+
+  /* ═══ Scroll indicator : souris stylisée ══════════════════════════ */
+  .hero-mouse {
+    width: 22px;
+    height: 36px;
+    border: 1.5px solid currentColor;
+    border-radius: 14px;
+    position: relative;
+    opacity: 0.7;
+  }
+  .hero-mouse-wheel {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 2px;
+    animation: mouse-scroll 1.8s ease-in-out infinite;
+  }
+  @keyframes mouse-scroll {
+    0%   { transform: translate(-50%, 0); opacity: 1; }
+    50%  { transform: translate(-50%, 12px); opacity: 0.3; }
+    100% { transform: translate(-50%, 0); opacity: 1; }
+  }
+
+  /* ═══ Reduced motion ══════════════════════════════════════════════ */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-frame, .hero-photo, .flare-beam, .particle, .hero-mouse-wheel {
+      animation: none !important;
+    }
+    .hero-frame-1 { opacity: 1; }
+    .hero-frame-2, .hero-frame-3 { opacity: 0; }
+    .hero-photo { transform: scale(1); }
+    .particle { opacity: 0.3; }
+  }
+</style>

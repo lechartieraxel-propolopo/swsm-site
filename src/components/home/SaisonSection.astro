@@ -1,0 +1,187 @@
+---
+// Section E — Saison
+// Bloc gauche : dernière course (P-position énorme).
+// Bloc droit : calendrier saison (passé barré, à venir mis en avant, en direct pulsant).
+import saison from "../../data/saison.json";
+import { getCollection } from "astro:content";
+
+const pilotes = await getCollection("pilotes");
+const piloteByKey = (key: string) =>
+  pilotes.find((p) => p.id.startsWith(key))?.data;
+
+const passees = saison.manches.filter((m) => m.statut === "passe");
+const derniere = passees[passees.length - 1];
+
+const moisFR = [
+  "janvier", "février", "mars", "avril", "mai", "juin",
+  "juillet", "août", "septembre", "octobre", "novembre", "décembre",
+];
+const formatDate = (iso: string, opts: { caps?: boolean } = {}) => {
+  const d = new Date(iso);
+  const txt = `${d.getDate()} ${moisFR[d.getMonth()]} ${d.getFullYear()}`;
+  return opts.caps ? txt.toUpperCase() : txt;
+};
+
+const getBestResult = (m: typeof derniere) => {
+  if (!m?.resultats) return null;
+  const all = Object.entries(m.resultats);
+  const best = all.reduce((acc, cur) =>
+    cur[1].position < acc[1].position ? cur : acc,
+  );
+  return { key: best[0], ...best[1] };
+};
+const best = derniere ? getBestResult(derniere) : null;
+const bestPilote = best ? piloteByKey(best.key) : null;
+---
+
+<section
+  class="saison has-grain relative bg-swsm-white py-24 md:py-32"
+  aria-label="Saison en cours"
+>
+  <div class="max-w-[1240px] mx-auto px-6 md:px-10">
+    <header class="mb-16 md:mb-20">
+      <p class="saison-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+        Saison {saison.annee}
+      </p>
+      <h2
+        class="saison-title font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl"
+        data-split-mask
+      >
+        La saison en cours.
+      </h2>
+    </header>
+
+    <div class="grid md:grid-cols-2 gap-12 md:gap-16">
+      <!-- Bloc gauche : dernière course -->
+      <article class="saison-block-left border-t border-swsm-black/10 pt-10">
+        <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+          Dernière course
+        </p>
+
+        {derniere && (
+          <>
+            <p class="font-display font-bold text-sm uppercase tracking-caps-loose text-swsm-black/85 mb-8">
+              {derniere.lieu.toUpperCase()} — {formatDate(derniere.date, { caps: true })}
+            </p>
+
+            {best && bestPilote && (
+              <>
+                <p class="saison-position font-display font-bold text-swsm-black leading-none tracking-caps-tight text-7xl md:text-8xl">
+                  P{best.position}
+                </p>
+                <p class="font-body text-sm text-swsm-black/70 mt-4 uppercase tracking-caps-loose">
+                  {bestPilote.prenom} {bestPilote.nom} — {best.categorie}
+                </p>
+              </>
+            )}
+
+            {derniere.resultats && (
+              <ul class="mt-8 space-y-2 font-body text-sm text-swsm-black/70">
+                {Object.entries(derniere.resultats).map(([key, r]) => {
+                  const p = piloteByKey(key);
+                  if (!p) return null;
+                  return (
+                    <li class="flex items-baseline justify-between max-w-xs">
+                      <span>{p.prenom} {p.nom}</span>
+                      <span class="font-display font-bold text-swsm-black">P{r.position}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            {derniere.lien_compte_rendu && (
+              <a
+                href={derniere.lien_compte_rendu}
+                class="btn-cta btn-cta-glass-dark mt-10 font-display font-bold text-sm uppercase tracking-caps-loose px-7 py-3.5"
+              >
+                <span>Lire le compte rendu</span>
+                <span class="btn-cta-arrow">→</span>
+              </a>
+            )}
+          </>
+        )}
+      </article>
+
+      <!-- Bloc droit : calendrier -->
+      <article class="saison-block-right border-t border-swsm-black/10 pt-10">
+        <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+          Calendrier {saison.annee}
+        </p>
+
+        <ol class="divide-y divide-swsm-black/10">
+          {
+            saison.manches.map((m) => {
+              const isPasse = m.statut === "passe";
+              const isLive = m.statut === "en_direct";
+              const dateTxt = formatDate(m.date);
+              return (
+                <li class={`saison-manche py-5 flex items-baseline justify-between gap-4 ${isPasse ? "opacity-50" : ""}`}>
+                  <div class="flex-1 min-w-0">
+                    <p class={`font-display font-bold text-base md:text-lg tracking-caps-tight ${isPasse ? "line-through" : ""}`}>
+                      {m.lieu}
+                    </p>
+                    <p class={`font-body text-sm text-swsm-black/60 mt-0.5 ${isPasse ? "line-through" : ""}`}>
+                      {dateTxt}
+                    </p>
+                  </div>
+                  <div class="flex-shrink-0">
+                    {isLive && (
+                      <span class="saison-live inline-flex items-center gap-2 bg-swsm-pink text-swsm-white px-3 py-1 text-[10px] font-display font-bold uppercase tracking-caps-loose">
+                        <span class="block w-1.5 h-1.5 rounded-full bg-swsm-white animate-pulse"></span>
+                        En direct
+                      </span>
+                    )}
+                    {!isPasse && !isLive && (
+                      <span class="inline-block bg-swsm-pink/10 text-swsm-pink px-3 py-1 text-[10px] font-display font-bold uppercase tracking-caps-loose">
+                        À venir
+                      </span>
+                    )}
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ol>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const section = document.querySelector<HTMLElement>(".saison");
+  const eyebrow = document.querySelector<HTMLElement>(".saison-eyebrow");
+  const title = document.querySelector<HTMLElement>(".saison-title");
+  const left = document.querySelector<HTMLElement>(".saison-block-left");
+  const right = document.querySelector<HTMLElement>(".saison-block-right");
+  const position = document.querySelector<HTMLElement>(".saison-position");
+
+  if (section && eyebrow && title && left && right) {
+    // Le titre est animé par le module global (data-split-mask).
+    if (reduce) {
+      gsap.set([eyebrow, left, right], { opacity: 1, y: 0, scale: 1 });
+    } else {
+      gsap.set(eyebrow, { opacity: 0, y: 20 });
+      gsap.set([left, right], { opacity: 0, y: 30 });
+      if (position) gsap.set(position, { scale: 1.1 });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 70%",
+          toggleActions: "play none none none",
+        },
+      })
+        .to(eyebrow, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+        .to([left, right], { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.15 }, "-=0.2")
+        .to(position, { scale: 1, duration: 0.6, ease: "power2.out" }, "-=0.5");
+    }
+  }
+</script>

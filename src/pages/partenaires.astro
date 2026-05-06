@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroPartenaires from "../components/partenaires/HeroPartenaires.astro";
+import ParallaxBand from "../components/partenaires/ParallaxBand.astro";
+import PartenaireBlock from "../components/partenaires/PartenaireBlock.astro";
+import CTAPartenaires from "../components/partenaires/CTAPartenaires.astro";
+
+const partenaires = (await getCollection("partenaires")).sort(
+  (a, b) => a.data.ordre - b.data.ordre,
+);
+---
+
+<BaseLayout
+  title="Partenaires"
+  description="Cinq partenaires accompagnent SWSM Racing Team. Découvrez les entreprises qui font vivre l'écurie : 360 Franchises, ATL Capital, BearMotorShop, Alystar, Team 33."
+>
+  <HeroPartenaires />
+  <ParallaxBand />
+
+  {partenaires.map((p, i) => (
+    <PartenaireBlock partenaire={p} index={i} />
+  ))}
+
+  <CTAPartenaires />
+</BaseLayout>

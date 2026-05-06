@@ -1,0 +1,66 @@
+---
+// Filtres catégorie — badges cliquables qui filtrent la grille via JS vanilla.
+const filters = [
+  { value: "all", label: "Tous" },
+  { value: "compte-rendu", label: "Comptes rendus" },
+  { value: "portrait", label: "Portraits" },
+  { value: "coulisses", label: "Coulisses" },
+  { value: "partenaire", label: "Partenaires" },
+  { value: "ecurie", label: "Vie d'écurie" },
+];
+---
+
+<div class="coul-filters bg-swsm-white border-b border-swsm-black/10 sticky top-0 z-30 backdrop-blur-md" style="z-index:5;">
+  <div class="max-w-[1240px] mx-auto px-6 md:px-10 py-5 flex flex-wrap items-center gap-2 md:gap-3">
+    <span class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-black/50 mr-3 hidden md:inline">Filtrer</span>
+    {filters.map((f) => (
+      <button
+        type="button"
+        class={`coul-filter-btn ${f.value === "all" ? "is-active" : ""} text-xs uppercase tracking-caps-loose font-display font-semibold px-4 py-2 rounded-full border transition-all duration-300`}
+        data-filter={f.value}
+      >
+        {f.label}
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  .coul-filter-btn {
+    background: transparent;
+    color: rgba(13, 13, 13, 0.55);
+    border-color: rgba(13, 13, 13, 0.12);
+    cursor: pointer;
+  }
+  .coul-filter-btn:hover {
+    color: #0D0D0D;
+    border-color: rgba(13, 13, 13, 0.30);
+  }
+  .coul-filter-btn.is-active {
+    background: #0D0D0D;
+    color: #F7F7F5;
+    border-color: #0D0D0D;
+  }
+</style>
+
+<script>
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>(".coul-filter-btn"));
+  const items = Array.from(document.querySelectorAll<HTMLElement>("[data-article-cat]"));
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter || "all";
+      buttons.forEach((b) => b.classList.toggle("is-active", b === btn));
+
+      items.forEach((item) => {
+        const cat = item.dataset.articleCat;
+        const match = filter === "all" || cat === filter;
+        item.style.display = match ? "" : "none";
+      });
+
+      if ((window as any).plausible) {
+        (window as any).plausible("Filter coulisses", { props: { category: filter } });
+      }
+    });
+  });
+</script>

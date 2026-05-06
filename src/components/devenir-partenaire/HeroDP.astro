@@ -1,0 +1,20 @@
+---
+// Hero "Devenir partenaire" — composant React avec flèche dynamique
+// pointant sur le CTA principal "Télécharger le dossier".
+import { DynamicHero } from "../ui/dynamic-hero";
+---
+
+<DynamicHero client:load />
+
+<script>
+  // Tracking Plausible — bouton de téléchargement du dossier
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const link = target.closest<HTMLAnchorElement>('a[href="/dossier-sponsoring.pdf"]');
+    if (link && (window as any).plausible) {
+      (window as any).plausible("Download dossier sponsoring", {
+        props: { source: "hero" },
+      });
+    }
+  });
+</script>

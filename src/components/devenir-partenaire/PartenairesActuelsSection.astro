@@ -1,0 +1,179 @@
+---
+// Stack animé des partenaires actuels — repris du home (PartenairesSection)
+// avec CTA final adapté au contexte "Devenir partenaire".
+import { getCollection } from "astro:content";
+import PartnerCardStack from "../ui/partner-card-stack";
+
+const partenaires = (await getCollection("partenaires")).sort(
+  (a, b) => a.data.ordre - b.data.ordre,
+);
+
+const partnersData = partenaires.map((p) => ({
+  id: p.id,
+  nom: p.data.nom,
+  role: p.data.role,
+  niveau: p.data.niveau,
+  photo: p.data.photo,
+  logo: p.data.logo,
+  couleur: p.data.couleur,
+  logoTint: p.data.logoTint,
+}));
+---
+
+<section
+  class="dp-current relative bg-swsm-black text-swsm-white py-24 md:py-32 overflow-hidden"
+  style="z-index:5;box-shadow:0 -30px 60px -10px rgba(0,0,0,0.4);"
+  aria-label="Partenaires actuels de SWSM Racing Team"
+>
+  <div class="max-w-[1240px] mx-auto px-6 md:px-10">
+    <header class="max-w-2xl mb-12 md:mb-16 mx-auto text-center">
+      <p class="dp-current-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+        Ils nous accompagnent
+      </p>
+      <h2
+        class="dp-current-title font-display font-bold tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-6"
+        data-split-mask
+      >
+        Cinq partenaires. Une seule équipe.
+      </h2>
+      <p class="dp-current-sub font-body text-base md:text-lg text-swsm-white/70 mx-auto">
+        Des entreprises qui investissent dans une structure sportive en construction.
+      </p>
+    </header>
+
+    <div class="dp-current-stack-wrap flex justify-center">
+      <PartnerCardStack partners={partnersData} client:load />
+    </div>
+
+    <div class="mt-16 md:mt-20 text-center">
+      <a
+        href="/partenaires"
+        class="btn-cta btn-cta-glass font-display font-bold text-sm uppercase tracking-caps-loose px-8 py-4"
+      >
+        <span>Voir les partenaires en détail</span>
+        <span class="btn-cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Modale partenaire -->
+  <div
+    id="partenaire-modale"
+    class="fixed inset-0 z-50 opacity-0 pointer-events-none transition-opacity duration-300"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+  >
+    <button
+      type="button"
+      class="absolute inset-0 bg-swsm-black/90 backdrop-blur-md"
+      aria-label="Fermer"
+      data-modale-close
+    ></button>
+
+    <div class="relative h-full w-full flex items-center justify-center p-4 md:p-8 pointer-events-none">
+      <div class="modale-panel relative bg-swsm-white text-swsm-black w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-sm scale-95 opacity-0 transition-all duration-300">
+        <button
+          type="button"
+          class="absolute top-4 right-4 z-10 w-10 h-10 inline-flex items-center justify-center bg-swsm-black/5 hover:bg-swsm-black/15 transition-colors rounded-full"
+          aria-label="Fermer la modale"
+          data-modale-close
+        >
+          <span class="relative block w-4 h-4">
+            <span class="absolute left-0 top-1/2 block w-4 h-[2px] bg-swsm-black rotate-45"></span>
+            <span class="absolute left-0 top-1/2 block w-4 h-[2px] bg-swsm-black -rotate-45"></span>
+          </span>
+        </button>
+
+        <div class="p-8 md:p-12">
+          {
+            partenaires.map((p) => (
+              <div class="modale-content hidden" data-partner={p.id}>
+                <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-3">
+                  {p.data.niveau}
+                </p>
+                <h3 class="font-display font-bold text-swsm-black tracking-caps-tight text-3xl md:text-4xl mb-2">
+                  {p.data.nom}
+                </h3>
+                <p class="font-body text-sm uppercase tracking-caps-loose text-swsm-black/60 mb-8">
+                  {p.data.role}
+                </p>
+
+                {p.data.photo && (
+                  <div class="aspect-[16/9] overflow-hidden rounded-sm mb-8 bg-swsm-black/5">
+                    <img src={p.data.photo} alt={`Photo ${p.data.nom}`} class="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                )}
+
+                <p class="font-body text-base md:text-lg text-swsm-black/85 leading-relaxed">
+                  {p.data.description}
+                </p>
+
+                {p.data.citation && (
+                  <blockquote class="mt-8 pl-6 border-l-2 border-swsm-pink italic font-body text-base text-swsm-black/85">
+                    {p.data.citation}
+                  </blockquote>
+                )}
+
+                {(p.data.site || p.data.linkedin || p.data.instagram || p.data.email || p.data.telephone) && (
+                  <div class="mt-10 pt-6 border-t border-swsm-black/10 grid sm:grid-cols-2 gap-3 text-sm font-body">
+                    {p.data.site && (<a href={p.data.site} target="_blank" rel="noopener noreferrer" class="text-swsm-black hover:text-swsm-pink transition-colors">Site web →</a>)}
+                    {p.data.linkedin && (<a href={p.data.linkedin} target="_blank" rel="noopener noreferrer" class="text-swsm-black hover:text-swsm-pink transition-colors">LinkedIn →</a>)}
+                    {p.data.instagram && (<a href={p.data.instagram} target="_blank" rel="noopener noreferrer" class="text-swsm-black hover:text-swsm-pink transition-colors">Instagram →</a>)}
+                    {p.data.email && (<a href={`mailto:${p.data.email}`} class="text-swsm-black hover:text-swsm-pink transition-colors">{p.data.email}</a>)}
+                    {p.data.telephone && (<a href={`tel:${p.data.telephone}`} class="text-swsm-black hover:text-swsm-pink transition-colors">{p.data.telephone}</a>)}
+                  </div>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Modale ouverte par CustomEvent émis depuis le composant React.
+  const modale = document.getElementById("partenaire-modale");
+  const panel = modale?.querySelector<HTMLElement>(".modale-panel");
+  const contents = Array.from(document.querySelectorAll<HTMLElement>(".modale-content"));
+  const closers = Array.from(document.querySelectorAll<HTMLElement>("[data-modale-close]"));
+
+  const openModale = (slug: string) => {
+    if (!modale || !panel) return;
+    contents.forEach((c) => c.classList.toggle("hidden", c.dataset.partner !== slug));
+    modale.classList.remove("opacity-0", "pointer-events-none");
+    modale.classList.add("opacity-100");
+    modale.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => {
+      panel.classList.remove("scale-95", "opacity-0");
+      panel.classList.add("scale-100", "opacity-100");
+    });
+    document.body.style.overflow = "hidden";
+
+    if (typeof window !== "undefined" && (window as any).plausible) {
+      (window as any).plausible("Click logo partenaire", { props: { partenaire: slug } });
+    }
+  };
+
+  const closeModale = () => {
+    if (!modale || !panel) return;
+    panel.classList.remove("scale-100", "opacity-100");
+    panel.classList.add("scale-95", "opacity-0");
+    modale.classList.add("opacity-0", "pointer-events-none");
+    modale.classList.remove("opacity-100");
+    modale.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  window.addEventListener("partner:open", (e: Event) => {
+    const slug = (e as CustomEvent<string>).detail;
+    if (slug) openModale(slug);
+  });
+
+  closers.forEach((c) => c.addEventListener("click", closeModale));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModale();
+  });
+</script>

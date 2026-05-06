@@ -1,0 +1,118 @@
+---
+// Section F — Coulisses
+// Aperçu du magazine /coulisses : 3 derniers articles publiés (non-draft).
+import { getCollection } from "astro:content";
+
+const articles = (await getCollection("articles", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const categoryLabel: Record<string, string> = {
+  "compte-rendu": "Compte rendu",
+  portrait: "Portrait",
+  coulisses: "Coulisses",
+  partenaire: "Partenaire",
+  ecurie: "Vie d'écurie",
+};
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<section
+  class="coulisses has-grain relative bg-swsm-white py-24 md:py-32"
+  aria-label="Coulisses de l'écurie"
+>
+  <div class="max-w-[1240px] mx-auto px-6 md:px-10">
+    <header class="max-w-2xl mb-16 md:mb-20">
+      <p class="coulisses-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
+        Les coulisses
+      </p>
+      <h2
+        class="coulisses-title font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-6"
+        data-split-mask
+      >
+        L'écurie au quotidien.
+      </h2>
+      <p class="coulisses-sub font-body text-base md:text-lg text-swsm-black/70">
+        Comptes rendus de course, portraits, préparation, paddock.
+      </p>
+    </header>
+
+    <div class="coulisses-grid grid md:grid-cols-3 gap-8 md:gap-10">
+      {
+        articles.map((a) => (
+          <a
+            href={`/coulisses/${a.id}`}
+            class="coulisses-card group block"
+          >
+            <div class="aspect-[4/3] overflow-hidden bg-swsm-black/5 relative" data-parallax="20">
+              <img
+                src={a.data.cover}
+                alt={a.data.title}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                data-photo-reveal
+                loading="lazy"
+              />
+            </div>
+            <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mt-5">
+              {categoryLabel[a.data.category]}
+            </p>
+            <h3 class="font-display font-bold text-swsm-black text-xl md:text-2xl mt-2 tracking-caps-tight leading-snug group-hover:text-swsm-pink transition-colors duration-300">
+              {a.data.title}
+            </h3>
+            <p class="font-body text-sm text-swsm-black/60 mt-3">
+              {formatDate(a.data.pubDate)}
+            </p>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="mt-16 text-center">
+      <a
+        href="/coulisses"
+        class="btn-cta btn-cta-glass-dark font-display font-bold text-sm uppercase tracking-caps-loose px-8 py-4"
+      >
+        <span>Voir tous les articles</span>
+        <span class="btn-cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const section = document.querySelector<HTMLElement>(".coulisses");
+  const eyebrow = document.querySelector<HTMLElement>(".coulisses-eyebrow");
+  const title = document.querySelector<HTMLElement>(".coulisses-title");
+  const sub = document.querySelector<HTMLElement>(".coulisses-sub");
+  const cards = Array.from(document.querySelectorAll<HTMLElement>(".coulisses-card"));
+
+  if (section && eyebrow && title && sub && cards.length) {
+    // Le titre est animé par le module global (data-split-mask).
+    if (reduce) {
+      gsap.set([eyebrow, sub, ...cards], { opacity: 1, y: 0 });
+    } else {
+      gsap.set([eyebrow, sub], { opacity: 0, y: 20 });
+      gsap.set(cards, { opacity: 0, y: 40 });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 70%",
+          toggleActions: "play none none none",
+        },
+      })
+        .to(eyebrow, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+        .to(sub, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.2")
+        .to(cards, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.15 }, "-=0.3");
+    }
+  }
+</script>

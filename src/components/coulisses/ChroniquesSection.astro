@@ -1,0 +1,36 @@
+---
+// Section "Les chroniques" — grille éditoriale des articles.
+// Remplace l'ancienne combinaison FeaturedArticle + CategoryFilters + grille.
+import { getCollection } from "astro:content";
+import ArticleCard from "./ArticleCard.astro";
+
+const articles = (await getCollection("articles", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+{articles.length > 0 && (
+  <section class="chroniques bg-swsm-white py-20 md:py-28 px-6 md:px-10 has-grain">
+    <div class="max-w-[1240px] mx-auto">
+      <header class="mb-14 md:mb-20 max-w-2xl">
+        <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
+          Les chroniques
+        </p>
+        <h2
+          class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-5"
+          data-split-mask
+        >
+          Le carnet éditorial.
+        </h2>
+        <p class="font-body text-base md:text-lg text-swsm-black/65 leading-relaxed">
+          Comptes rendus, portraits, coulisses techniques. L'écurie au quotidien — pas de filtres, pas de tri, juste les histoires qu'on a envie de raconter.
+        </p>
+      </header>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
+        {articles.map((article) => (
+          <ArticleCard article={article} />
+        ))}
+      </div>
+    </div>
+  </section>
+)}

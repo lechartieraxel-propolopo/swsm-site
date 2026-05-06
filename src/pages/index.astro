@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/home/HeroSection.astro";
+import ZoomParallaxWrapper from "../components/home/ZoomParallaxWrapper.astro";
+import PilotesSection from "../components/home/PilotesSection.astro";
+import PartenairesSection from "../components/home/PartenairesSection.astro";
+import SaisonSection from "../components/home/SaisonSection.astro";
+import StoriesPreview from "../components/home/StoriesPreview.astro";
+import CoulissesSection from "../components/home/CoulissesSection.astro";
+import CTASection from "../components/home/CTASection.astro";
+---
+
+<BaseLayout
+  title="Accueil"
+  description="Écurie privée du Sud-Ouest. Trois pilotes engagés en Championnat de France de Supermotard."
+>
+  <HeroSection />
+  <ZoomParallaxWrapper />
+  <PilotesSection />
+  <PartenairesSection />
+  <SaisonSection />
+  <StoriesPreview />
+  <CoulissesSection />
+  <CTASection />
+</BaseLayout>
