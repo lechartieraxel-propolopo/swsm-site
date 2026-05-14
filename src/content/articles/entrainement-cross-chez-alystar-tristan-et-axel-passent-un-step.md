@@ -11,7 +11,7 @@ cover: /images/articles/capture-d-ecran-2026-05-14-a-17-27-03-1778785256032.png
 pilotes:
   - axel-lechartier
   - tristan-ducamp
-draft: true
+draft: false
 ---
 ## La partie terre, une compétence à part entière
 
