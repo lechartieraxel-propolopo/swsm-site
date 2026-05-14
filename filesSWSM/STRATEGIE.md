@@ -13,7 +13,7 @@ Référence centrale : à lire avant toute décision technique ou éditoriale.
 **Pilotes engagés** : 3 pilotes en Championnat de France de Supermotard, catégorie Challenger
 
 - Axel Lechartier — #52 — Challenger + Trophée de France
-- Tristan Ducap — #500 — Challenger + Trophée de France
+- Tristan Ducamp — #500 — Challenger + Trophée de France
 - Edouardo Ferrera — #867 — Challenger
 
 **Modèle économique actuel** : 100 % autofinancé via les sociétés de Thierry et Axel Lechartier (notamment 360 Franchises et ATL Capital, qui sponsorisent réellement la structure).

@@ -79,7 +79,7 @@ swsm-racing-team/
 │   │   │   └── *.md
 │   │   ├── pilotes/                     # 3 fiches pilotes
 │   │   │   ├── axel-lechartier.md
-│   │   │   ├── tristan-ducap.md
+│   │   │   ├── tristan-ducamp.md
 │   │   │   └── edouardo-ferrera.md
 │   │   └── partenaires/                 # 5 fiches partenaires
 │   │       ├── 360-franchises.md

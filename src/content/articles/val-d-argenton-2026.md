@@ -20,7 +20,7 @@ Côté écurie, préparation moto réalisée en amont chez **BearMotorShop**. R�
 ## Engagements et résultats
 
 - **Axel Lechartier (#52)** termine **P12** sur la course du dimanche matin. Bon départ, perte de deux positions en milieu de course sur un faux mouvement à l'épingle, remontée propre dans les trois derniers tours. Premier point au championnat.
-- **Tristan Ducap (#500)** termine **P18**. Course de gestion correcte, rythme régulier, peu d'erreurs. Manque de mordant en sortie de virages serrés, à travailler à l'entraînement.
+- **Tristan Ducamp (#500)** termine **P18**. Course de gestion correcte, rythme régulier, peu d'erreurs. Manque de mordant en sortie de virages serrés, à travailler à l'entraînement.
 - **Edouardo Ferrera (#867)** termine **P25**. Première manche de Championnat de France pour le pilote, prise de marques sur un plateau plus relevé que ses références précédentes. Bonne attitude, à confirmer sur la suite.
 
 ## Lecture de l'écurie

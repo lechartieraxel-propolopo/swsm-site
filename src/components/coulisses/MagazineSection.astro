@@ -17,8 +17,12 @@ const categoryLabel: Record<string, string> = {
 const formatDate = (d: Date) =>
   d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 
+// 1 featured + 2 secondaires affichés. Le reste est révélable via un point
+// cliquable. Quand un nouvel article s'ajoute, il devient automatiquement
+// le featured (tri par date desc), les anciens reculent.
 const featured = articles[0];
-const rest = articles.slice(1);
+const rest = articles.slice(1, 3);
+const archived = articles.slice(3);
 ---
 
 {articles.length > 0 && (
@@ -145,6 +149,70 @@ const rest = articles.slice(1);
         </div>
       </div>
 
+      {/* Point cliquable + archives — visibles uniquement si plus de 3 articles */}
+      {archived.length > 0 && (
+        <div class="magazine-archives-toggle-wrap mt-16 md:mt-20 flex flex-col items-center">
+          <button
+            type="button"
+            class="magazine-archives-toggle group inline-flex flex-col items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-swsm-pink rounded-full p-2"
+            aria-expanded="false"
+            aria-controls="magazine-archives"
+            data-toggle-archives
+          >
+            <span
+              class="magazine-dot block w-3 h-3 rounded-full bg-swsm-pink transition-all duration-500 group-hover:scale-125 group-hover:shadow-[0_0_16px_#EC2D7C]"
+              aria-hidden="true"
+            ></span>
+            <span class="text-[10px] md:text-xs uppercase tracking-[0.2em] font-display font-medium text-swsm-black/70 group-hover:text-swsm-pink transition-colors">
+              <span class="magazine-toggle-show">Voir tous les articles ({archived.length})</span>
+              <span class="magazine-toggle-hide hidden">Replier</span>
+            </span>
+          </button>
+
+          <div
+            id="magazine-archives"
+            class="magazine-archives w-full mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 overflow-hidden"
+            data-expanded="false"
+          >
+            {archived.map((article, i) => (
+              <a
+                href={`/coulisses/${article.id}`}
+                class="magazine-archive-card group block relative"
+              >
+                <span
+                  class="absolute -top-2 right-0 font-display font-bold text-swsm-black/[0.05] text-[3.5rem] md:text-[4.5rem] leading-[0.8] tracking-caps-tight pointer-events-none select-none"
+                  aria-hidden="true"
+                >
+                  N°0{i + 4}
+                </span>
+                <div class="aspect-[4/3] overflow-hidden bg-swsm-black/5 rounded-sm mb-4">
+                  <img
+                    src={article.data.cover}
+                    alt={article.data.title}
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="text-[10px] uppercase tracking-[0.18em] font-display font-medium text-swsm-pink">
+                    {categoryLabel[article.data.category] || article.data.category}
+                  </span>
+                  <span class="font-body italic text-xs text-swsm-black/55">
+                    {formatDate(article.data.pubDate)}
+                  </span>
+                </div>
+                <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.15] text-lg md:text-xl mb-2 group-hover:text-swsm-pink transition-colors duration-300">
+                  {article.data.title}
+                </h3>
+                <p class="font-body text-sm text-swsm-black/65 leading-relaxed line-clamp-2">
+                  {article.data.description}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
       <!-- Footer barre latérale magazine -->
       <div class="mt-16 md:mt-20 pt-6 border-t border-swsm-black/10 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[10px] md:text-xs uppercase tracking-[0.18em] font-display font-medium text-swsm-black/50">
         <span>SWSM Racing Team — Magazine éditorial</span>
@@ -182,6 +250,37 @@ const rest = articles.slice(1);
       transition: none;
     }
   }
+
+  /* Archives : repliées par défaut, animation expand au click */
+  .magazine-archives {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 700ms cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 500ms ease-out 100ms,
+                margin-top 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    margin-top: 0;
+  }
+  .magazine-archives[data-expanded="true"] {
+    max-height: 4000px;
+    opacity: 1;
+    margin-top: 3rem;
+  }
+  @media (min-width: 768px) {
+    .magazine-archives[data-expanded="true"] { margin-top: 4rem; }
+  }
+
+  /* Pulse subtil sur le point */
+  @keyframes magazine-dot-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(236, 45, 124, 0.5); }
+    50% { box-shadow: 0 0 0 10px rgba(236, 45, 124, 0); }
+  }
+  .magazine-dot {
+    animation: magazine-dot-pulse 2.4s ease-in-out infinite;
+  }
+  .magazine-archives-toggle[aria-expanded="true"] .magazine-dot {
+    animation: none;
+    transform: rotate(45deg);
+  }
 </style>
 
 <script>
@@ -202,6 +301,27 @@ const rest = articles.slice(1);
       // Stagger : 0ms, 100ms, 200ms entre les items
       (el as HTMLElement).style.transitionDelay = `${i * 100}ms`;
       io.observe(el);
+    });
+  }
+
+  // Toggle archives au clic sur le point
+  const toggle = document.querySelector<HTMLButtonElement>("[data-toggle-archives]");
+  const archives = document.getElementById("magazine-archives");
+  const labelShow = toggle?.querySelector<HTMLElement>(".magazine-toggle-show");
+  const labelHide = toggle?.querySelector<HTMLElement>(".magazine-toggle-hide");
+
+  if (toggle && archives && labelShow && labelHide) {
+    toggle.addEventListener("click", () => {
+      const isOpen = archives.dataset.expanded === "true";
+      const next = !isOpen;
+      archives.dataset.expanded = String(next);
+      toggle.setAttribute("aria-expanded", String(next));
+      labelShow.classList.toggle("hidden", next);
+      labelHide.classList.toggle("hidden", !next);
+
+      if (typeof window !== "undefined" && (window as any).plausible) {
+        (window as any).plausible(next ? "Magazine: archives ouvertes" : "Magazine: archives repliées");
+      }
     });
   }
 </script>
