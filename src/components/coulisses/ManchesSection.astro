@@ -5,7 +5,8 @@ import { ExpandingCards, type CardItem } from "../ui/expanding-cards";
 import saison from "../../data/saison.json";
 import settings from "../../data/site-settings.json";
 
-// Photo générique par lieu (à enrichir au fil des manches avec de vraies photos par circuit)
+// Photo par défaut si une manche n'a pas encore de photo dédiée
+const photoParDefaut = "/images/general/IMG_9430.JPG";
 const photoParLieu: Record<string, string> = {
   "Le Val d'Argenton": "/images/general/IMG_9430.JPG",
   "Lohéac": "/images/general/IMG_9442.JPG",
@@ -64,7 +65,7 @@ const cards: CardItem[] = saison.manches.map((m) => {
     id: m.id,
     title: buildTitle(m),
     description: buildDescription(m),
-    imgSrc: photoParLieu[m.lieu] || "/images/general/IMG_9430.JPG",
+    imgSrc: (m as { photo?: string }).photo || photoParLieu[m.lieu] || photoParDefaut,
     icon: isPassed ? "flag" : "calendar",
     badge: isPassed ? "Manche passée" : "À venir",
     linkHref: m.lien_compte_rendu,
