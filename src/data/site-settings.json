@@ -4,7 +4,7 @@
     "title": "Une écurie. Une ambition.",
     "subtitle": "Trois pilotes. Une écurie. Une saison.",
     "photos": [
-      "/images/hero/hero-1.jpg",
+      "/images/hero/img-9405.jpg",
       "/images/hero/hero-2.jpg",
       "/images/hero/hero-3.jpg"
     ]
@@ -28,11 +28,6 @@
     "eyebrow": "L'instant",
     "title": "Une saison, en quelques tap.",
     "subtitle": "Quatre fenêtres sur l'écurie : atelier, pré-grille, course, coulisses."
-  },
-  "storiesCoulisses": {
-    "eyebrow": "En direct des coulisses",
-    "title": "Une journée de course, en stories.",
-    "subtitle": ""
   },
   "coulissesSection": {
     "eyebrow": "Les coulisses",
@@ -90,6 +85,11 @@
     "titleBottom": "les coulisses.",
     "description": "L'écurie au quotidien. Sans filtre, sans mise en scène. Juste ce qui se passe quand on coupe la caméra principale.",
     "photo": "/images/general/IMG_9442.JPG"
+  },
+  "storiesCoulisses": {
+    "eyebrow": "En direct des coulisses",
+    "title": "Une journée de course, en stories.",
+    "subtitle": ""
   },
   "coulissesEquipe": {
     "eyebrow": "Derrière les coulisses",
