@@ -1,0 +1,114 @@
+[
+  {
+    "id": "atelier",
+    "avatarLabel": "Atelier",
+    "avatarImage": "/images/general/IMG_9351.JPG",
+    "slides": [
+      {
+        "img": "/images/general/IMG_9351.JPG",
+        "eyebrow": "Préparation",
+        "title": "Le silence avant le départ.",
+        "caption": "On vérifie deux fois. Pas de place à l'à-peu-près."
+      },
+      {
+        "img": "/images/general/IMG_9379.JPG",
+        "eyebrow": "Stand",
+        "title": "Cinq minutes pour ajuster.",
+        "caption": "Une butée, un cran de plus, on retourne en piste."
+      },
+      {
+        "img": "/images/general/IMG_9403.JPG",
+        "eyebrow": "Mécanique",
+        "title": "Tout dépend de ce moment-là.",
+        "caption": "Les heures de prépa qu'on ne voit pas, mais qui tiennent tout."
+      },
+      {
+        "img": "/images/general/IMG_9421.JPG",
+        "eyebrow": "Équipement",
+        "title": "Tout ce qu'il faut. Rien de plus.",
+        "caption": "L'inventaire d'une journée de course."
+      }
+    ]
+  },
+  {
+    "id": "pregrille",
+    "avatarLabel": "Pré-grille",
+    "avatarImage": "/images/general/IMG_9408.JPG",
+    "slides": [
+      {
+        "img": "/images/general/IMG_9408.JPG",
+        "eyebrow": "Pré-grille",
+        "title": "Le casque vissé.",
+        "caption": "Le rythme cardiaque qui monte tranquille."
+      },
+      {
+        "img": "/images/general/IMG_9440.JPG",
+        "eyebrow": "Concentration",
+        "title": "Le regard.",
+        "caption": "Les visualisations du tour avant le départ."
+      },
+      {
+        "img": "/images/general/IMG_9416.JPG",
+        "eyebrow": "Détail",
+        "title": "Les sliders qui ont vu du bitume.",
+        "caption": "Chaque trace, une histoire."
+      }
+    ]
+  },
+  {
+    "id": "course",
+    "avatarLabel": "Course",
+    "avatarImage": "/images/general/IMG_9442.JPG",
+    "slides": [
+      {
+        "img": "/images/general/IMG_9442.JPG",
+        "eyebrow": "En course",
+        "title": "Pleine charge.",
+        "caption": "Le moteur chante, le corps suit."
+      },
+      {
+        "img": "/images/general/IMG_9412.JPG",
+        "eyebrow": "Ligne droite",
+        "title": "On regarde devant.",
+        "caption": "Jamais derrière."
+      },
+      {
+        "img": "/images/general/IMG_9430.JPG",
+        "eyebrow": "Tracé",
+        "title": "Connu par cœur.",
+        "caption": "Et appris à chaque tour."
+      },
+      {
+        "img": "/images/general/IMG_9446.JPG",
+        "eyebrow": "Drift",
+        "title": "Quand l'arrière sort un peu.",
+        "caption": "On contre, on relance."
+      }
+    ]
+  },
+  {
+    "id": "coulisses",
+    "avatarLabel": "Coulisses",
+    "avatarImage": "/images/general/IMG_9451.JPG",
+    "slides": [
+      {
+        "img": "/images/general/IMG_9399.JPG",
+        "eyebrow": "Paddock",
+        "title": "Discussion technique.",
+        "caption": "Les data parlent, mais le ressenti aussi."
+      },
+      {
+        "img": "/images/general/IMG_9451.JPG",
+        "eyebrow": "Photographe",
+        "title": "L'image fait partie du sport.",
+        "caption": "On joue le jeu, l'instant se capture."
+      },
+      {
+        "img": "/images/general/IMG_9459.JPG",
+        "eyebrow": "Soir",
+        "title": "La fatigue qui s'installe.",
+        "caption": "Mais le sourire reste."
+      }
+    ]
+  }
+]

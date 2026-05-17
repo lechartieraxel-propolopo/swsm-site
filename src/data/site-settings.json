@@ -1,0 +1,19 @@
+{
+  "hero": {
+    "eyebrow": "SWSM Racing Team",
+    "title": "Une écurie. Une ambition.",
+    "subtitle": "Trois pilotes. Une écurie. Une saison.",
+    "photos": [
+      "/images/hero/hero-1.jpg",
+      "/images/hero/hero-2.jpg",
+      "/images/hero/hero-3.jpg"
+    ]
+  },
+  "cta": {
+    "eyebrow": "Investir dans l'écurie",
+    "title": "Faites partie de l'écurie.",
+    "subtitle": "Cinq partenaires nous accompagnent déjà. Découvrez comment associer votre marque à SWSM Racing Team.",
+    "buttonDossier": "Télécharger le dossier",
+    "buttonContact": "Prendre contact"
+  }
+}

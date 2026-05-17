@@ -1,10 +1,8 @@
 ---
 // Section G — CTA Devenir partenaire
-// Adaptation du composant Feature108 (shadcnblocks) en Astro+GSAP.
-// Fond : dégradé signature rose-violet. Card panel : blanc cassé avec texte sombre.
-// 3 tabs présentent 3 angles de la valeur du sponsoring SWSM :
-// Visibilité, Ancrage territorial, Activation B2B.
-// Photos : /public/images/cta/01.JPG, 02.JPG, 03.JPG
+// Textes lus depuis src/data/site-settings.json, éditables via l'admin.
+import settings from "../../data/site-settings.json";
+const cta = settings.cta;
 ---
 
 <section
@@ -15,18 +13,18 @@
     <!-- Header centré -->
     <header class="flex flex-col items-center gap-5 text-center max-w-3xl mx-auto">
       <span class="cta-eyebrow inline-block text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-white border border-swsm-white/40 rounded-full px-4 py-1.5 backdrop-blur-sm">
-        Investir dans l'écurie
+        {cta.eyebrow}
       </span>
 
       <h2
         class="cta-title font-display font-bold text-swsm-white tracking-caps-tight leading-[1.05] text-3xl md:text-5xl lg:text-6xl"
         data-split-mask
       >
-        Faites partie de l'écurie.
+        {cta.title}
       </h2>
 
       <p class="cta-sub font-body text-base md:text-lg text-swsm-white/90 leading-relaxed">
-        Cinq partenaires nous accompagnent déjà. Découvrez comment associer votre marque à SWSM Racing Team.
+        {cta.subtitle}
       </p>
     </header>
 
@@ -194,7 +192,7 @@
         id="cta-download"
         class="btn-cta btn-cta-pink font-display font-bold text-sm uppercase tracking-caps-loose px-8 py-4"
       >
-        <span>Télécharger le dossier</span>
+        <span>{cta.buttonDossier}</span>
         <span class="btn-cta-arrow">→</span>
       </a>
       <a
@@ -202,7 +200,7 @@
         id="cta-contact"
         class="btn-cta btn-cta-glass font-display font-bold text-sm uppercase tracking-caps-loose px-8 py-4"
       >
-        <span>Prendre contact</span>
+        <span>{cta.buttonContact}</span>
         <span class="btn-cta-arrow">→</span>
       </a>
     </div>

@@ -1,15 +1,10 @@
 ---
 // Section A — Hero — version crossfade + Ken Burns
-// Architecture en 5 calques (de bas en haut) :
-//   z-0   : Slideshow 3 photos (frame opacity + img Ken Burns) — couleur, vivante
-//   z-5   : Grain photographique permanent (SVG fractalNoise)
-//   z-15  : Light flare diagonal qui balaie le hero toutes les 11s
-//   z-18  : 30 particules blanches flottantes (6 variantes)
-//   z-20  : Overlay léger (bg-black/30) pour lisibilité
-//   z-30  : Texte (data-split-hero pour effet par mot blur 8px → 0)
-//   z-30  : Scroll indicator (souris stylisée + roue qui pulse)
-//
-// Conserve `position: sticky` pour la compatibilité stacking reveal vers Manifeste.
+// Texte et photos lus depuis src/data/site-settings.json, éditables via l'admin.
+import settings from "../../data/site-settings.json";
+const hero = settings.hero;
+const photos = (hero.photos ?? []).slice(0, 3);
+while (photos.length < 3) photos.push(photos[0] ?? "/images/hero/hero-1.jpg");
 ---
 
 <section
@@ -20,13 +15,13 @@
   <!-- ─── CALQUE 0 — Slideshow 3 photos ─── -->
   <div class="hero-photo-layer absolute inset-0 z-0" aria-hidden="true">
     <div class="hero-frame hero-frame-1 absolute inset-0 overflow-hidden">
-      <img src="/images/hero/hero-1.jpg" alt="" class="hero-photo absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+      <img src={photos[0]} alt="" class="hero-photo absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
     </div>
     <div class="hero-frame hero-frame-2 absolute inset-0 overflow-hidden">
-      <img src="/images/hero/hero-2.jpg" alt="" class="hero-photo absolute inset-0 w-full h-full object-cover" loading="eager" />
+      <img src={photos[1]} alt="" class="hero-photo absolute inset-0 w-full h-full object-cover" loading="eager" />
     </div>
     <div class="hero-frame hero-frame-3 absolute inset-0 overflow-hidden">
-      <img src="/images/hero/hero-3.jpg" alt="" class="hero-photo absolute inset-0 w-full h-full object-cover" loading="eager" />
+      <img src={photos[2]} alt="" class="hero-photo absolute inset-0 w-full h-full object-cover" loading="eager" />
     </div>
   </div>
 
@@ -51,18 +46,18 @@
   <!-- ─── CALQUE 30 — Texte ─── -->
   <div class="relative z-30 w-full max-w-[1240px] mx-auto px-6 md:px-10 text-center">
     <p class="hero-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
-      SWSM Racing Team
+      {hero.eyebrow}
     </p>
 
     <h1
       class="hero-title font-display font-bold text-swsm-white uppercase tracking-caps-tight leading-[0.95] text-5xl md:text-7xl lg:text-8xl mb-6"
       data-split-hero
     >
-      Une écurie. Une ambition.
+      {hero.title}
     </h1>
 
     <p class="hero-sub font-body text-base md:text-lg text-swsm-white/95 max-w-xl mx-auto">
-      Trois pilotes. Une écurie. Une saison.
+      {hero.subtitle}
     </p>
   </div>
 
