@@ -59,14 +59,15 @@ const links = [
   <!-- Drawer mobile -->
   <div
     id="swsm-drawer"
-    class="md:hidden fixed inset-0 z-[60] bg-swsm-black text-swsm-white opacity-0 pointer-events-none transition-opacity duration-300"
+    class="md:hidden fixed inset-0 text-swsm-white opacity-0 pointer-events-none transition-opacity duration-300"
+    style="background-color:#0D0D0D;z-index:9999;"
     aria-hidden="true"
   >
-    <!-- Halo rose/violet en arrière-plan -->
+    <!-- Halo rose/violet en arrière-plan (par-dessus le fond noir, pas en dessous) -->
     <div
-      class="absolute inset-0 pointer-events-none opacity-60"
+      class="absolute inset-0 pointer-events-none"
       aria-hidden="true"
-      style="background: radial-gradient(ellipse at 80% 10%, rgba(236,45,124,0.18) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(91,33,182,0.18) 0%, transparent 55%);"
+      style="background: radial-gradient(ellipse at 80% 10%, rgba(236,45,124,0.20) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(91,33,182,0.20) 0%, transparent 55%);"
     ></div>
 
     <div class="relative flex items-center justify-between h-16 px-5">
