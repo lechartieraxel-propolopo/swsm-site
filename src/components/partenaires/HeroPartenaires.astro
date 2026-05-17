@@ -1,8 +1,8 @@
 ---
 // Hero "Partenaires" — vidéo qui s'expanse au scroll, palette SWSM.
-// Le scroll de la page est bloqué tant que la vidéo n'est pas pleinement
-// expandée (effet immersif).
 import { ScrollExpandHero } from "../ui/scroll-expansion-hero";
+import settings from "../../data/site-settings.json";
+const h = settings.partenairesHero;
 ---
 
 <ScrollExpandHero
@@ -10,20 +10,20 @@ import { ScrollExpandHero } from "../ui/scroll-expansion-hero";
   mediaType="video"
   mediaSrc="/videos/hero-partenaires.mp4"
   bgImageSrc="/images/general/IMG_9442.JPG"
-  title="Cinq partenaires."
-  eyebrow="Partenariat 2026"
-  scrollToExpand="Faire défiler pour découvrir"
+  title={h.title}
+  eyebrow={h.eyebrow}
+  scrollToExpand={h.scrollLabel}
   textBlend={false}
 >
   <div class="max-w-3xl mx-auto text-center text-swsm-white">
     <p class="text-xs uppercase tracking-[0.05em] font-display font-medium text-swsm-pink mb-5">
-      Une seule équipe
+      {h.subEyebrow}
     </p>
     <h2 class="font-display font-bold tracking-[-0.01em] leading-[1.05] text-3xl md:text-5xl mb-6">
-      Des entreprises qui investissent dans une structure sportive en construction.
+      {h.subTitle}
     </h2>
     <p class="font-body text-base md:text-lg text-swsm-white/75 leading-relaxed">
-      Cinq partenaires accompagnent SWSM Racing Team. Découvrez chacun d'eux et l'histoire qu'ils écrivent avec l'écurie.
+      {h.subText}
     </p>
   </div>
 </ScrollExpandHero>

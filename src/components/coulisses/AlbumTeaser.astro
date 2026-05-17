@@ -1,8 +1,8 @@
 ---
 // Section "teaser album" en fin de page Coulisses.
-// Composant React lazy-load (client:visible) — section de 200vh avec sticky 100vh interne.
-// L'animation est driven par le scroll vertical naturel de la page.
 import ScrollMorphAlbum from "../ui/scroll-morph-album";
+import settings from "../../data/site-settings.json";
+const t = settings.coulissesAlbum;
 
 const albumImages = [
   "/images/general/IMG_9351.JPG",
@@ -30,11 +30,11 @@ const albumImages = [
 
 <ScrollMorphAlbum
   images={albumImages}
-  introTitle="L'écurie en images."
-  introSubtitle="Continuez à scroller"
-  arcTitle="L'album SWSM"
-  arcSubtitle="Une saison capturée. Photos, instants, coulisses."
-  ctaLabel="Voir l'album complet"
+  introTitle={t.introTitle}
+  introSubtitle={t.introSubtitle}
+  arcTitle={t.arcTitle}
+  arcSubtitle={t.arcSubtitle}
+  ctaLabel={t.ctaLabel}
   ctaHref="/album"
   client:visible
 />

@@ -33,19 +33,19 @@ const archived = articles.slice(3);
       <header class="magazine-masthead flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16 pb-6 border-b-2 border-swsm-black">
         <div>
           <p class="text-[10px] md:text-xs uppercase tracking-[0.25em] font-display font-medium text-swsm-pink mb-3">
-            Issue n°{String(2026)} — Le magazine
+            {s.eyebrow}
           </p>
           <h2
             id="magazine-title"
             class="font-display font-bold text-swsm-black tracking-caps-tight leading-[0.95] text-4xl md:text-6xl lg:text-7xl"
             data-split-mask
           >
-            Le carnet éditorial.
+            {s.title}
           </h2>
         </div>
         <div class="md:text-right">
           <p class="font-body italic text-sm text-swsm-black/60 max-w-xs leading-snug">
-            Comptes rendus de manche, portraits de pilotes, coulisses techniques. Le quotidien de l'écurie en mots.
+            {s.subtitle}
           </p>
         </div>
       </header>

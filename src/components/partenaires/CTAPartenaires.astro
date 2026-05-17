@@ -1,6 +1,7 @@
 ---
 // CTA final de la page /partenaires
-// Section pleine hauteur, dégradé signature, "Et si vous étiez le prochain ?"
+import settings from "../../data/site-settings.json";
+const c = settings.partenairesCta;
 ---
 
 <section
@@ -17,18 +18,18 @@
 
   <div class="relative z-10 max-w-[1240px] mx-auto text-center flex flex-col items-center gap-6">
     <p class="part-cta-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-white/85">
-      Rejoignez-nous
+      {c.eyebrow}
     </p>
 
     <h2
       class="part-cta-title font-display font-bold text-swsm-white uppercase tracking-caps-tight leading-[0.95] text-4xl md:text-6xl lg:text-7xl"
       data-split-mask
     >
-      Et si vous étiez<br />le prochain ?
+      {c.titleLine1}<br />{c.titleLine2}
     </h2>
 
     <p class="part-cta-sub font-body text-base md:text-lg text-swsm-white/85 max-w-2xl mt-2">
-      Cinq entreprises nous accompagnent. La sixième pourrait être la vôtre.
+      {c.subtitle}
     </p>
 
     <div class="part-cta-buttons mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
