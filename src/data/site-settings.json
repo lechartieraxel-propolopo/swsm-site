@@ -157,5 +157,23 @@
     "title": "Et la saison continue.",
     "subtitle": "D'autres images, d'autres manches, d'autres histoires arrivent. L'album se construit en continu.",
     "ctaLabel": "Lire les coulisses"
+  },
+  "zoomParallax": {
+    "images": [
+      "/images/hero/hero-1.jpg",
+      "/images/hero/hero-2.jpg",
+      "/images/hero/hero-3.jpg",
+      "/images/general/IMG_9442.JPG",
+      "/images/general/IMG_9421.JPG",
+      "/images/general/IMG_9430.JPG",
+      "/images/general/IMG_9456.JPG"
+    ],
+    "manifesto": {
+      "eyebrow": "Notre engagement",
+      "title1": "Investir dans une structure.",
+      "title2": "Pas seulement sponsoriser un pilote.",
+      "ctaLabel": "En savoir plus",
+      "ctaHref": "/partenaires"
+    }
   }
 }

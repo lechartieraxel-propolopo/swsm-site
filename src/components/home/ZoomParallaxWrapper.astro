@@ -1,17 +1,18 @@
 ---
 import { ZoomParallax, type ManifestoContent } from "../ui/zoom-parallax";
+import settings from "../../data/site-settings.json";
 
-const images = [
-  { src: "/images/hero/hero-1.jpg",      alt: "SWSM Racing Team — image principale" },
-  { src: "/images/hero/hero-2.jpg",      alt: "SWSM Racing Team — paddock" },
-  { src: "/images/hero/hero-3.jpg",      alt: "SWSM Racing Team — action" },
-  { src: "/images/general/IMG_9442.JPG", alt: "SWSM Racing Team — moto" },
-  { src: "/images/general/IMG_9421.JPG", alt: "SWSM Racing Team — équipement" },
-  { src: "/images/general/IMG_9430.JPG", alt: "SWSM Racing Team — piste" },
-  { src: "/images/general/IMG_9456.JPG", alt: "SWSM Racing Team — détail" },
-];
+const z = (settings as { zoomParallax?: { images?: string[]; manifesto?: ManifestoContent } }).zoomParallax ?? {
+  images: ["/images/hero/hero-1.jpg", "/images/hero/hero-2.jpg", "/images/hero/hero-3.jpg", "/images/general/IMG_9442.JPG", "/images/general/IMG_9421.JPG", "/images/general/IMG_9430.JPG", "/images/general/IMG_9456.JPG"],
+  manifesto: { eyebrow: "Notre engagement", title1: "Investir dans une structure.", title2: "Pas seulement sponsoriser un pilote.", ctaLabel: "En savoir plus", ctaHref: "/partenaires" },
+};
 
-const manifesto: ManifestoContent = {
+const images = (z.images ?? []).map((src: string, i: number) => ({
+  src,
+  alt: `SWSM Racing Team — image ${i + 1}`,
+}));
+
+const manifesto: ManifestoContent = z.manifesto ?? {
   eyebrow: "Notre engagement",
   title1: "Investir dans une structure.",
   title2: "Pas seulement sponsoriser un pilote.",
