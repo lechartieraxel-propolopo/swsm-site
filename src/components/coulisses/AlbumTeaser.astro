@@ -1,31 +1,11 @@
 ---
 // Section "teaser album" en fin de page Coulisses.
+// Photos lues depuis album-photos.json (bento) — éditables via l'admin.
 import ScrollMorphAlbum from "../ui/scroll-morph-album";
 import settings from "../../data/site-settings.json";
+import albumData from "../../data/album-photos.json";
 const t = settings.coulissesAlbum;
-
-const albumImages = [
-  "/images/general/IMG_9351.JPG",
-  "/images/general/IMG_9360.JPG",
-  "/images/general/IMG_9368.JPG",
-  "/images/general/IMG_9379.JPG",
-  "/images/general/IMG_9384.JPG",
-  "/images/general/IMG_9392.JPG",
-  "/images/general/IMG_9399.JPG",
-  "/images/general/IMG_9403.JPG",
-  "/images/general/IMG_9408.JPG",
-  "/images/general/IMG_9412.JPG",
-  "/images/general/IMG_9416.JPG",
-  "/images/general/IMG_9421.JPG",
-  "/images/general/IMG_9430.JPG",
-  "/images/general/IMG_9440.JPG",
-  "/images/general/IMG_9442.JPG",
-  "/images/general/IMG_9446.JPG",
-  "/images/general/IMG_9451.JPG",
-  "/images/general/IMG_9456.JPG",
-  "/images/general/IMG_9459.JPG",
-  "/images/general/IMG_9499.JPG",
-];
+const albumImages = albumData.bento.map((b) => b.url);
 ---
 
 <ScrollMorphAlbum

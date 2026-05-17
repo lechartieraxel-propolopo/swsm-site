@@ -1,6 +1,8 @@
 ---
 // Hero "Album" — photo en fond + spiral animation overlay (mix-blend screen).
 import { SpiralAnimation } from "../ui/spiral-animation";
+import album from "../../data/album-photos.json";
+const h = album.hero;
 ---
 
 <section
@@ -10,7 +12,7 @@ import { SpiralAnimation } from "../ui/spiral-animation";
   <!-- Photo en fond -->
   <div
     class="absolute inset-0 z-0 bg-cover bg-center"
-    style="background-image:url('/images/general/IMG_9442.JPG');"
+    style={`background-image:url('${h.background}');`}
     aria-hidden="true"
   ></div>
 
@@ -29,15 +31,15 @@ import { SpiralAnimation } from "../ui/spiral-animation";
   <div class="relative z-30 h-full flex items-center justify-center px-6 md:px-10">
     <div class="max-w-4xl text-center flex flex-col items-center gap-6">
       <p class="album-hero-eyebrow text-xs uppercase tracking-[0.05em] font-display font-medium text-swsm-pink">
-        Album · Hors série
+        {h.eyebrow}
       </p>
       <h1
         class="album-hero-title font-display font-bold text-swsm-white tracking-[-0.01em] leading-[0.95] text-5xl md:text-7xl lg:text-8xl"
       >
-        L'album SWSM.
+        {h.title}
       </h1>
       <p class="album-hero-sub font-body text-base md:text-lg text-swsm-white/80 max-w-xl leading-relaxed mt-2">
-        Une saison capturée. Sans filtre, sans hiérarchie. Les images qui restent quand on range les caisses.
+        {h.subtitle}
       </p>
       <div class="album-hero-scroll mt-12 flex flex-col items-center gap-2 text-swsm-white/60">
         <span class="text-[10px] uppercase tracking-[0.3em] font-display">Faire défiler</span>
