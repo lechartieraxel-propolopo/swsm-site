@@ -1,0 +1,45 @@
+---
+// Section "Prochaine manche" — compte à rebours auto-calculé depuis saison.json.
+// Sélectionne automatiquement la prochaine manche dont la date est >= aujourd'hui.
+// Quand une manche se passe, la suivante prend automatiquement le relais.
+import { RaceCountdown, type NextRace } from "../ui/race-countdown";
+import saison from "../../data/saison.json";
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+// Tri par date asc, puis pick la première "a_venir" ou dont la date >= aujourd'hui.
+const upcoming = saison.manches
+  .filter((m) => new Date(m.date) >= today)
+  .sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
+
+const nextRace = upcoming[0];
+
+const race: NextRace | null = nextRace
+  ? {
+      lieu: nextRace.lieu,
+      departement: (nextRace as any).departement,
+      organisateur: (nextRace as any).organisateur,
+      date: nextRace.date,
+      dateFin: (nextRace as any).date_fin,
+    }
+  : null;
+---
+
+{race && (
+  <section
+    class="next-race relative bg-swsm-black text-swsm-white overflow-hidden"
+    aria-label="Prochaine manche du championnat"
+  >
+    {/* Halo subtil rose-violet en arrière-plan */}
+    <div
+      class="absolute inset-0 pointer-events-none opacity-50"
+      aria-hidden="true"
+      style="background: radial-gradient(ellipse at 80% 50%, rgba(236,45,124,0.12) 0%, transparent 55%), radial-gradient(ellipse at 20% 60%, rgba(91,33,182,0.12) 0%, transparent 55%);"
+    ></div>
+
+    <div class="relative">
+      <RaceCountdown race={race} client:load />
+    </div>
+  </section>
+)}
