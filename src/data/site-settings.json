@@ -9,11 +9,76 @@
       "/images/hero/hero-3.jpg"
     ]
   },
+  "pilotesSection": {
+    "eyebrow": "L'écurie",
+    "title": "Trois pilotes. Un seul collectif."
+  },
+  "partenairesSection": {
+    "eyebrow": "Ils nous accompagnent",
+    "title": "Cinq partenaires. Une seule équipe.",
+    "subtitle": "Des entreprises qui investissent dans une structure sportive en construction."
+  },
+  "saisonSection": {
+    "eyebrow": "Saison",
+    "title": "La saison en cours."
+  },
+  "storiesPreview": {
+    "eyebrow": "L'instant",
+    "title": "Une saison, en quelques tap.",
+    "subtitle": "Quatre fenêtres sur l'écurie : atelier, pré-grille, course, coulisses."
+  },
+  "storiesCoulisses": {
+    "eyebrow": "En direct des coulisses",
+    "title": "Une journée de course, en stories."
+  },
+  "coulissesSection": {
+    "eyebrow": "Les coulisses",
+    "title": "L'écurie au quotidien.",
+    "subtitle": "Comptes rendus de course, portraits, préparation, paddock."
+  },
   "cta": {
     "eyebrow": "Investir dans l'écurie",
     "title": "Faites partie de l'écurie.",
     "subtitle": "Cinq partenaires nous accompagnent déjà. Découvrez comment associer votre marque à SWSM Racing Team.",
     "buttonDossier": "Télécharger le dossier",
-    "buttonContact": "Prendre contact"
+    "buttonContact": "Prendre contact",
+    "tabs": [
+      {
+        "label": "Visibilité",
+        "eyebrow": "Présence racing",
+        "title": "Votre marque sur la piste.",
+        "description": "Logo sur les motos, les combinaisons, dans le paddock et sur tous nos supports digitaux. Six à huit week-ends de course par saison en Championnat de France de Supermotard, devant un public spécialisé et la presse motarde.",
+        "bullets": [
+          "Combi pilote, carénage moto, supports paddock",
+          "Réseaux sociaux : LinkedIn, Instagram, Facebook, TikTok",
+          "Comptes rendus de course publiés sous 48h"
+        ],
+        "photo": "/images/cta/01.JPG"
+      },
+      {
+        "label": "Ancrage",
+        "eyebrow": "Sud-Ouest",
+        "title": "Une écurie ancrée dans le territoire.",
+        "description": "Structure privée du Sud-Ouest, racines en Nouvelle-Aquitaine. Pour une PME locale, c'est l'opportunité d'associer son image à un projet sportif identitaire, durable, et reconnu sur le territoire.",
+        "bullets": [
+          "Communauté locale de partenaires (5 déjà engagés)",
+          "Visibilité sur les retombées presse régionales",
+          "Réseau Sud-Ouest activé via 360 Franchises"
+        ],
+        "photo": "/images/cta/02.JPG"
+      },
+      {
+        "label": "Activation",
+        "eyebrow": "Hospitalité B2B",
+        "title": "Un terrain d'activation client.",
+        "description": "Le sponsoring SWSM, ce n'est pas qu'un logo. C'est un outil de relation client : invitations paddock le week-end de course, événements dédiés, contenu éditorial pour vos canaux internes ou externes.",
+        "bullets": [
+          "Invitations paddock pour vos clients VIP",
+          "Photos / vidéos exclusives pour vos contenus",
+          "Co-création d'événements (séminaires, soirées)"
+        ],
+        "photo": "/images/cta/03.JPG"
+      }
+    ]
   }
 }

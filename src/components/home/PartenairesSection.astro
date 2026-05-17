@@ -3,6 +3,8 @@
 // React island via framer-motion (déjà installé). Modale Astro pilotée par CustomEvent.
 import { getCollection } from "astro:content";
 import PartnerCardStack from "../ui/partner-card-stack";
+import settings from "../../data/site-settings.json";
+const s = settings.partenairesSection;
 
 const partenaires = (await getCollection("partenaires")).sort(
   (a, b) => a.data.ordre - b.data.ordre,
@@ -29,16 +31,16 @@ const partnersData = partenaires.map((p) => ({
     <!-- Header -->
     <header class="max-w-2xl mb-12 md:mb-16 mx-auto text-center">
       <p class="partenaires-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
-        Ils nous accompagnent
+        {s.eyebrow}
       </p>
       <h2
         class="partenaires-title font-display font-bold tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-6"
         data-split-mask
       >
-        Cinq partenaires. Une seule équipe.
+        {s.title}
       </h2>
       <p class="partenaires-sub font-body text-base md:text-lg text-swsm-white/70 mx-auto">
-        Des entreprises qui investissent dans une structure sportive en construction.
+        {s.subtitle}
       </p>
     </header>
 

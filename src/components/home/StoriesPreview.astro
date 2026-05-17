@@ -3,9 +3,10 @@
 // éditables via l'admin (App Gestion).
 import { StoriesRow, type StoryData } from "../ui/story";
 import storiesData from "../../data/stories.json";
+import settings from "../../data/site-settings.json";
 
 const stories: StoryData[] = storiesData as StoryData[];
-
+const s = settings.storiesPreview;
 ---
 
 <section
@@ -15,13 +16,13 @@ const stories: StoryData[] = storiesData as StoryData[];
   <div class="max-w-[1240px] mx-auto">
     <header class="mb-10 md:mb-12 max-w-2xl">
       <p class="text-xs uppercase tracking-[0.05em] font-display font-medium text-swsm-pink mb-4">
-        L'instant
+        {s.eyebrow}
       </p>
       <h2 class="font-display font-bold text-swsm-white tracking-[-0.01em] leading-[1.05] text-3xl md:text-5xl mb-4">
-        Une saison, en quelques tap.
+        {s.title}
       </h2>
       <p class="font-body text-base md:text-lg text-swsm-white/70 leading-relaxed">
-        Quatre fenêtres sur l'écurie : atelier, pré-grille, course, coulisses.
+        {s.subtitle}
       </p>
     </header>
 

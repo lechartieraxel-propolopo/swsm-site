@@ -1,20 +1,22 @@
 ---
 // Section Pilotes — pin GSAP horizontal scroll (version originale qui marchait)
 import { getCollection } from "astro:content";
+import settings from "../../data/site-settings.json";
 
 const pilotes = (await getCollection("pilotes")).sort(
   (a, b) => a.data.ordre - b.data.ordre,
 );
 const totalSlides = pilotes.length;
+const s = settings.pilotesSection;
 ---
 
 <section class="pilotes pilotes-section" style="position:relative;background:#F7F7F5;z-index:3;">
   <header style="padding:6rem 1.5rem 3rem;max-width:1240px;margin:0 auto;">
     <p style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#EC2D7C;margin-bottom:1.5rem;">
-      L'écurie
+      {s.eyebrow}
     </p>
     <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;letter-spacing:-0.01em;color:#0D0D0D;max-width:900px;">
-      Trois pilotes. Un seul collectif.
+      {s.title}
     </h2>
   </header>
 

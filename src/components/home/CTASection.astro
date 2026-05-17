@@ -3,6 +3,7 @@
 // Textes lus depuis src/data/site-settings.json, éditables via l'admin.
 import settings from "../../data/site-settings.json";
 const cta = settings.cta;
+const tabs = cta.tabs;
 ---
 
 <section
@@ -51,7 +52,7 @@ const cta = settings.cta;
             <circle cx="12" cy="12" r="6"></circle>
             <circle cx="12" cy="12" r="2"></circle>
           </svg>
-          <span>Visibilité</span>
+          <span>{tabs[0]?.label ?? "Visibilité"}</span>
         </button>
 
         <!-- Tab 2 : Ancrage -->
@@ -68,7 +69,7 @@ const cta = settings.cta;
             <path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"></path>
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
-          <span>Ancrage</span>
+          <span>{tabs[1]?.label ?? "Ancrage"}</span>
         </button>
 
         <!-- Tab 3 : Activation -->
@@ -87,7 +88,7 @@ const cta = settings.cta;
             <path d="M22 11h-6"></path>
             <path d="M19 8v6"></path>
           </svg>
-          <span>Activation</span>
+          <span>{tabs[2]?.label ?? "Activation"}</span>
         </button>
       </div>
 
@@ -104,22 +105,22 @@ const cta = settings.cta;
           >
             <div class="flex flex-col gap-5">
               <span class="inline-flex items-center w-fit text-[10px] uppercase tracking-eyebrow font-display font-medium text-swsm-pink border border-swsm-pink/40 rounded-full px-3 py-1">
-                Présence racing
+                {tabs[0]?.eyebrow}
               </span>
               <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.1] text-2xl md:text-3xl lg:text-4xl">
-                Votre marque sur la piste.
+                {tabs[0]?.title}
               </h3>
               <p class="font-body text-base text-swsm-black/75 leading-relaxed">
-                Logo sur les motos, les combinaisons, dans le paddock et sur tous nos supports digitaux. Six à huit week-ends de course par saison en Championnat de France de Supermotard, devant un public spécialisé et la presse motarde.
+                {tabs[0]?.description}
               </p>
               <ul class="font-body text-sm text-swsm-black/70 space-y-2 mt-2">
-                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Combi pilote, carénage moto, supports paddock</span></li>
-                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Réseaux sociaux : LinkedIn, Instagram, Facebook, TikTok</span></li>
-                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Comptes rendus de course publiés sous 48h</span></li>
+                {tabs[0]?.bullets?.map((b) => (
+                  <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>{b}</span></li>
+                ))}
               </ul>
             </div>
             <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-swsm-black/5">
-              <img src="/images/cta/01.JPG" alt="Visibilité racing SWSM Racing Team" class="w-full h-full object-cover" loading="lazy" />
+              <img src={tabs[0]?.photo} alt={`${tabs[0]?.label ?? ""} SWSM Racing Team`} class="w-full h-full object-cover" loading="lazy" />
             </div>
           </div>
 
@@ -133,22 +134,22 @@ const cta = settings.cta;
           >
             <div class="flex flex-col gap-5">
               <span class="inline-flex items-center w-fit text-[10px] uppercase tracking-eyebrow font-display font-medium text-swsm-pink border border-swsm-pink/40 rounded-full px-3 py-1">
-                Sud-Ouest
+                {tabs[1]?.eyebrow}
               </span>
               <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.1] text-2xl md:text-3xl lg:text-4xl">
-                Une écurie ancrée dans le territoire.
+                {tabs[1]?.title}
               </h3>
               <p class="font-body text-base text-swsm-black/75 leading-relaxed">
-                Structure privée du Sud-Ouest, racines en Nouvelle-Aquitaine. Pour une PME locale, c'est l'opportunité d'associer son image à un projet sportif identitaire, durable, et reconnu sur le territoire.
+                {tabs[1]?.description}
               </p>
               <ul class="font-body text-sm text-swsm-black/70 space-y-2 mt-2">
-                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Communauté locale de partenaires (5 déjà engagés)</span></li>
-                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Visibilité sur les retombées presse régionales</span></li>
-                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Réseau Sud-Ouest activé via 360 Franchises</span></li>
+                {tabs[1]?.bullets?.map((b) => (
+                  <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>{b}</span></li>
+                ))}
               </ul>
             </div>
             <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-swsm-black/5">
-              <img src="/images/cta/02.JPG" alt="Ancrage territorial SWSM Racing Team" class="w-full h-full object-cover" loading="lazy" />
+              <img src={tabs[1]?.photo} alt={`${tabs[1]?.label ?? ""} SWSM Racing Team`} class="w-full h-full object-cover" loading="lazy" />
             </div>
           </div>
 
@@ -162,22 +163,22 @@ const cta = settings.cta;
           >
             <div class="flex flex-col gap-5">
               <span class="inline-flex items-center w-fit text-[10px] uppercase tracking-eyebrow font-display font-medium text-swsm-pink border border-swsm-pink/40 rounded-full px-3 py-1">
-                Hospitalité B2B
+                {tabs[2]?.eyebrow}
               </span>
               <h3 class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.1] text-2xl md:text-3xl lg:text-4xl">
-                Un terrain d'activation client.
+                {tabs[2]?.title}
               </h3>
               <p class="font-body text-base text-swsm-black/75 leading-relaxed">
-                Le sponsoring SWSM, ce n'est pas qu'un logo. C'est un outil de relation client : invitations paddock le week-end de course, événements dédiés, contenu éditorial pour vos canaux internes ou externes.
+                {tabs[2]?.description}
               </p>
               <ul class="font-body text-sm text-swsm-black/70 space-y-2 mt-2">
-                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Invitations paddock pour vos clients VIP</span></li>
-                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Photos / vidéos exclusives pour vos contenus</span></li>
-                <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>Co-création d'événements (séminaires, soirées)</span></li>
+                {tabs[2]?.bullets?.map((b) => (
+                  <li class="flex items-start gap-2"><span class="text-swsm-pink font-bold mt-0.5">→</span><span>{b}</span></li>
+                ))}
               </ul>
             </div>
             <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-swsm-black/5">
-              <img src="/images/cta/03.JPG" alt="Activation B2B SWSM Racing Team" class="w-full h-full object-cover" loading="lazy" />
+              <img src={tabs[2]?.photo} alt={`${tabs[2]?.label ?? ""} SWSM Racing Team`} class="w-full h-full object-cover" loading="lazy" />
             </div>
           </div>
         </div>
