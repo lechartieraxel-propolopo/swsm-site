@@ -3,6 +3,7 @@
 // Map les 6 manches de saison.json en ExpandingCards interactives.
 import { ExpandingCards, type CardItem } from "../ui/expanding-cards";
 import saison from "../../data/saison.json";
+import settings from "../../data/site-settings.json";
 
 // Photo générique par lieu (à enrichir au fil des manches avec de vraies photos par circuit)
 const photoParLieu: Record<string, string> = {
@@ -75,16 +76,16 @@ const cards: CardItem[] = saison.manches.map((m) => {
   <div class="max-w-[1240px] mx-auto">
     <header class="mb-12 md:mb-16 max-w-2xl">
       <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
-        Le calendrier
+        {settings.coulissesManches.eyebrow}
       </p>
       <h2
         class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-5"
         data-split-mask
       >
-        Six manches. Une saison.
+        {settings.coulissesManches.title}
       </h2>
       <p class="font-body text-base md:text-lg text-swsm-black/65 leading-relaxed">
-        Six rendez-vous du Championnat de France Supermotard 2026. Survolez chaque manche pour découvrir le débrief — cliquez sur les manches passées pour lire le compte rendu complet.
+        {settings.coulissesManches.subtitle}
       </p>
     </header>
 

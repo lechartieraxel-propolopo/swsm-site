@@ -12,7 +12,7 @@ const links = [
   class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-out bg-transparent"
   data-state="top"
 >
-  <div class="mx-auto max-w-[1240px] px-6 md:px-10">
+  <div class="mx-auto max-w-[1240px] px-5 md:px-10">
     <nav class="flex items-center justify-between h-16 md:h-20 text-swsm-white">
       <a
         href="/"
@@ -22,6 +22,7 @@ const links = [
         SWSM
       </a>
 
+      <!-- Nav desktop -->
       <ul class="hidden md:flex items-center gap-10">
         {
           links.map((link) => (
@@ -37,29 +38,38 @@ const links = [
         }
       </ul>
 
+      <!-- Burger mobile : pill glassmorphism, visible sur n'importe quel fond -->
       <button
         id="swsm-burger"
         type="button"
-        class="md:hidden inline-flex items-center justify-center w-10 h-10 -mr-2"
+        class="swsm-burger md:hidden inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-swsm-pink"
         aria-label="Ouvrir le menu"
         aria-controls="swsm-drawer"
         aria-expanded="false"
       >
         <span class="sr-only">Ouvrir le menu</span>
-        <span class="relative block w-6 h-[2px] bg-current">
-          <span class="absolute left-0 -top-2 block w-6 h-[2px] bg-current"></span>
-          <span class="absolute left-0 top-2 block w-6 h-[2px] bg-current"></span>
+        <span class="relative block w-5 h-[2px] bg-current rounded">
+          <span class="absolute left-0 -top-[6px] block w-5 h-[2px] bg-current rounded"></span>
+          <span class="absolute left-0 top-[6px] block w-3.5 h-[2px] bg-current rounded transition-all"></span>
         </span>
       </button>
     </nav>
   </div>
 
+  <!-- Drawer mobile -->
   <div
     id="swsm-drawer"
-    class="md:hidden fixed inset-0 z-40 bg-swsm-black text-swsm-white opacity-0 pointer-events-none transition-opacity duration-300"
+    class="md:hidden fixed inset-0 z-[60] bg-swsm-black text-swsm-white opacity-0 pointer-events-none transition-opacity duration-300"
     aria-hidden="true"
   >
-    <div class="flex items-center justify-between h-16 px-6">
+    <!-- Halo rose/violet en arrière-plan -->
+    <div
+      class="absolute inset-0 pointer-events-none opacity-60"
+      aria-hidden="true"
+      style="background: radial-gradient(ellipse at 80% 10%, rgba(236,45,124,0.18) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(91,33,182,0.18) 0%, transparent 55%);"
+    ></div>
+
+    <div class="relative flex items-center justify-between h-16 px-5">
       <a
         href="/"
         class="font-display font-bold text-lg tracking-caps-loose uppercase"
@@ -69,38 +79,84 @@ const links = [
       <button
         id="swsm-burger-close"
         type="button"
-        class="inline-flex items-center justify-center w-10 h-10 -mr-2"
+        class="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-swsm-pink"
         aria-label="Fermer le menu"
       >
-        <span class="relative block w-6 h-6">
-          <span class="absolute left-0 top-1/2 block w-6 h-[2px] bg-current rotate-45"></span>
-          <span class="absolute left-0 top-1/2 block w-6 h-[2px] bg-current -rotate-45"></span>
+        <span class="relative block w-5 h-5">
+          <span class="absolute left-0 top-1/2 block w-5 h-[2px] bg-current rotate-45 rounded"></span>
+          <span class="absolute left-0 top-1/2 block w-5 h-[2px] bg-current -rotate-45 rounded"></span>
         </span>
       </button>
     </div>
-    <ul class="flex flex-col gap-8 px-6 mt-12">
-      {
-        links.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="font-display font-bold text-3xl tracking-caps-tight"
-            >
-              {link.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+
+    <!-- Eyebrow + nav links -->
+    <div class="relative px-6 mt-12">
+      <p class="text-[10px] uppercase tracking-[0.25em] font-display font-medium text-swsm-pink mb-8">
+        Menu
+      </p>
+      <ul class="flex flex-col gap-7">
+        {
+          links.map((link, i) => (
+            <li class="swsm-drawer-item" style={`transition-delay:${i * 60 + 100}ms`}>
+              <a
+                href={link.href}
+                class="font-display font-bold text-3xl sm:text-4xl tracking-[-0.01em] inline-flex items-baseline gap-3 hover:text-swsm-pink transition-colors"
+              >
+                <span class="text-[10px] uppercase tracking-[0.2em] font-medium text-swsm-white/40 mt-2">
+                  0{i + 1}
+                </span>
+                <span>{link.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Footer du drawer : contact + signature -->
+      <div class="absolute left-6 right-6 bottom-10 flex flex-col gap-3">
+        <p class="text-[10px] uppercase tracking-[0.25em] font-display font-medium text-swsm-pink">
+          Contact
+        </p>
+        <a
+          href="/devenir-partenaire#contact"
+          class="font-body text-sm text-swsm-white/70 hover:text-swsm-white transition-colors"
+        >
+          Nous écrire →
+        </a>
+        <p class="text-[10px] uppercase tracking-[0.2em] font-display font-medium text-swsm-white/35 mt-4">
+          SWSM Racing Team · Saison 2026
+        </p>
+      </div>
+    </div>
   </div>
 </header>
 
 <style>
-  /* Quand la page a un hero clair (body.light-navbar) et qu'on est en haut (data-state="top"),
-     la navbar utilise du texte foncé pour rester lisible sur le fond blanc.
-     Une fois scrolled, le backdrop sombre prend le dessus → texte blanc retrouvé. */
+  /* Sur les pages à hero clair (body.light-navbar) en haut de page → texte foncé. */
   body.light-navbar #swsm-navbar[data-state="top"] nav {
     color: #0D0D0D;
+  }
+  /* Burger sur fond clair : fond noir translucide pour contraste */
+  body.light-navbar #swsm-navbar[data-state="top"] .swsm-burger {
+    background-color: rgba(13, 13, 13, 0.06);
+    border-color: rgba(13, 13, 13, 0.12);
+  }
+  body.light-navbar #swsm-navbar[data-state="top"] .swsm-burger:hover {
+    background-color: rgba(13, 13, 13, 0.12);
+  }
+
+  /* Drawer : items qui slident depuis la gauche au open */
+  .swsm-drawer-item {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1), transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #swsm-drawer.is-open .swsm-drawer-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .swsm-drawer-item { opacity: 1; transform: none; transition: none; }
   }
 </style>
 
@@ -114,10 +170,9 @@ const links = [
     let lastY = window.scrollY;
     let ticking = false;
     const SCROLL_THRESHOLD = 8;
-    const HIDE_AFTER = 200; // hide-on-scroll uniquement au-delà
-    const FADE_RANGE = 100; // 0→100px de scroll : opacité du fond 0→0.95
+    const HIDE_AFTER = 200;
+    const FADE_RANGE = 100;
 
-    // Backdrop séparé pour interpoler l'opacité sans toucher au texte
     const backdrop = document.createElement("div");
     backdrop.style.cssText =
       "position:absolute;inset:0;background:rgba(13,13,13,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transition:opacity 80ms linear;pointer-events:none;z-index:-1;";
@@ -127,14 +182,10 @@ const links = [
     const onScroll = () => {
       const y = window.scrollY;
       const delta = y - lastY;
-
-      // Progressive opacity du fond : 0 → 1 entre 0 et FADE_RANGE
       const bgOpacity = Math.min(y / FADE_RANGE, 1);
       backdrop.style.opacity = String(bgOpacity);
-
       navbar.dataset.state = y <= 24 ? "top" : "scrolled";
 
-      // Hide-on-scroll : seulement après 200px (laisse vivre le hero)
       if (y > HIDE_AFTER && Math.abs(delta) > SCROLL_THRESHOLD) {
         navbar.style.transform = delta > 0 ? "translateY(-100%)" : "translateY(0)";
       } else if (y <= HIDE_AFTER) {
@@ -160,7 +211,7 @@ const links = [
   const openDrawer = () => {
     if (!drawer || !burger) return;
     drawer.classList.remove("opacity-0", "pointer-events-none");
-    drawer.classList.add("opacity-100");
+    drawer.classList.add("opacity-100", "is-open");
     drawer.setAttribute("aria-hidden", "false");
     burger.setAttribute("aria-expanded", "true");
     document.body.style.overflow = "hidden";
@@ -169,7 +220,7 @@ const links = [
   const closeDrawer = () => {
     if (!drawer || !burger) return;
     drawer.classList.add("opacity-0", "pointer-events-none");
-    drawer.classList.remove("opacity-100");
+    drawer.classList.remove("opacity-100", "is-open");
     drawer.setAttribute("aria-hidden", "true");
     burger.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";

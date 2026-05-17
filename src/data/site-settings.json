@@ -11,7 +11,8 @@
   },
   "pilotesSection": {
     "eyebrow": "L'écurie",
-    "title": "Trois pilotes. Un seul collectif."
+    "title": "Trois pilotes. Un seul collectif.",
+    "subtitle": ""
   },
   "partenairesSection": {
     "eyebrow": "Ils nous accompagnent",
@@ -20,7 +21,8 @@
   },
   "saisonSection": {
     "eyebrow": "Saison",
-    "title": "La saison en cours."
+    "title": "La saison en cours.",
+    "subtitle": ""
   },
   "storiesPreview": {
     "eyebrow": "L'instant",
@@ -29,7 +31,8 @@
   },
   "storiesCoulisses": {
     "eyebrow": "En direct des coulisses",
-    "title": "Une journée de course, en stories."
+    "title": "Une journée de course, en stories.",
+    "subtitle": ""
   },
   "coulissesSection": {
     "eyebrow": "Les coulisses",
@@ -80,5 +83,79 @@
         "photo": "/images/cta/03.JPG"
       }
     ]
+  },
+  "coulissesHero": {
+    "eyebrow": "Magazine SWSM",
+    "titleTop": "Bienvenue dans",
+    "titleBottom": "les coulisses.",
+    "description": "L'écurie au quotidien. Sans filtre, sans mise en scène. Juste ce qui se passe quand on coupe la caméra principale.",
+    "photo": "/images/general/IMG_9442.JPG"
+  },
+  "coulissesEquipe": {
+    "eyebrow": "Derrière les coulisses",
+    "title": "L'équipe qui tient l'écurie.",
+    "subtitle": "Trois pilotes en piste. Mais derrière, une organisation. Voici les deux personnes qui font que SWSM Racing Team existe et tourne, manche après manche."
+  },
+  "coulissesManches": {
+    "eyebrow": "Le calendrier",
+    "title": "Six manches. Une saison.",
+    "subtitle": "Six rendez-vous du Championnat de France Supermotard 2026. Survolez chaque manche pour découvrir le débrief — cliquez sur les manches passées pour lire le compte rendu complet."
+  },
+  "coulissesMagazine": {
+    "eyebrow": "Issue n°2026 — Le magazine",
+    "title": "Le carnet éditorial.",
+    "subtitle": "Comptes rendus de manche, portraits de pilotes, coulisses techniques. Le quotidien de l'écurie en mots."
+  },
+  "coulissesAlbum": {
+    "introTitle": "L'écurie en images.",
+    "introSubtitle": "Continuez à scroller",
+    "arcTitle": "L'album SWSM",
+    "arcSubtitle": "Une saison capturée. Photos, instants, coulisses.",
+    "ctaLabel": "Voir l'album complet"
+  },
+  "coulissesNewsletter": {
+    "eyebrow": "Ne ratez aucun article",
+    "title": "Suivez la saison 2026.",
+    "subtitle": "Comptes rendus de course, portraits, coulisses techniques. Un mail tous les quinze jours, jamais plus."
+  },
+  "partenairesHero": {
+    "eyebrow": "Partenariat 2026",
+    "title": "Cinq partenaires.",
+    "scrollLabel": "Faire défiler pour découvrir",
+    "subEyebrow": "Une seule équipe",
+    "subTitle": "Des entreprises qui investissent dans une structure sportive en construction.",
+    "subText": "Cinq partenaires accompagnent SWSM Racing Team. Découvrez chacun d'eux et l'histoire qu'ils écrivent avec l'écurie."
+  },
+  "partenairesCta": {
+    "eyebrow": "Rejoignez-nous",
+    "titleLine1": "Et si vous étiez",
+    "titleLine2": "le prochain ?",
+    "subtitle": "Cinq entreprises nous accompagnent. La sixième pourrait être la vôtre."
+  },
+  "albumChapters": {
+    "eyebrow": "Cinq chapitres",
+    "title": "Une saison, cinq temps.",
+    "subtitle": "De l'atelier à la pré-grille, du stand à la course. Chaque moment a son rythme, son rituel, sa lumière."
+  },
+  "albumReveal": {
+    "eyebrow": "En course",
+    "titleLine1": "On regarde devant.",
+    "titleLine2": "Jamais derrière."
+  },
+  "albumMoments": {
+    "eyebrow": "Moments",
+    "title": "Quatre instants qui résument tout.",
+    "subtitle": "Le tracé, le drift, la fin, le soir. Quatre photos qui racontent ce que c'est, une journée de course."
+  },
+  "albumBento": {
+    "eyebrow": "L'album complet",
+    "title": "Faites votre choix.",
+    "subtitle": "Vingt instants captés sur une saison. Glissez pour parcourir, cliquez sur une image pour la voir en grand format avec son contexte."
+  },
+  "albumOutro": {
+    "eyebrow": "Fin de l'album",
+    "title": "Et la saison continue.",
+    "subtitle": "D'autres images, d'autres manches, d'autres histoires arrivent. L'album se construit en continu.",
+    "ctaLabel": "Lire les coulisses"
   }
 }

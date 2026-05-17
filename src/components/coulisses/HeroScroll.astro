@@ -1,26 +1,24 @@
 ---
 // Hero animé de la page Coulisses : titre éditorial + "écran" qui se redresse au scroll.
-// Composant React lazy-load — utilise framer-motion useScroll en local.
-// Aucun GSAP ScrollTrigger sur cette page → pas de conflit.
+// Textes lus depuis site-settings.json (page Coulisses / Hero).
 import { ContainerScroll } from "../ui/container-scroll";
+import settings from "../../data/site-settings.json";
+const h = settings.coulissesHero;
 ---
 
 <section class="hero-scroll-wrapper relative bg-swsm-white overflow-x-hidden" aria-label="Bienvenue dans les coulisses">
-  <!-- Cadrillage en fond -->
   <div class="hero-scroll-grid" aria-hidden="true"></div>
-
-  <!-- Fondu en bas pour transition douce vers la section suivante -->
   <div class="hero-scroll-fade" aria-hidden="true"></div>
 
   <ContainerScroll
-    eyebrow="Magazine SWSM"
-    titleTop="Bienvenue dans"
-    titleBottom="les coulisses."
-    description="L'écurie au quotidien. Sans filtre, sans mise en scène. Juste ce qui se passe quand on coupe la caméra principale."
+    eyebrow={h.eyebrow}
+    titleTop={h.titleTop}
+    titleBottom={h.titleBottom}
+    description={h.description}
     client:visible
   >
     <img
-      src="/images/general/IMG_9442.JPG"
+      src={h.photo}
       alt="SWSM Racing Team — l'écurie au quotidien"
       class="mx-auto h-full w-full object-cover object-center"
       draggable={false}

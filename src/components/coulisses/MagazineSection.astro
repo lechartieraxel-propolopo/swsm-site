@@ -1,7 +1,8 @@
 ---
 // Section "Le magazine" — articles éditoriaux dans un layout magazine asymétrique.
-// 1 article featured en grand à gauche, 2 articles plus petits empilés à droite.
 import { getCollection } from "astro:content";
+import settings from "../../data/site-settings.json";
+const s = settings.coulissesMagazine;
 
 const articles = (await getCollection("articles", ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());

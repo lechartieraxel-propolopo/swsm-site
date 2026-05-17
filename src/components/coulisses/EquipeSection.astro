@@ -1,7 +1,8 @@
 ---
 // Section "Derrière les coulisses" — présentation de l'équipe technique en format magazine.
-// Layout alterné gauche/droite, grand portrait, citation typographique, bio.
 import { getCollection } from "astro:content";
+import settings from "../../data/site-settings.json";
+const s = settings.coulissesEquipe;
 
 const equipe = (await getCollection("equipe")).sort(
   (a, b) => a.data.ordre - b.data.ordre,
@@ -13,17 +14,17 @@ const equipe = (await getCollection("equipe")).sort(
     <!-- Header -->
     <header class="mb-16 md:mb-24 max-w-2xl">
       <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
-        Derrière les coulisses
+        {s.eyebrow}
       </p>
       <h2
         id="equipe-title"
         class="font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl mb-5"
         data-split-mask
       >
-        L'équipe qui tient l'écurie.
+        {s.title}
       </h2>
       <p class="font-body text-base md:text-lg text-swsm-black/65 leading-relaxed">
-        Trois pilotes en piste. Mais derrière, une organisation. Voici les deux personnes qui font que SWSM Racing Team existe et tourne, manche après manche.
+        {s.subtitle}
       </p>
     </header>
 
