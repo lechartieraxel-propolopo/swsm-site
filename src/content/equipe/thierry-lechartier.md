@@ -8,6 +8,7 @@ bio: >-
   partenaires. Son rôle : garder le cap, tenir la vision, faire en sorte que
   chaque manche se passe dans les meilleures conditions possibles.
 citation: 'Une écurie, c''est d''abord une organisation. Le reste suit.'
+photo: /images/equipe/capture-d-ecran-2026-05-17-a-17-01-59.png
 ordre: 1
 ---
 
