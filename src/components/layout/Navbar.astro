@@ -59,11 +59,11 @@ const links = [
   <!-- Drawer mobile -->
   <div
     id="swsm-drawer"
-    class="md:hidden fixed inset-0 text-swsm-white opacity-0 pointer-events-none transition-opacity duration-300"
-    style="background-color:#0D0D0D;z-index:9999;"
+    class="swsm-drawer md:hidden text-swsm-white"
+    data-open="false"
     aria-hidden="true"
   >
-    <!-- Halo rose/violet en arrière-plan (par-dessus le fond noir, pas en dessous) -->
+    <!-- Halo rose/violet en arrière-plan -->
     <div
       class="absolute inset-0 pointer-events-none"
       aria-hidden="true"
@@ -146,13 +146,34 @@ const links = [
     background-color: rgba(13, 13, 13, 0.12);
   }
 
+  /* ─── Drawer mobile : OPACITÉ TOTALE, jamais transparent ─── */
+  .swsm-drawer {
+    position: fixed;
+    inset: 0;
+    background-color: #0D0D0D; /* swsm-black 100% opaque */
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 280ms ease-out, visibility 0s linear 280ms;
+    pointer-events: none;
+  }
+  .swsm-drawer[data-open="true"] {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 280ms ease-out, visibility 0s linear 0s;
+  }
+  @media (min-width: 768px) {
+    .swsm-drawer { display: none; }
+  }
+
   /* Drawer : items qui slident depuis la gauche au open */
   .swsm-drawer-item {
     opacity: 0;
     transform: translateX(-12px);
     transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1), transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  #swsm-drawer.is-open .swsm-drawer-item {
+  .swsm-drawer[data-open="true"] .swsm-drawer-item {
     opacity: 1;
     transform: translateX(0);
   }
@@ -211,8 +232,7 @@ const links = [
 
   const openDrawer = () => {
     if (!drawer || !burger) return;
-    drawer.classList.remove("opacity-0", "pointer-events-none");
-    drawer.classList.add("opacity-100", "is-open");
+    drawer.setAttribute("data-open", "true");
     drawer.setAttribute("aria-hidden", "false");
     burger.setAttribute("aria-expanded", "true");
     document.body.style.overflow = "hidden";
@@ -220,8 +240,7 @@ const links = [
 
   const closeDrawer = () => {
     if (!drawer || !burger) return;
-    drawer.classList.add("opacity-0", "pointer-events-none");
-    drawer.classList.remove("opacity-100", "is-open");
+    drawer.setAttribute("data-open", "false");
     drawer.setAttribute("aria-hidden", "true");
     burger.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
