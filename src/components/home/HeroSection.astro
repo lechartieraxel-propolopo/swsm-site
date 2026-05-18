@@ -76,13 +76,13 @@ const formatWeekend = (start: string, end?: string) => {
 
     <h1
       class="hero-title font-display font-bold text-swsm-white tracking-[-0.02em] leading-[0.95] text-5xl md:text-7xl lg:text-8xl mb-8 md:mb-10 max-w-5xl"
-      data-split-hero
     >
       {
-        // Split le titre par phrase (séparateur ". ") et met chaque
-        // phrase sur sa propre ligne via display:block.
+        // Split le titre par phrase (". ") → chaque phrase sur sa propre
+        // ligne via <span class="hero-line"> en display:block. Animation
+        // CSS pure (fade + slide-up), pas de GSAP SplitText qui flatten.
         hero.title.split(/\. /).map((part: string, i: number, arr: string[]) => (
-          <span class="block">
+          <span class="hero-line block" style={`animation-delay:${i * 120 + 100}ms`}>
             {part}{i < arr.length - 1 ? "." : ""}
           </span>
         ))
@@ -239,12 +239,24 @@ const formatWeekend = (start: string, end?: string) => {
     50%      { box-shadow: 0 0 0 8px rgba(236, 45, 124, 0); }
   }
 
+  /* ═══ Titre : fade + slide-up par ligne (sans GSAP SplitText) ═════ */
+  .hero-line {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(8px);
+    animation: hero-line-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  @keyframes hero-line-in {
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+
   /* ═══ Reduced motion ══════════════════════════════════════════════ */
   @media (prefers-reduced-motion: reduce) {
     .hero-frame, .hero-photo, .flare-beam, .particle, .hero-mouse-wheel,
-    .hero-next-race [class*="animate-"] {
+    .hero-next-race [class*="animate-"], .hero-line {
       animation: none !important;
     }
+    .hero-line { opacity: 1; transform: none; filter: none; }
     .hero-frame-1 { opacity: 1; }
     .hero-frame-2, .hero-frame-3 { opacity: 0; }
     .hero-photo { transform: scale(1); }
