@@ -75,11 +75,18 @@ const formatWeekend = (start: string, end?: string) => {
     </p>
 
     <h1
-      class="hero-title font-display font-bold text-swsm-white tracking-[-0.02em] leading-[0.95] text-5xl md:text-7xl lg:text-8xl mb-8 md:mb-10 max-w-4xl"
+      class="hero-title font-display font-bold text-swsm-white tracking-[-0.02em] leading-[0.95] text-5xl md:text-7xl lg:text-8xl mb-8 md:mb-10 max-w-5xl"
       data-split-hero
-      style="white-space: pre-line;"
     >
-      {hero.title.replace(/\. /g, ".\n")}
+      {
+        // Split le titre par phrase (séparateur ". ") et met chaque
+        // phrase sur sa propre ligne via display:block.
+        hero.title.split(/\. /).map((part: string, i: number, arr: string[]) => (
+          <span class="block">
+            {part}{i < arr.length - 1 ? "." : ""}
+          </span>
+        ))
+      }
     </h1>
 
     <p class="hero-sub font-body text-sm md:text-base text-swsm-white/90 max-w-xl">
