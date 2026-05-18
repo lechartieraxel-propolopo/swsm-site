@@ -67,8 +67,8 @@ const formatWeekend = (start: string, end?: string) => {
   <!-- ─── CALQUE 20 — Overlay lisibilité ─── -->
   <div class="absolute inset-0 z-20 bg-black/30" aria-hidden="true"></div>
 
-  <!-- ─── CALQUE 30 — Texte aligné bas-gauche ─── -->
-  <div class="relative z-30 w-full h-screen max-w-[1240px] mx-auto px-6 md:px-10 flex flex-col justify-end pb-24 md:pb-28">
+  <!-- ─── CALQUE 30 — Texte aligné bas-gauche (collé au bord, pas centré) ─── -->
+  <div class="relative z-30 w-full h-screen px-6 md:px-12 lg:px-16 flex flex-col justify-end pb-24 md:pb-28">
     <p class="hero-eyebrow text-xs uppercase tracking-[0.25em] font-display font-medium text-swsm-pink mb-5 inline-flex items-center gap-3">
       <span class="block w-6 h-px bg-swsm-pink" aria-hidden="true"></span>
       <span>{hero.eyebrow}</span>
@@ -87,7 +87,7 @@ const formatWeekend = (start: string, end?: string) => {
   </div>
 
   <!-- ─── BAS DE HERO : Prochaine manche (gauche) + Scroll (droite) ─── -->
-  <div class="absolute left-0 right-0 bottom-0 z-30 max-w-[1240px] mx-auto px-6 md:px-10 pb-6 md:pb-8 flex items-end justify-between gap-6">
+  <div class="absolute left-0 right-0 bottom-0 z-30 px-6 md:px-12 lg:px-16 pb-6 md:pb-8 flex items-end justify-between gap-6">
     {nextRace && (
       <div class="hero-next-race flex flex-col gap-1 text-swsm-white">
         <p class="text-[10px] md:text-xs uppercase tracking-[0.25em] font-display font-medium text-swsm-pink inline-flex items-center gap-2">
