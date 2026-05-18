@@ -55,81 +55,82 @@ const links = [
       </button>
     </nav>
   </div>
-
-  <!-- Drawer mobile -->
-  <div
-    id="swsm-drawer"
-    class="swsm-drawer md:hidden text-swsm-white"
-    data-open="false"
-    aria-hidden="true"
-  >
-    <!-- Halo rose/violet en arrière-plan -->
-    <div
-      class="absolute inset-0 pointer-events-none"
-      aria-hidden="true"
-      style="background: radial-gradient(ellipse at 80% 10%, rgba(236,45,124,0.20) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(91,33,182,0.20) 0%, transparent 55%);"
-    ></div>
-
-    <div class="relative flex items-center justify-between h-16 px-5">
-      <a
-        href="/"
-        class="font-display font-bold text-lg tracking-caps-loose uppercase"
-      >
-        SWSM
-      </a>
-      <button
-        id="swsm-burger-close"
-        type="button"
-        class="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-swsm-pink"
-        aria-label="Fermer le menu"
-      >
-        <span class="relative block w-5 h-5">
-          <span class="absolute left-0 top-1/2 block w-5 h-[2px] bg-current rotate-45 rounded"></span>
-          <span class="absolute left-0 top-1/2 block w-5 h-[2px] bg-current -rotate-45 rounded"></span>
-        </span>
-      </button>
-    </div>
-
-    <!-- Eyebrow + nav links -->
-    <div class="relative px-6 mt-12">
-      <p class="text-[10px] uppercase tracking-[0.25em] font-display font-medium text-swsm-pink mb-8">
-        Menu
-      </p>
-      <ul class="flex flex-col gap-7">
-        {
-          links.map((link, i) => (
-            <li class="swsm-drawer-item" style={`transition-delay:${i * 60 + 100}ms`}>
-              <a
-                href={link.href}
-                class="font-display font-bold text-3xl sm:text-4xl tracking-[-0.01em] inline-flex items-baseline gap-3 hover:text-swsm-pink transition-colors"
-              >
-                <span class="text-[10px] uppercase tracking-[0.2em] font-medium text-swsm-white/40 mt-2">
-                  0{i + 1}
-                </span>
-                <span>{link.label}</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-
-    <!-- Footer drawer : ancré tout en bas en safe-area, séparé visuellement -->
-    <div
-      class="absolute left-6 right-6 bottom-0 pb-[max(env(safe-area-inset-bottom),1.5rem)] flex items-center justify-between gap-4 border-t border-white/10 pt-5"
-    >
-      <a
-        href="/devenir-partenaire#contact"
-        class="font-display text-xs uppercase tracking-[0.18em] font-medium text-swsm-white/70 hover:text-swsm-pink transition-colors"
-      >
-        Contact →
-      </a>
-      <span class="font-body text-[10px] uppercase tracking-[0.15em] text-swsm-white/35">
-        SWSM · 2026
-      </span>
-    </div>
-  </div>
 </header>
+
+<!-- Drawer mobile — SIBLING du header (pas enfant) pour que le fixed
+     se positionne par rapport au viewport, pas au header transformé. -->
+<div
+  id="swsm-drawer"
+  class="swsm-drawer md:hidden text-swsm-white"
+  data-open="false"
+  aria-hidden="true"
+>
+  <!-- Halo rose/violet en arrière-plan -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    aria-hidden="true"
+    style="background: radial-gradient(ellipse at 80% 10%, rgba(236,45,124,0.20) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(91,33,182,0.20) 0%, transparent 55%);"
+  ></div>
+
+  <div class="relative flex items-center justify-between h-16 px-5">
+    <a
+      href="/"
+      class="font-display font-bold text-lg tracking-caps-loose uppercase"
+    >
+      SWSM
+    </a>
+    <button
+      id="swsm-burger-close"
+      type="button"
+      class="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-swsm-pink"
+      aria-label="Fermer le menu"
+    >
+      <span class="relative block w-5 h-5">
+        <span class="absolute left-0 top-1/2 block w-5 h-[2px] bg-current rotate-45 rounded"></span>
+        <span class="absolute left-0 top-1/2 block w-5 h-[2px] bg-current -rotate-45 rounded"></span>
+      </span>
+    </button>
+  </div>
+
+  <!-- Eyebrow + nav links -->
+  <div class="relative px-6 mt-12">
+    <p class="text-[10px] uppercase tracking-[0.25em] font-display font-medium text-swsm-pink mb-8">
+      Menu
+    </p>
+    <ul class="flex flex-col gap-7">
+      {
+        links.map((link, i) => (
+          <li class="swsm-drawer-item" style={`transition-delay:${i * 60 + 100}ms`}>
+            <a
+              href={link.href}
+              class="font-display font-bold text-3xl sm:text-4xl tracking-[-0.01em] inline-flex items-baseline gap-3 hover:text-swsm-pink transition-colors"
+            >
+              <span class="text-[10px] uppercase tracking-[0.2em] font-medium text-swsm-white/40 mt-2">
+                0{i + 1}
+              </span>
+              <span>{link.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <!-- Footer drawer : ancré tout en bas en safe-area, séparé visuellement -->
+  <div
+    class="absolute left-6 right-6 bottom-0 pb-[max(env(safe-area-inset-bottom),1.5rem)] flex items-center justify-between gap-4 border-t border-white/10 pt-5"
+  >
+    <a
+      href="/devenir-partenaire#contact"
+      class="font-display text-xs uppercase tracking-[0.18em] font-medium text-swsm-white/70 hover:text-swsm-pink transition-colors"
+    >
+      Contact →
+    </a>
+    <span class="font-body text-[10px] uppercase tracking-[0.15em] text-swsm-white/35">
+      SWSM · 2026
+    </span>
+  </div>
+</div>
 
 <style>
   /* Sur les pages à hero clair (body.light-navbar) en haut de page → texte foncé. */
