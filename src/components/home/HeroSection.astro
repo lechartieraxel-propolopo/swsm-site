@@ -2,9 +2,33 @@
 // Section A — Hero — version crossfade + Ken Burns
 // Texte et photos lus depuis src/data/site-settings.json, éditables via l'admin.
 import settings from "../../data/site-settings.json";
+import saison from "../../data/saison.json";
+
 const hero = settings.hero;
 const photos = (hero.photos ?? []).slice(0, 3);
 while (photos.length < 3) photos.push(photos[0] ?? "/images/hero/hero-1.jpg");
+
+// Prochaine manche : sélection auto basée sur la date du jour
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const upcoming = saison.manches
+  .filter((m: any) => new Date(m.date) >= today)
+  .sort((a: any, b: any) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
+const nextRace = upcoming[0] as any;
+
+const formatWeekend = (start: string, end?: string) => {
+  const ds = new Date(start);
+  if (!end) {
+    return ds.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+  }
+  const de = new Date(end);
+  const sameMonth =
+    ds.getMonth() === de.getMonth() && ds.getFullYear() === de.getFullYear();
+  if (sameMonth) {
+    return `${ds.getDate()}—${de.getDate()} ${de.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}`;
+  }
+  return `${ds.toLocaleDateString("fr-FR", { day: "numeric", month: "long" })} → ${de.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}`;
+};
 ---
 
 <section
@@ -43,30 +67,42 @@ while (photos.length < 3) photos.push(photos[0] ?? "/images/hero/hero-1.jpg");
   <!-- ─── CALQUE 20 — Overlay lisibilité ─── -->
   <div class="absolute inset-0 z-20 bg-black/30" aria-hidden="true"></div>
 
-  <!-- ─── CALQUE 30 — Texte ─── -->
-  <div class="relative z-30 w-full max-w-[1240px] mx-auto px-6 md:px-10 text-center">
-    <p class="hero-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
-      {hero.eyebrow}
+  <!-- ─── CALQUE 30 — Texte aligné bas-gauche ─── -->
+  <div class="relative z-30 w-full h-screen max-w-[1240px] mx-auto px-6 md:px-10 flex flex-col justify-end pb-24 md:pb-28">
+    <p class="hero-eyebrow text-xs uppercase tracking-[0.25em] font-display font-medium text-swsm-pink mb-5 inline-flex items-center gap-3">
+      <span class="block w-6 h-px bg-swsm-pink" aria-hidden="true"></span>
+      <span>{hero.eyebrow}</span>
     </p>
 
     <h1
-      class="hero-title font-display font-bold text-swsm-white uppercase tracking-caps-tight leading-[0.95] text-5xl md:text-7xl lg:text-8xl mb-6"
+      class="hero-title font-display font-bold text-swsm-white tracking-[-0.02em] leading-[0.95] text-5xl md:text-7xl lg:text-8xl mb-5 max-w-4xl"
       data-split-hero
     >
       {hero.title}
     </h1>
 
-    <p class="hero-sub font-body text-base md:text-lg text-swsm-white/95 max-w-xl mx-auto">
+    <p class="hero-sub font-body text-sm md:text-base text-swsm-white/90 max-w-xl">
       {hero.subtitle}
     </p>
   </div>
 
-  <!-- Scroll indicator : souris stylisée + chevrons -->
-  <div class="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-10 z-30 flex flex-col items-center gap-3 text-swsm-white/70" aria-hidden="true">
-    <div class="hero-mouse">
-      <span class="hero-mouse-wheel"></span>
-    </div>
-    <span class="text-[10px] uppercase tracking-[0.25em] font-display font-medium opacity-70">Scroll</span>
+  <!-- ─── BAS DE HERO : Prochaine manche (gauche) + Scroll (droite) ─── -->
+  <div class="absolute left-0 right-0 bottom-0 z-30 max-w-[1240px] mx-auto px-6 md:px-10 pb-6 md:pb-8 flex items-end justify-between gap-6">
+    {nextRace && (
+      <div class="hero-next-race flex flex-col gap-1 text-swsm-white">
+        <p class="text-[10px] md:text-xs uppercase tracking-[0.25em] font-display font-medium text-swsm-pink inline-flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-swsm-pink animate-[hero-pulse_2s_ease-in-out_infinite]" aria-hidden="true"></span>
+          Prochaine manche
+        </p>
+        <p class="text-xs md:text-sm font-body text-swsm-white/85">
+          <span class="font-display font-medium">{nextRace.lieu}</span>
+          <span class="text-swsm-white/55"> · {formatWeekend(nextRace.date, nextRace.date_fin)}</span>
+        </p>
+      </div>
+    )}
+    <span class="text-[10px] md:text-xs uppercase tracking-[0.3em] font-display font-medium text-swsm-white/55 shrink-0">
+      Scroll
+    </span>
   </div>
 </section>
 
@@ -189,9 +225,16 @@ while (photos.length < 3) photos.push(photos[0] ?? "/images/hero/hero-1.jpg");
     100% { transform: translate(-50%, 0); opacity: 1; }
   }
 
+  /* ═══ Point rose pulsant pour Prochaine manche ════════════════════ */
+  @keyframes hero-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(236, 45, 124, 0.55); }
+    50%      { box-shadow: 0 0 0 8px rgba(236, 45, 124, 0); }
+  }
+
   /* ═══ Reduced motion ══════════════════════════════════════════════ */
   @media (prefers-reduced-motion: reduce) {
-    .hero-frame, .hero-photo, .flare-beam, .particle, .hero-mouse-wheel {
+    .hero-frame, .hero-photo, .flare-beam, .particle, .hero-mouse-wheel,
+    .hero-next-race [class*="animate-"] {
       animation: none !important;
     }
     .hero-frame-1 { opacity: 1; }
