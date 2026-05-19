@@ -44,6 +44,22 @@ const equipe = (await getCollection("equipe")).sort(
               ]}
               data-equipe-member
             >
+              {/* Numéro filigrane — au niveau de l'article, z-10 pour
+                  déborder par-dessus la photo sans être caché */}
+              <span
+                aria-hidden="true"
+                class:list={[
+                  "absolute pointer-events-none select-none font-display font-bold leading-[0.8] tracking-caps-tight z-10",
+                  "text-swsm-black/10 mix-blend-multiply",
+                  "text-[7rem] md:text-[13rem]",
+                  reverse
+                    ? "-top-10 md:-top-14 right-2 md:right-8"
+                    : "-top-10 md:-top-14 left-2 md:left-8",
+                ]}
+              >
+                {numero}
+              </span>
+
               {/* Photo */}
               <div
                 class:list={[
@@ -51,18 +67,6 @@ const equipe = (await getCollection("equipe")).sort(
                   reverse ? "md:col-start-7" : "md:col-start-1",
                 ]}
               >
-                {/* Numéro filigrane */}
-                <span
-                  aria-hidden="true"
-                  class:list={[
-                    "absolute pointer-events-none select-none font-display font-bold text-swsm-black/[0.06] leading-[0.8] tracking-caps-tight z-0",
-                    "text-[8rem] md:text-[14rem]",
-                    reverse ? "-top-8 md:-top-16 -right-2 md:-right-4" : "-top-8 md:-top-16 -left-2 md:-left-4",
-                  ]}
-                >
-                  {numero}
-                </span>
-
                 <div class="relative aspect-[3/4] overflow-hidden bg-swsm-black/5 rounded-sm">
                   {m.data.photo ? (
                     <img
