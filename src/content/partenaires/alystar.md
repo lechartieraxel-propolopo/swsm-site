@@ -11,7 +11,7 @@ description: >-
 site: 'http://www.alystar.fr'
 logo: /images/partenaires/alystar/alystar-logo.png
 photo: /images/partenaires/alystar/image-2.jpg
-couleur: '#5B21B6'
+couleur: '#FF9300'
 logoTint: white
 ordre: 4
 ---
