@@ -1,34 +1,24 @@
 ---
-const args = [
-  {
-    num: "01",
-    title: "Une structure en construction",
-    desc: "SWSM Racing Team est une écurie privée du Sud-Ouest engageant trois pilotes en Championnat de France. Une opportunité d'accompagner une structure dès ses débuts, à un moment où chaque sponsor prend une place visible et durable.",
-  },
-  {
-    num: "02",
-    title: "Un écosystème B2B",
-    desc: "Soutenue par 360 Franchises et ATL Capital, SWSM s'inscrit dans un réseau B2B local actif. Un sponsoring, c'est aussi rejoindre une communauté de dirigeants qui se croisent et collaborent au-delà du paddock.",
-  },
-  {
-    num: "03",
-    title: "Une exposition ciblée",
-    desc: "Au-delà des courses, SWSM est présente sur LinkedIn, Instagram et les rendez-vous business du Sud-Ouest. Un partenariat se mesure en visibilité réelle, retombées presse et activations terrain — pas en logos collés sur une moto.",
-  },
-];
+import settings from "../../data/site-settings.json";
+const s = (settings as any).devenirPartenaire?.arguments ?? {
+  eyebrow: "L'opportunité",
+  title: "Trois raisons d'investir.",
+  items: [],
+};
+const args = s.items as Array<{ num: string; title: string; desc: string }>;
 ---
 
 <section class="dp-args has-grain bg-swsm-white py-24 md:py-32 px-6 md:px-10" style="z-index:2;">
   <div class="max-w-[1240px] mx-auto">
     <header class="mb-16 md:mb-20 max-w-2xl">
       <p class="dp-args-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
-        L'opportunité
+        {s.eyebrow}
       </p>
       <h2
         class="dp-args-title font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl"
         data-split-mask
       >
-        Trois raisons d'investir.
+        {s.title}
       </h2>
     </header>
 

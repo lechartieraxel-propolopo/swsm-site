@@ -1,43 +1,20 @@
 ---
-const questions = [
-  {
-    q: "Comment se déroule un partenariat avec SWSM ?",
-    a: "Un premier échange en visio ou rendez-vous physique pour comprendre votre stratégie. Une proposition personnalisée selon vos objectifs (visibilité, activation, ROI). Une convention signée pour la saison. Un suivi régulier durant l'année avec reporting des retombées.",
-  },
-  {
-    q: "Quels sont les délais pour signer ?",
-    a: "De l'échange initial à la signature, comptez 2 à 4 semaines selon la profondeur de la discussion et les validations internes. Une fois signé, l'activation des contreparties démarre sous 15 jours.",
-  },
-  {
-    q: "Peut-on personnaliser les contreparties ?",
-    a: "Oui. Les niveaux affichés sont une grille de référence. Selon votre secteur, vos cibles et vos objectifs, nous adaptons les contreparties — moins de visibilité et plus d'activation B2B, ou inverse.",
-  },
-  {
-    q: "Y a-t-il des engagements de durée ?",
-    a: "L'engagement est annuel par défaut, calé sur la saison sportive. Un partenariat pluriannuel est possible avec conditions préférentielles. Sortie en fin de saison, sans pénalité.",
-  },
-  {
-    q: "Comment se mesure le ROI sponsor ?",
-    a: "Un reporting trimestriel mesure : visibilité (logos, mentions, retombées presse), audience (analytics du site, croissance réseaux), activation (événements clients, contenus co-créés). Pour les niveaux Principal et Titre, KPI sur-mesure définis avec vous.",
-  },
-  {
-    q: "Puis-je rencontrer les pilotes ?",
-    a: "Oui. Selon votre niveau de partenariat, vous pourrez rencontrer les pilotes en paddock le week-end de course, lors d'un événement entreprise dédié, ou sur un atelier mécanique en semaine.",
-  },
-];
+import settings from "../../data/site-settings.json";
+const f = (settings as any).devenirPartenaire?.faq ?? { eyebrow: "", title: "", items: [] };
+const questions = f.items as Array<{ q: string; a: string }>;
 ---
 
 <section class="dp-faq has-grain bg-swsm-white py-24 md:py-32 px-6 md:px-10" style="z-index:9;">
   <div class="max-w-3xl mx-auto">
     <header class="mb-12 md:mb-16">
       <p class="dp-faq-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
-        Questions fréquentes
+        {f.eyebrow}
       </p>
       <h2
         class="dp-faq-title font-display font-bold text-swsm-black tracking-caps-tight leading-[1.05] text-3xl md:text-5xl"
         data-split-mask
       >
-        Tout ce que vous voulez savoir.
+        {f.title}
       </h2>
     </header>
 

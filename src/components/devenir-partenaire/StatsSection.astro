@@ -1,10 +1,7 @@
 ---
-const stats = [
-  { value: 3, label: "Pilotes", note: "engagés en Championnat de France", isNumber: true },
-  { value: 6, label: "Manches", note: "sur la saison 2026", isNumber: true },
-  { value: 5, label: "Partenaires", note: "actuels", isNumber: true },
-  { value: "Nouvelle-Aquitaine", label: "Territoire", note: "d'ancrage", isNumber: false },
-];
+import settings from "../../data/site-settings.json";
+const s = (settings as any).devenirPartenaire?.stats ?? { eyebrow: "", title: "", items: [] };
+const stats = s.items as Array<{ value: string; label: string; note: string; isNumber: boolean }>;
 ---
 
 <section class="dp-stats relative bg-swsm-black text-swsm-white py-24 md:py-32 px-6 md:px-10 overflow-hidden" style="z-index:3;box-shadow:0 -30px 60px -10px rgba(0,0,0,0.4);">
@@ -14,13 +11,13 @@ const stats = [
   <div class="relative z-10 max-w-[1240px] mx-auto">
     <header class="mb-16 md:mb-20 max-w-2xl">
       <p class="dp-stats-eyebrow text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-5">
-        La structure en chiffres
+        {s.eyebrow}
       </p>
       <h2
         class="dp-stats-title font-display font-bold text-swsm-white tracking-caps-tight leading-[1.05] text-3xl md:text-5xl"
         data-split-mask
       >
-        Une visibilité qui se construit.
+        {s.title}
       </h2>
     </header>
 

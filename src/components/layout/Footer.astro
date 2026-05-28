@@ -44,7 +44,7 @@ const navLinks = [
                 src={p.data.logo || "/images/partenaires/Blanc_FondTransparent.png"}
                 alt={i < partenaires.length ? `${p.data.nom} — Partenaire SWSM Racing Team` : ""}
                 loading="lazy"
-                class="footer-partner-logo h-10 md:h-12 w-auto max-w-[180px] object-contain select-none pointer-events-none transition-opacity duration-300"
+                class="footer-partner-logo h-14 md:h-16 w-auto max-w-[220px] object-contain select-none pointer-events-none transition-all duration-500"
               />
             </div>
           ))}
@@ -169,12 +169,12 @@ const navLinks = [
 </footer>
 
 <style>
-  /* Logos partenaires : conversion en monochrome gris sobre, hover plus opaque */
+  /* Logos partenaires : grayscale sobre (préserve les détails), hover en couleur */
   .footer-partner-logo {
-    filter: brightness(0) opacity(0.45);
+    filter: grayscale(1) opacity(0.55) contrast(1.05);
   }
   .footer-partner-cell:hover .footer-partner-logo {
-    filter: brightness(0) opacity(0.85);
+    filter: grayscale(0) opacity(1);
   }
 
   /* Carousel auto-scroll : translate de 0 à -50% (la moitié = un cycle complet

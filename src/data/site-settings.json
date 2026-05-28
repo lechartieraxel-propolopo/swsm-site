@@ -160,6 +160,89 @@
     "subtitle": "D'autres images, d'autres manches, d'autres histoires arrivent. L'album se construit en continu.",
     "ctaLabel": "Lire les coulisses"
   },
+  "devenirPartenaire": {
+    "arguments": {
+      "eyebrow": "L'opportunité",
+      "title": "Trois raisons d'investir.",
+      "items": [
+        { "num": "01", "title": "Une structure en construction", "desc": "SWSM Racing Team est une écurie privée du Sud-Ouest engageant trois pilotes en Championnat de France. Une opportunité d'accompagner une structure dès ses débuts, à un moment où chaque sponsor prend une place visible et durable." },
+        { "num": "02", "title": "Un écosystème B2B", "desc": "Soutenue par 360 Franchises et ATL Capital, SWSM s'inscrit dans un réseau B2B local actif. Un sponsoring, c'est aussi rejoindre une communauté de dirigeants qui se croisent et collaborent au-delà du paddock." },
+        { "num": "03", "title": "Une exposition ciblée", "desc": "Au-delà des courses, SWSM est présente sur LinkedIn, Instagram et les rendez-vous business du Sud-Ouest. Un partenariat se mesure en visibilité réelle, retombées presse et activations terrain — pas en logos collés sur une moto." }
+      ]
+    },
+    "stats": {
+      "eyebrow": "La structure en chiffres",
+      "title": "Une visibilité qui se construit.",
+      "items": [
+        { "value": "3", "label": "Pilotes", "note": "engagés en Championnat de France", "isNumber": true },
+        { "value": "6", "label": "Manches", "note": "sur la saison 2026", "isNumber": true },
+        { "value": "5", "label": "Partenaires", "note": "actuels", "isNumber": true },
+        { "value": "Nouvelle-Aquitaine", "label": "Territoire", "note": "d'ancrage", "isNumber": false }
+      ]
+    },
+    "niveaux": {
+      "eyebrow": "5 Niveaux",
+      "title": "Choisissez votre engagement.",
+      "subtitle": "Tarifs personnalisés selon votre stratégie. Discussion en RDV.",
+      "items": [
+        { "nom": "Partenaire Titre", "eyebrow": "Top du dispositif", "desc": "Le nom de votre marque associé à l'écurie. Visibilité maximale sur tous les supports.", "contreparties": ["Nom de votre marque associé à l'écurie", "Logo majeur sur les motos et combinaisons des 3 pilotes", "Présence dominante sur tous les supports digitaux", "Communication dédiée sur LinkedIn / Instagram", "Invitation paddock VIP sur l'ensemble des manches", "Reporting personnalisé des retombées"], "note": "1 emplacement", "accent": true, "glow": "pink" },
+        { "nom": "Partenaire Principal", "eyebrow": "Premier niveau majeur", "desc": "Logo dominant sur la moto et la combinaison. Co-branding sur les supports digitaux et physiques.", "contreparties": ["Logo dominant sur la moto", "Logo sur les combinaisons des pilotes", "Mention dans les publications de manche", "Invitations paddock sur 2 manches", "Citation dans un compte rendu et un portrait", "Reporting trimestriel"], "note": "2 emplacements", "accent": false, "glow": "violet" },
+        { "nom": "Partenaire Officiel", "eyebrow": "Niveau intermédiaire", "desc": "Présence affirmée sans être dominante. Idéal pour les premiers sponsorings.", "contreparties": ["Présence affirmée sur la moto", "Mention dans les publications", "Invitation paddock sur 1 manche", "Mention dédiée dans un article"], "note": "Plusieurs emplacements", "accent": false, "glow": "pink" },
+        { "nom": "Partenaire Technique", "eyebrow": "Échange de prestations", "desc": "Pour les acteurs du secteur moto qui apportent expertise ou matériel.", "contreparties": ["Reconnaissance \"Partenaire Technique\"", "Citation dans la rubrique mécanique / équipement", "Logo sur les supports techniques de l'écurie", "Échange de prestations valorisées"], "note": "Échange en nature", "accent": false, "glow": "violet" },
+        { "nom": "Partenaire / Supporter", "eyebrow": "Palier d'entrée", "desc": "Pour les soutiens locaux qui veulent accompagner l'écurie.", "contreparties": ["Logo \"Supporter\" sur les supports digitaux", "Mention dans la rubrique partenaires du site", "Invitation à l'événement annuel partenaires", "Newsletter privée d'écurie"], "note": "Plusieurs emplacements", "accent": false, "glow": "pink" }
+      ]
+    },
+    "partenairesActuels": {
+      "eyebrow": "Ils nous accompagnent",
+      "title": "Cinq partenaires. Une seule équipe.",
+      "subtitle": "Des entreprises qui investissent dans une structure sportive en construction.",
+      "ctaLabel": "Voir les partenaires en détail"
+    },
+    "temoignage": {
+      "eyebrow": "Témoignage",
+      "quote": "Investir dans SWSM, ce n'est pas sponsoriser un pilote — c'est s'associer à un projet sportif structuré, pensé comme une marque, et qui parle aux dirigeants comme à leurs équipes.",
+      "authorName": "À compléter",
+      "authorNote": "Citation à recueillir auprès d'un partenaire actuel"
+    },
+    "telechargement": {
+      "dossier": {
+        "eyebrow": "Le dossier",
+        "title": "Téléchargez le dossier sponsoring complet.",
+        "desc": "Présentation détaillée des niveaux, contreparties, calendrier et grille tarifaire.",
+        "buttonLabel": "Télécharger le PDF"
+      },
+      "rdv": {
+        "eyebrow": "Ou direct",
+        "title": "Prenez RDV en direct.",
+        "desc": "Réservez un créneau de 30 minutes avec l'équipe pour discuter de votre projet de partenariat.",
+        "buttonLabel": "Voir le calendrier",
+        "calendarUrl": "https://calendly.com/swsm-racing-team"
+      }
+    },
+    "faq": {
+      "eyebrow": "Questions fréquentes",
+      "title": "Tout ce que vous voulez savoir.",
+      "items": [
+        { "q": "Comment se déroule un partenariat avec SWSM ?", "a": "Un premier échange en visio ou rendez-vous physique pour comprendre votre stratégie. Une proposition personnalisée selon vos objectifs (visibilité, activation, ROI). Une convention signée pour la saison. Un suivi régulier durant l'année avec reporting des retombées." },
+        { "q": "Quels sont les délais pour signer ?", "a": "De l'échange initial à la signature, comptez 2 à 4 semaines selon la profondeur de la discussion et les validations internes. Une fois signé, l'activation des contreparties démarre sous 15 jours." },
+        { "q": "Peut-on personnaliser les contreparties ?", "a": "Oui. Les niveaux affichés sont une grille de référence. Selon votre secteur, vos cibles et vos objectifs, nous adaptons les contreparties — moins de visibilité et plus d'activation B2B, ou inverse." },
+        { "q": "Y a-t-il des engagements de durée ?", "a": "L'engagement est annuel par défaut, calé sur la saison sportive. Un partenariat pluriannuel est possible avec conditions préférentielles. Sortie en fin de saison, sans pénalité." },
+        { "q": "Comment se mesure le ROI sponsor ?", "a": "Un reporting trimestriel mesure : visibilité (logos, mentions, retombées presse), audience (analytics du site, croissance réseaux), activation (événements clients, contenus co-créés). Pour les niveaux Principal et Titre, KPI sur-mesure définis avec vous." },
+        { "q": "Puis-je rencontrer les pilotes ?", "a": "Oui. Selon votre niveau de partenariat, vous pourrez rencontrer les pilotes en paddock le week-end de course, lors d'un événement entreprise dédié, ou sur un atelier mécanique en semaine." }
+      ]
+    }
+  },
+  "footer": {
+    "tagline": "Écurie privée du Sud-Ouest. Trois pilotes en Championnat de France de Supermotard.",
+    "partnersHeader": {
+      "eyebrow": "Saison 2026",
+      "title": "Merci à nos partenaires.",
+      "subtitle": "Ils accompagnent l'écurie cette saison."
+    },
+    "contactEmail": "contact@swsm-racing-team.fr",
+    "contactFormLabel": "Formulaire de contact",
+    "copyright": "SWSM Racing Team — Tous droits réservés"
+  },
   "zoomParallax": {
     "images": [
       "/images/hero/hero-1.jpg",
