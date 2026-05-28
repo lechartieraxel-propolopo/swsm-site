@@ -62,16 +62,16 @@ function PartnerCard({ partner }: { partner: Partner }) {
 
   return (
     <div className="flex h-full w-full flex-col gap-4">
-      {/* Vignette : fond coloré + logo centré */}
+      {/* Vignette : fond coloré + logo centré (padding pour éviter le débordement) */}
       <div
-        className="relative flex h-[275px] w-full items-center justify-center overflow-hidden rounded-md outline outline-1 -outline-offset-1 outline-swsm-white/10"
+        className="relative flex h-[275px] w-full items-center justify-center overflow-hidden rounded-md outline outline-1 -outline-offset-1 outline-swsm-white/10 px-10 py-12"
         style={{ backgroundColor: partner.couleur || "#171717" }}
       >
         {partner.logo ? (
           <img
             src={partner.logo}
             alt={`${partner.nom} — logo`}
-            className="max-h-[55%] max-w-[65%] select-none object-contain"
+            className="max-h-full max-w-full select-none object-contain"
             style={{ filter: logoFilter }}
             draggable={false}
           />
