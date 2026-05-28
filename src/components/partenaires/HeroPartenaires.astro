@@ -8,8 +8,8 @@ const h = settings.partenairesHero;
 <ScrollExpandHero
   client:load
   mediaType="video"
-  mediaSrc="/videos/hero-partenaires.mp4"
-  bgImageSrc="/images/general/IMG_9442.JPG"
+  mediaSrc={(h as { video?: string }).video ?? "/videos/hero-partenaires.mp4"}
+  bgImageSrc={(h as { bgImage?: string }).bgImage ?? "/images/general/IMG_9442.JPG"}
   title={h.title}
   eyebrow={h.eyebrow}
   scrollToExpand={h.scrollLabel}

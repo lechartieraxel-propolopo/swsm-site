@@ -124,7 +124,9 @@
     "scrollLabel": "Faire défiler pour découvrir",
     "subEyebrow": "Une seule équipe",
     "subTitle": "Des entreprises qui investissent dans une structure sportive en construction.",
-    "subText": "Cinq partenaires accompagnent SWSM Racing Team. Découvrez chacun d'eux et l'histoire qu'ils écrivent avec l'écurie."
+    "subText": "Cinq partenaires accompagnent SWSM Racing Team. Découvrez chacun d'eux et l'histoire qu'ils écrivent avec l'écurie.",
+    "video": "/videos/hero-partenaires.mp4",
+    "bgImage": "/images/general/IMG_9442.JPG"
   },
   "partenairesCta": {
     "eyebrow": "Rejoignez-nous",
