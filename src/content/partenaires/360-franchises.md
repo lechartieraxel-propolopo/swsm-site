@@ -11,7 +11,7 @@ logo: /images/partenaires/360-franchises/Origine_FondTransparent.png
 photo: /images/partenaires/360-franchises/photo-balconies.jpg
 couleur: '#0F172A'
 logoTint: white
-site: 'https://360franchises.com'
+site: 'https://360franchises.fr'
 ordre: 1
 ---
 
