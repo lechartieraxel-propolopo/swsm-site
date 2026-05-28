@@ -52,12 +52,13 @@ function PartnerCard({ partner }: { partner: Partner }) {
     window.dispatchEvent(new CustomEvent("partner:open", { detail: partner.id }));
   };
 
-  // Filtre CSS appliqué au logo si on veut le tinter (pour logos PNG/JPG sans variante)
+  // Filtre CSS appliqué au logo : "white" = grayscale clair (garde les nuances,
+  // pas un aplat blanc), "black" = grayscale sombre, sinon couleurs d'origine.
   const logoFilter =
     partner.logoTint === "white"
-      ? "brightness(0) invert(1)"
+      ? "grayscale(1) brightness(1.6) contrast(0.95)"
       : partner.logoTint === "black"
-        ? "brightness(0)"
+        ? "grayscale(1) brightness(0.4) contrast(1.2)"
         : "none";
 
   return (
