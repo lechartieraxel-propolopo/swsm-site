@@ -42,24 +42,37 @@ const navLinks = [
 
       <!-- Carousel auto-scroll : track dupliqué x2 pour boucle infinie sans saut -->
       <div class="footer-marquee relative overflow-hidden">
-        <div class="footer-marquee-track flex w-max animate-footer-scroll">
+        <div class="footer-marquee-track flex w-max animate-footer-scroll gap-4 md:gap-6 px-4">
           {[...partenaires, ...partenaires].map((p, i) => (
-            <div
-              class="footer-partner-cell shrink-0 px-10 md:px-16 flex items-center justify-center h-24 md:h-28"
+            <a
+              href={p.data.site || "/partenaires"}
+              target={p.data.site ? "_blank" : undefined}
+              rel={p.data.site ? "noopener noreferrer" : undefined}
+              class="footer-partner-card shrink-0 relative flex items-center justify-center rounded-md overflow-hidden h-28 md:h-32 w-52 md:w-64 px-8 md:px-10 transition-transform duration-300 hover:scale-[1.03] group"
+              style={`background-color: ${p.data.couleur || "#171717"};`}
               aria-hidden={i >= partenaires.length ? "true" : undefined}
+              aria-label={i < partenaires.length ? `${p.data.nom} — Voir le site` : undefined}
+              tabIndex={i >= partenaires.length ? -1 : undefined}
             >
               <img
                 src={p.data.logo || "/images/partenaires/Blanc_FondTransparent.png"}
                 alt={i < partenaires.length ? `${p.data.nom} — Partenaire SWSM Racing Team` : ""}
                 loading="lazy"
-                class="footer-partner-logo h-14 md:h-16 w-auto max-w-[220px] object-contain select-none pointer-events-none transition-all duration-500"
+                class="footer-partner-logo max-h-[60%] max-w-[80%] w-auto h-auto object-contain select-none pointer-events-none transition-transform duration-500 group-hover:scale-105"
+                style={p.data.logoTint === "white"
+                  ? "filter: grayscale(1) brightness(1.6) contrast(0.95);"
+                  : p.data.logoTint === "black"
+                    ? "filter: grayscale(1) brightness(0.4) contrast(1.2);"
+                    : "none"}
               />
-            </div>
+              {/* outline subtil pour démarquer la carte */}
+              <span class="absolute inset-0 rounded-md ring-1 ring-inset ring-swsm-white/10 pointer-events-none"></span>
+            </a>
           ))}
         </div>
         <!-- Voiles latéraux pour fade-in/out -->
-        <div class="absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-swsm-white to-transparent pointer-events-none" aria-hidden="true"></div>
-        <div class="absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-swsm-white to-transparent pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-swsm-white to-transparent pointer-events-none z-10" aria-hidden="true"></div>
+        <div class="absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-swsm-white to-transparent pointer-events-none z-10" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -177,12 +190,12 @@ const navLinks = [
 </footer>
 
 <style>
-  /* Logos partenaires : grayscale sobre (préserve les détails), hover en couleur */
-  .footer-partner-logo {
-    filter: grayscale(1) opacity(0.55) contrast(1.05);
+  /* Carte partenaire : ombre douce au hover pour effet de relief */
+  .footer-partner-card {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   }
-  .footer-partner-cell:hover .footer-partner-logo {
-    filter: grayscale(0) opacity(1);
+  .footer-partner-card:hover {
+    box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.25);
   }
 
   /* Carousel auto-scroll : translate de 0 à -50% (la moitié = un cycle complet
