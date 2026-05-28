@@ -73,19 +73,22 @@ const partnersData = partenaires.map((p) => ({
 
     <div class="relative h-full w-full flex items-center justify-center p-4 md:p-8 pointer-events-none">
       <div class="modale-panel relative bg-swsm-white text-swsm-black w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-sm scale-95 opacity-0 transition-all duration-300 pointer-events-auto">
-        <button
-          type="button"
-          class="absolute top-4 right-4 z-10 w-10 h-10 inline-flex items-center justify-center bg-swsm-black/5 hover:bg-swsm-black/15 transition-colors rounded-full"
-          aria-label="Fermer la modale"
-          data-modale-close
-        >
-          <span class="relative block w-4 h-4">
-            <span class="absolute left-0 top-1/2 block w-4 h-[2px] bg-swsm-black rotate-45"></span>
-            <span class="absolute left-0 top-1/2 block w-4 h-[2px] bg-swsm-black -rotate-45"></span>
-          </span>
-        </button>
+        {/* Header sticky avec X : reste visible pendant le scroll */}
+        <div class="sticky top-0 z-20 flex justify-end p-3 bg-gradient-to-b from-swsm-white via-swsm-white/95 to-transparent">
+          <button
+            type="button"
+            class="w-10 h-10 inline-flex items-center justify-center bg-swsm-black/8 hover:bg-swsm-black/20 backdrop-blur-sm transition-colors rounded-full shadow-sm"
+            aria-label="Fermer la modale"
+            data-modale-close
+          >
+            <span class="relative block w-4 h-4">
+              <span class="absolute left-0 top-1/2 block w-4 h-[2px] bg-swsm-black rotate-45"></span>
+              <span class="absolute left-0 top-1/2 block w-4 h-[2px] bg-swsm-black -rotate-45"></span>
+            </span>
+          </button>
+        </div>
 
-        <div class="p-8 md:p-12">
+        <div class="px-8 md:px-12 pb-8 md:pb-12 pt-0 -mt-4">
           {
             partenaires.map((p) => (
               <div class="modale-content hidden" data-partner={p.id}>
