@@ -3,15 +3,16 @@ nom: 360 Franchises
 niveau: Partenaire Principal
 role: Capital et conseil
 description: >-
-  Structure de capital et de conseil aux franchises, 360 Franchises soutient
-  SWSM Racing Team depuis sa création. Au-delà de l'apport financier, le
-  partenariat repose sur une vision partagée : structurer un projet sportif
-  comme une marque, avec la même rigueur qu'une entreprise en croissance.
+  Cabinet de conseil en développement de réseaux de franchise, 360 Franchises
+  accompagne dirigeants et entrepreneurs dans la structuration et la croissance
+  de leur enseigne. C'est aussi la structure d'où est né SWSM Racing Team. Le
+  partenariat repose sur une conviction partagée : un projet sportif se
+  construit comme une marque, avec la rigueur d'une entreprise en croissance.
+site: 'https://360franchises.fr'
 logo: /images/partenaires/360-franchises/Origine_FondTransparent.png
 photo: /images/partenaires/360-franchises/photo-balconies.jpg
 couleur: '#0F172A'
 logoTint: white
-site: 'https://360franchises.fr'
 ordre: 1
 ---
 
