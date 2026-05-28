@@ -1,12 +1,13 @@
 ---
 nom: ATL Capital
 niveau: Partenaire Principal
-role: Investissement
+role: Préparation Moto
 description: >-
-  ATL Capital accompagne SWSM Racing Team sur le volet investissement et
-  structuration patrimoniale. Le partenariat traduit la volonté commune
-  d'inscrire le projet dans la durée et d'en faire un actif de communication
-  crédible pour la marque.
+  ATL Capital est un atelier de confection moto spécialisé dans la création sur
+  mesure et la modernisation de machines anciennes, mariant l'âme des modèles
+  d'époque à la fiabilité des pièces récentes. Un travail d'artisan, à la
+  croisée de la mécanique et de la passion, qui résonne directement avec
+  l'esprit de SWSM Racing Team.
 logo: /images/partenaires/atl-capital/ATL.Concept.blanc.transparent.png
 photo: /images/partenaires/atl-capital/8-dscf5363.jpg
 couleur: '#1E3A5F'
