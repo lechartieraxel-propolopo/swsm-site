@@ -8,19 +8,11 @@ const partenaires = (await getCollection("partenaires")).sort(
 
 const year = new Date().getFullYear();
 
-const socials = [
-  { name: "Instagram", href: "#", initial: "IG" },
-  { name: "LinkedIn", href: "#", initial: "IN" },
-  { name: "Facebook", href: "#", initial: "FB" },
-  { name: "TikTok", href: "#", initial: "TT" },
-  { name: "YouTube", href: "#", initial: "YT" },
-];
-
 const navLinks = [
   { href: "/coulisses", label: "Coulisses" },
   { href: "/partenaires", label: "Partenaires" },
   { href: "/devenir-partenaire", label: "Devenir partenaire" },
-  { href: "/devenir-partenaire#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 ---
 
@@ -78,24 +70,6 @@ const navLinks = [
         <p class="font-body text-sm text-swsm-white/65 mt-4 max-w-[280px] leading-relaxed">
           Écurie privée du Sud-Ouest. Trois pilotes en Championnat de France de Supermotard.
         </p>
-
-        <ul class="flex items-center gap-3 mt-6">
-          {
-            socials.map((s) => (
-              <li>
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.name}
-                  class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-swsm-white/20 hover:border-swsm-pink hover:bg-swsm-pink/10 hover:text-swsm-pink transition-colors text-[10px] font-display font-bold tracking-caps-loose"
-                >
-                  {s.initial}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
       </div>
 
       <!-- Col 2 — Navigation -->
@@ -119,21 +93,28 @@ const navLinks = [
         </ul>
       </div>
 
-      <!-- Col 3 — Partenaires -->
+      <!-- Col 3 — Partenaires (vrais noms complets) -->
       <div>
         <p class="text-xs uppercase tracking-eyebrow font-display font-medium text-swsm-pink mb-6">
           Partenaires
         </p>
-        <ul class="grid grid-cols-3 gap-3">
+        <ul class="space-y-3">
           {
             partenaires.map((p) => (
               <li>
-                <span
-                  class="inline-block w-full text-center px-2 py-2 border border-swsm-white/10 font-display font-medium text-[10px] uppercase tracking-caps-loose text-swsm-white/55 truncate"
-                  title={p.data.nom}
-                >
-                  {p.data.nom.split(" ")[0]}
-                </span>
+                {p.data.site ? (
+                  <a
+                    href={p.data.site}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-body text-sm text-swsm-white/70 hover:text-swsm-white transition-colors inline-flex items-center gap-2 group"
+                  >
+                    <span>{p.data.nom}</span>
+                    <span class="text-[10px] text-swsm-white/30 group-hover:text-swsm-pink transition-colors">↗</span>
+                  </a>
+                ) : (
+                  <span class="font-body text-sm text-swsm-white/70">{p.data.nom}</span>
+                )}
               </li>
             ))
           }
@@ -147,15 +128,16 @@ const navLinks = [
         </p>
         <a
           href="mailto:contact@swsm-racing-team.fr"
-          class="font-body text-sm text-swsm-white hover:text-swsm-pink transition-colors block"
+          class="font-body text-sm text-swsm-white hover:text-swsm-pink transition-colors block break-all"
         >
           contact@swsm-racing-team.fr
         </a>
         <a
-          href="/devenir-partenaire"
-          class="font-body text-sm text-swsm-white/70 hover:text-swsm-white inline-block mt-3 transition-colors"
+          href="/contact"
+          class="font-body text-sm text-swsm-white/70 hover:text-swsm-white inline-flex items-center gap-2 mt-4 transition-colors group"
         >
-          Formulaire de contact →
+          <span>Formulaire de contact</span>
+          <span class="text-swsm-pink group-hover:translate-x-1 transition-transform">→</span>
         </a>
       </div>
     </div>
@@ -165,7 +147,7 @@ const navLinks = [
       <p class="font-body text-xs text-swsm-white/50">
         © {year} SWSM Racing Team — Tous droits réservés
       </p>
-      <ul class="flex items-center gap-6 text-xs">
+      <ul class="flex flex-wrap items-center gap-6 text-xs">
         <li>
           <a href="/mentions-legales" class="font-body text-swsm-white/50 hover:text-swsm-white transition-colors">
             Mentions légales
@@ -174,6 +156,11 @@ const navLinks = [
         <li>
           <a href="/confidentialite" class="font-body text-swsm-white/50 hover:text-swsm-white transition-colors">
             Politique de confidentialité
+          </a>
+        </li>
+        <li>
+          <a href="/cookies" class="font-body text-swsm-white/50 hover:text-swsm-white transition-colors">
+            Cookies
           </a>
         </li>
       </ul>

@@ -1,0 +1,237 @@
+---
+// Page Contact — formulaire qui envoie un mail à contact@swsm-racing-team.fr
+// via Web3Forms (gratuit, sans backend). Clé d'accès à configurer dans
+// PUBLIC_WEB3FORMS_KEY (variable env Vercel).
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? "";
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contactez SWSM Racing Team. Partenariats, presse, demandes d'informations."
+>
+  <section
+    class="contact-section relative bg-swsm-black text-swsm-white py-32 md:py-40 px-6 md:px-10 overflow-hidden"
+    aria-label="Formulaire de contact"
+  >
+    <!-- Halo subtil rose/violet -->
+    <div
+      class="absolute inset-0 pointer-events-none opacity-40"
+      aria-hidden="true"
+      style="background: radial-gradient(ellipse at 20% 30%, rgba(236,45,124,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(91,33,182,0.15) 0%, transparent 50%);"
+    ></div>
+
+    <div class="relative max-w-3xl mx-auto">
+      <header class="mb-12 md:mb-16">
+        <p class="text-xs uppercase tracking-[0.25em] font-display font-medium text-swsm-pink mb-5 inline-flex items-center gap-3">
+          <span class="block w-6 h-px bg-swsm-pink"></span>
+          Nous contacter
+        </p>
+        <h1 class="font-display font-bold tracking-[-0.02em] leading-[0.95] text-4xl md:text-6xl lg:text-7xl mb-6">
+          Une question ?<br/>Un projet ?
+        </h1>
+        <p class="font-body text-base md:text-lg text-swsm-white/75 leading-relaxed max-w-xl">
+          Partenariats, presse, demandes d'informations — écrivez-nous, on revient vers vous sous 48h en semaine.
+        </p>
+      </header>
+
+      <!-- Bloc info contact direct -->
+      <div class="grid sm:grid-cols-2 gap-4 mb-12 md:mb-16">
+        <a
+          href="mailto:contact@swsm-racing-team.fr"
+          class="group block p-5 rounded-sm border border-swsm-white/10 hover:border-swsm-pink/40 transition-colors"
+        >
+          <p class="text-[10px] uppercase tracking-[0.2em] font-display font-medium text-swsm-pink mb-2">
+            Email
+          </p>
+          <p class="font-body text-sm text-swsm-white group-hover:text-swsm-pink transition-colors break-all">
+            contact@swsm-racing-team.fr
+          </p>
+        </a>
+        <div class="block p-5 rounded-sm border border-swsm-white/10">
+          <p class="text-[10px] uppercase tracking-[0.2em] font-display font-medium text-swsm-pink mb-2">
+            Localisation
+          </p>
+          <p class="font-body text-sm text-swsm-white/85">
+            Sud-Ouest, Nouvelle-Aquitaine<br/>France
+          </p>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <form
+        id="swsm-contact-form"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="space-y-6"
+      >
+        <input type="hidden" name="access_key" value={accessKey} />
+        <input type="hidden" name="subject" value="[SWSM Site] Nouveau message" />
+        <input type="hidden" name="from_name" value="Site SWSM Racing Team" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="name" class="block text-[10px] uppercase tracking-[0.2em] font-display font-medium text-swsm-pink mb-2">
+              Nom *
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              autocomplete="name"
+              class="w-full px-4 py-3 bg-swsm-white/[0.04] border border-swsm-white/15 rounded-sm font-body text-base text-swsm-white placeholder:text-swsm-white/30 focus:outline-none focus:border-swsm-pink transition-colors"
+              placeholder="Votre nom"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-[10px] uppercase tracking-[0.2em] font-display font-medium text-swsm-pink mb-2">
+              Email *
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              class="w-full px-4 py-3 bg-swsm-white/[0.04] border border-swsm-white/15 rounded-sm font-body text-base text-swsm-white placeholder:text-swsm-white/30 focus:outline-none focus:border-swsm-pink transition-colors"
+              placeholder="vous@exemple.fr"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="company" class="block text-[10px] uppercase tracking-[0.2em] font-display font-medium text-swsm-pink mb-2">
+            Société (optionnel)
+          </label>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            autocomplete="organization"
+            class="w-full px-4 py-3 bg-swsm-white/[0.04] border border-swsm-white/15 rounded-sm font-body text-base text-swsm-white placeholder:text-swsm-white/30 focus:outline-none focus:border-swsm-pink transition-colors"
+            placeholder="Nom de votre entreprise"
+          />
+        </div>
+
+        <div>
+          <label for="reason" class="block text-[10px] uppercase tracking-[0.2em] font-display font-medium text-swsm-pink mb-2">
+            Sujet *
+          </label>
+          <select
+            id="reason"
+            name="reason"
+            required
+            class="w-full px-4 py-3 bg-swsm-white/[0.04] border border-swsm-white/15 rounded-sm font-body text-base text-swsm-white focus:outline-none focus:border-swsm-pink transition-colors appearance-none cursor-pointer"
+          >
+            <option value="" disabled selected class="bg-swsm-black">Choisir un sujet…</option>
+            <option value="partenariat" class="bg-swsm-black">Devenir partenaire</option>
+            <option value="presse" class="bg-swsm-black">Demande presse / média</option>
+            <option value="info" class="bg-swsm-black">Demande d'information</option>
+            <option value="autre" class="bg-swsm-black">Autre</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block text-[10px] uppercase tracking-[0.2em] font-display font-medium text-swsm-pink mb-2">
+            Message *
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="5"
+            class="w-full px-4 py-3 bg-swsm-white/[0.04] border border-swsm-white/15 rounded-sm font-body text-base text-swsm-white placeholder:text-swsm-white/30 focus:outline-none focus:border-swsm-pink transition-colors resize-y"
+            placeholder="Dites-nous tout."
+          ></textarea>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <input
+            id="consent"
+            name="consent"
+            type="checkbox"
+            required
+            class="mt-1 w-4 h-4 accent-swsm-pink shrink-0"
+          />
+          <label for="consent" class="font-body text-xs text-swsm-white/65 leading-relaxed">
+            J'accepte que mes données soient utilisées pour répondre à ma demande, conformément à la
+            <a href="/confidentialite" class="text-swsm-pink hover:underline">politique de confidentialité</a>.
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          class="group inline-flex items-center justify-center gap-2 font-display font-bold text-sm uppercase tracking-[0.05em] px-8 py-4 bg-swsm-pink text-swsm-white rounded-sm transition-transform duration-200 hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-swsm-pink focus-visible:ring-offset-2 focus-visible:ring-offset-swsm-black disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <span data-submit-label>Envoyer le message</span>
+          <span class="transition-transform group-hover:translate-x-1">→</span>
+        </button>
+
+        <p data-form-success class="hidden text-sm font-body text-swsm-pink mt-4">
+          ✓ Message envoyé. Nous revenons vers vous rapidement.
+        </p>
+        <p data-form-error class="hidden text-sm font-body text-red-400 mt-4">
+          Erreur lors de l'envoi. Réessayez ou écrivez directement à contact@swsm-racing-team.fr.
+        </p>
+      </form>
+
+      {!accessKey && (
+        <div class="mt-8 p-4 border border-yellow-400/30 bg-yellow-400/5 rounded-sm">
+          <p class="font-body text-xs text-yellow-200/85 leading-relaxed">
+            <strong class="text-yellow-200">Note admin :</strong> la variable d'environnement
+            <code class="font-mono bg-swsm-black/40 px-1.5 py-0.5 rounded">PUBLIC_WEB3FORMS_KEY</code>
+            n'est pas définie. Crée un compte gratuit sur
+            <a href="https://web3forms.com" target="_blank" rel="noopener noreferrer" class="text-yellow-200 underline">web3forms.com</a>,
+            récupère ta clé d'accès, et ajoute-la dans les variables d'environnement Vercel.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById("swsm-contact-form") as HTMLFormElement | null;
+  const successEl = document.querySelector<HTMLElement>("[data-form-success]");
+  const errorEl = document.querySelector<HTMLElement>("[data-form-error]");
+  const labelEl = document.querySelector<HTMLElement>("[data-submit-label]");
+
+  if (form && successEl && errorEl && labelEl) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      successEl.classList.add("hidden");
+      errorEl.classList.add("hidden");
+      const originalLabel = labelEl.textContent;
+      labelEl.textContent = "Envoi…";
+      const submitBtn = form.querySelector<HTMLButtonElement>("button[type=submit]");
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await res.json();
+        if (data.success) {
+          successEl.classList.remove("hidden");
+          form.reset();
+          if (typeof window !== "undefined" && (window as any).plausible) {
+            (window as any).plausible("Contact form submitted");
+          }
+        } else {
+          throw new Error(data.message || "Erreur d'envoi");
+        }
+      } catch (err) {
+        console.error("Form error:", err);
+        errorEl.classList.remove("hidden");
+      } finally {
+        labelEl.textContent = originalLabel;
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+</script>
