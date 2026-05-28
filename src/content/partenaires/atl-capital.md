@@ -10,7 +10,7 @@ description: >-
   l'esprit de SWSM Racing Team.
 logo: /images/partenaires/atl-capital/ATL.Concept.blanc.transparent.png
 photo: /images/partenaires/atl-capital/8-dscf5363.jpg
-couleur: '#E32400'
+couleur: '#B51A00'
 logoTint: white
 ordre: 2
 ---
