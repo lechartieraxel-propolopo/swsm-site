@@ -10,7 +10,7 @@ description: >-
 site: 'https://www.team33accessoires.fr'
 logo: /images/partenaires/team-33/images-2-removebg-preview.png
 photo: /images/partenaires/team-33/le-magasin.jpg
-couleur: '#7F1D1D'
+couleur: '#FFFB00'
 logoTint: white
 ordre: 5
 ---
