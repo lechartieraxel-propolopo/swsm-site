@@ -10,7 +10,7 @@ bio: >-
   remplissait les paddocks, jusqu'au Guidon d'Or, course mythique de la
   discipline. Son arrivée en 2026 apporte à SWSM Racing Team ce qui ne s'achète
   pas : l'expérience.
-photo: /images/pilotes/img-9813.jpg
+photo: /images/pilotes/img-9813.png
 ordre: 3
 ---
 
