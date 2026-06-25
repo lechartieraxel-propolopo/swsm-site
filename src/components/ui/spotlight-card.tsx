@@ -82,7 +82,10 @@ const GlowCard: React.FC<GlowCardProps> = ({
       backgroundAttachment: 'fixed',
       border: 'var(--border-size) solid var(--backup-border)',
       position: 'relative',
-      touchAction: 'none',
+      // touchAction: 'pan-y' : autorise le scroll vertical natif sur mobile,
+      // tout en gardant la card cliquable. Avant 'none' bloquait tout scroll
+      // quand l'utilisateur touchait une card.
+      touchAction: 'pan-y',
     };
 
     if (width !== undefined) baseStyles.width = typeof width === 'number' ? `${width}px` : width;
