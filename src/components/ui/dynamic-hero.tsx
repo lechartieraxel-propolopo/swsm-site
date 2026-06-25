@@ -15,7 +15,7 @@ export function DynamicHero({
   heading = "Faites partie de l'écurie.",
   tagline = "Cinq partenaires nous accompagnent déjà. Associez votre marque à SWSM Racing Team — trois pilotes en Championnat de France de Supermotard.",
   primaryCtaLabel = "Télécharger le dossier",
-  primaryCtaHref = "/dossier-sponsoring.pdf",
+  primaryCtaHref = "/dossier-sponsor/dossier-sponsoring-swsm-2026.pdf",
   secondaryCtaLabel = "Découvrir les niveaux",
   secondaryCtaHref = "#niveaux",
 }: DynamicHeroProps) {
