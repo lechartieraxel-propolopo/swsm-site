@@ -24,7 +24,7 @@
       "organisateur": "MC Roazhon Supermot'",
       "date": "2026-06-06",
       "date_fin": "2026-06-07",
-      "statut": "a_venir"
+      "statut": "passe"
     },
     {
       "id": 3,
@@ -33,7 +33,7 @@
       "organisateur": "TDG Motors",
       "date": "2026-07-04",
       "date_fin": "2026-07-05",
-      "statut": "a_venir"
+      "statut": "passe"
     },
     {
       "id": 4,
@@ -42,7 +42,8 @@
       "organisateur": "MC Boischaut",
       "date": "2026-07-25",
       "date_fin": "2026-07-26",
-      "statut": "a_venir"
+      "statut": "passe",
+      "lien_compte_rendu": "/coulisses/saint-amand-colombiers-2026"
     },
     {
       "id": 5,
