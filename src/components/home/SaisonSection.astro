@@ -34,6 +34,14 @@ const getBestResult = (m: typeof derniere) => {
 };
 const best = derniere ? getBestResult(derniere) : null;
 const bestPilote = best ? piloteByKey(best.key) : null;
+
+// Photo de couverture : récupère le cover de l'article lié à la dernière course
+const articles = await getCollection("articles");
+const derniereSlug = derniere?.lien_compte_rendu?.replace("/coulisses/", "");
+const articleDerniere = derniereSlug
+  ? articles.find((a) => a.id.replace(".md", "") === derniereSlug || a.id === derniereSlug)
+  : null;
+const coverPhoto = articleDerniere?.data?.cover;
 ---
 
 <section
@@ -65,6 +73,17 @@ const bestPilote = best ? piloteByKey(best.key) : null;
             <p class="font-display font-bold text-sm uppercase tracking-caps-loose text-swsm-black/85 mb-8">
               {derniere.lieu.toUpperCase()} — {formatDate(derniere.date, { caps: true })}
             </p>
+
+            {coverPhoto && (
+              <div class="aspect-[16/9] overflow-hidden rounded-sm mb-8 bg-swsm-black/5">
+                <img
+                  src={coverPhoto}
+                  alt={`${derniere.lieu} — photo de course`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            )}
 
             {best && bestPilote && (
               <>

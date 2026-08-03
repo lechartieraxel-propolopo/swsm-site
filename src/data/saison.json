@@ -24,7 +24,8 @@
       "organisateur": "MC Roazhon Supermot'",
       "date": "2026-06-06",
       "date_fin": "2026-06-07",
-      "statut": "passe"
+      "statut": "passe",
+      "lien_compte_rendu": "/coulisses/loheac-2026-compte-rendu"
     },
     {
       "id": 3,
@@ -33,7 +34,8 @@
       "organisateur": "TDG Motors",
       "date": "2026-07-04",
       "date_fin": "2026-07-05",
-      "statut": "passe"
+      "statut": "passe",
+      "lien_compte_rendu": "/coulisses/rouen-2026-compte-rendu"
     },
     {
       "id": 4,
@@ -43,7 +45,7 @@
       "date": "2026-07-25",
       "date_fin": "2026-07-26",
       "statut": "passe",
-      "lien_compte_rendu": "/coulisses/saint-amand-colombiers-2026"
+      "lien_compte_rendu": "/coulisses/saint-amand-colombiers-2026-compte-rendu"
     },
     {
       "id": 5,
