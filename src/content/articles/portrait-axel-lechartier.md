@@ -1,35 +1,37 @@
 ---
-title: "Portrait — Axel Lechartier"
-description: "Pilote fondateur de SWSM Racing Team. Du motocross au supermotard, méthode de travail entre les manches, lecture du championnat 2026."
-pubDate: 2026-03-20
-category: "portrait"
-cover: "/images/articles/portrait-axel-cover.jpg"
-pilotes: ["axel-lechartier"]
+title: Portrait — Axel Lechartier
+description: >-
+  Pilote fondateur de SWSM Racing Team. Un parcours à contre-courant du paddock,
+  un point fort assumé, une marge identifiée.
+pubDate: 2026-03-20T00:00:00.000Z
+category: portrait
+cover: /images/articles/portrait-axel-cover.jpg
+pilotes:
+  - axel-lechartier
 draft: false
 ---
+# Le bitume d'abord
 
-Pilote fondateur de SWSM Racing Team, Axel Lechartier est engagé en Championnat de France de Supermotard catégorie Challenger et au Trophée de France. Numéro #52.
+**Axel Lechartier, #52, pilote fondateur de SWSM Racing Team**
 
-## Un parcours du motocross au supermotard
+Dans un paddock de supermotard, la question de l'origine revient toujours. D'où tu viens ? La réponse est presque toujours la même. Du motocross. La discipline s'est construite là-dessus, sur des pilotes formés à la terre qui sont venus chercher le bitume plus tard, souvent après une carrière tout-terrain déjà bien remplie.
 
-Issu du motocross — formation classique pour beaucoup de pilotes du paddock supermotard — Axel a basculé vers la discipline mixte par choix technique. *« Sur un supermotard, tu travailles plus l'angle, plus le freinage. La diversité des appuis est ce qui m'a fait passer le pas. »*
+Axel Lechartier fait exception. Il n'est pas venu au supermotard, il a commencé par là.
 
-L'écurie SWSM Racing Team naît de cette logique : structurer un projet sportif comme une marque, en parallèle d'une activité entrepreneuriale. Pas une démarche de pilote isolé, mais une structure pensée pour durer.
+## À contre-courant du paddock
 
-## Méthode de travail entre les manches
+Dix-sept ans, un premier guidon, et directement la discipline mixte. Pas de saisons de motocross en amont, pas de jeunesse passée dans les ornières. Le supermotard comme point d'entrée et non comme reconversion.
 
-Deux week-ends d'entraînement programmés entre chaque manche du championnat. Sessions piste à Val d'Argenton et Salbris selon disponibilités. Travail spécifique en intersaison sur les phases de freinage tardif et les transferts de masse en bout de ligne droite.
+C'est une trajectoire rare, et elle produit un pilote au profil particulier. Là où la majorité du plateau arrive avec dix ans de terre dans les jambes et découvre progressivement l'asphalte, Axel a construit l'inverse. Une aisance immédiate sur le bitume, un rapport naturel à l'angle, au freinage, aux appuis. Le revêtement dur n'a jamais été un terrain d'adaptation pour lui. C'est son terrain.
 
-L'analyse vidéo systématique après chaque session est devenue la norme : référencement des courbes de vitesse au GPS, identification des zones de progression, ajustement des réglages sur la session suivante. *« On ne progresse pas sans mesurer. »*
+*« Le bitume, c'est là où je suis le plus rapide et, honnêtement, là où je prends le plus de plaisir. C'est venu tout de suite. »*
 
-## Lecture du championnat 2026
+## Là où ça se joue
 
-Le plateau Challenger 2026 est jugé plus relevé que les saisons précédentes. Une douzaine de pilotes pointés comme prétendants sérieux au top 10. Pour Axel, l'objectif personnel reste la régularité dans les points sur l'ensemble de la saison, et un top 10 sur au moins deux manches.
+Le supermotard ne se gagne pourtant pas uniquement sur l'asphalte. C'est même l'inverse. Sur un tracé mixte, la section terre est fréquemment l'endroit où les écarts se creusent. Franchissements, réception de saut, gestion de la motricité sur une surface qui bouge, relance en sortie de portion. Autant de gestes que les pilotes issus du motocross exécutent par automatisme, sans y penser, parce qu'ils les ont répétés pendant des années.
 
-L'enjeu collectif dépasse le résultat individuel : assurer la présence des trois pilotes sur chaque épreuve, construire l'image de l'écurie, valider auprès des partenaires que la structure fonctionne.
+Axel, lui, doit les construire. Et il ne s'en cache pas.
 
-## Hors piste
+*« La terre, c'est là où je pèche. C'est ce qui me manque encore pour jouer le tout haut de tableau. »*
 
-En semaine, Axel pilote les sociétés familiales (360 Franchises, ATL Capital) qui sont aussi partenaires principaux de l'écurie. Le sport et l'entreprise se nourrissent — discipline, gestion du stress, lecture rapide des situations sont des compétences communes.
-
-*« Quand on signe un partenaire, on signe quelqu'un qui investit dans la durée. Ce n'est pas du sponsoring de match, c'est du sponsoring de saison — et idéalement de carrière. »*
+La phrase mérite d'être entendue pour ce qu'elle est. Un diagnostic, pas
