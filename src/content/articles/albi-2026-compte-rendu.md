@@ -4,7 +4,7 @@ description: >-
   Un temps de leader en Trophée de France, un top 7 pour Tristan Ducamp et trois
   pilotes SWSM en progression pour clore la saison à Albi. Le récit d'un
   week-end où l'écurie a prouvé qu'elle avait le rythme pour jouer devant.
-pubDate: 2026-09-06T00:00:00.000Z
+pubDate: 2026-09-02T00:00:00.000Z
 category: compte-rendu
 cover: /images/articles/9b1f2ae1-1d4c-400c-8ef9-ff9e9e17f253.jpg
 course: albi-2026
