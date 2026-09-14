@@ -54,16 +54,8 @@
       "organisateur": "MC du Circuit d'Albi",
       "date": "2026-08-29",
       "date_fin": "2026-08-30",
-      "statut": "a_venir"
-    },
-    {
-      "id": 6,
-      "lieu": "Villars-sous-Écot",
-      "departement": "25",
-      "organisateur": "MC Villars-sous-Écot",
-      "date": "2026-09-12",
-      "date_fin": "2026-09-13",
-      "statut": "a_venir"
+      "statut": "passe",
+      "lien_compte_rendu": "/coulisses/albi-2026-compte-rendu"
     }
   ]
 }
