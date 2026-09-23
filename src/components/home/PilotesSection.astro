@@ -12,10 +12,10 @@ const s = settings.pilotesSection;
 
 <section class="pilotes pilotes-section" style="position:relative;background:#F7F7F5;z-index:3;">
   <header style="padding:6rem 1.5rem 3rem;max-width:1240px;margin:0 auto;">
-    <p style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#EC2D7C;margin-bottom:1.5rem;">
+    <p style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#FF1E7C;margin-bottom:1.5rem;">
       {s.eyebrow}
     </p>
-    <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;letter-spacing:-0.01em;color:#0D0D0D;max-width:900px;">
+    <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;letter-spacing:-0.01em;color:#1B2347;max-width:900px;">
       {s.title}
     </h2>
   </header>
@@ -37,7 +37,7 @@ const s = settings.pilotesSection;
         >
           <span
             aria-hidden="true"
-            style={`position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:${paddingRight}vw;font-family:var(--font-display);font-weight:700;font-size:28vw;color:rgba(13,13,13,0.05);line-height:1;letter-spacing:-0.02em;pointer-events:none;user-select:none;`}
+            style={`position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:${paddingRight}vw;font-family:var(--font-display);font-weight:700;font-size:28vw;color:rgba(27,35,71,0.05);line-height:1;letter-spacing:-0.02em;pointer-events:none;user-select:none;`}
           >
             {p.data.numero}
           </span>
@@ -53,19 +53,19 @@ const s = settings.pilotesSection;
             </div>
 
             <div>
-              <p style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#EC2D7C;margin-bottom:1rem;">
+              <p style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#FF1E7C;margin-bottom:1rem;">
                 Pilote {String(p.data.ordre).padStart(2, "0")}
               </p>
-              <p style="font-family:var(--font-display);font-weight:700;font-size:clamp(4rem,8vw,7rem);line-height:0.9;letter-spacing:-0.01em;color:#0D0D0D;margin:0;">
+              <p style="font-family:var(--font-display);font-weight:700;font-size:clamp(4rem,8vw,7rem);line-height:0.9;letter-spacing:-0.01em;color:#1B2347;margin:0;">
                 #{p.data.numero}
               </p>
-              <h3 style="font-family:var(--font-display);font-weight:700;font-size:clamp(1.5rem,2.5vw,2rem);letter-spacing:-0.01em;color:#0D0D0D;margin-top:1.25rem;">
+              <h3 style="font-family:var(--font-display);font-weight:700;font-size:clamp(1.5rem,2.5vw,2rem);letter-spacing:-0.01em;color:#1B2347;margin-top:1.25rem;">
                 {p.data.prenom} {p.data.nom}
               </h3>
-              <p style="font-family:var(--font-body);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:rgba(13,13,13,0.7);margin-top:0.5rem;">
+              <p style="font-family:var(--font-body);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:rgba(27,35,71,0.7);margin-top:0.5rem;">
                 {p.data.categorie}{p.data.trophee && " — Trophée de France"}
               </p>
-              <p style="font-family:var(--font-body);font-size:1rem;line-height:1.6;color:rgba(13,13,13,0.85);margin-top:1.5rem;max-width:28rem;">
+              <p style="font-family:var(--font-body);font-size:1rem;line-height:1.6;color:rgba(27,35,71,0.85);margin-top:1.5rem;max-width:28rem;">
                 {p.data.bio}
               </p>
             </div>
@@ -76,11 +76,11 @@ const s = settings.pilotesSection;
     </div>
 
     <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:1rem;pointer-events:none;">
-      <span class="pilotes-counter" style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(13,13,13,0.6);">
+      <span class="pilotes-counter" style="font-family:var(--font-display);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(27,35,71,0.6);">
         01 / {String(totalSlides).padStart(2, "0")}
       </span>
-      <div style="width:8rem;height:1px;background:rgba(13,13,13,0.15);position:relative;">
-        <div class="pilotes-progress" style="position:absolute;inset-block:0;left:0;background:#EC2D7C;width:0%;"></div>
+      <div style="width:8rem;height:1px;background:rgba(27,35,71,0.15);position:relative;">
+        <div class="pilotes-progress" style="position:absolute;inset-block:0;left:0;background:#FF1E7C;width:0%;"></div>
       </div>
     </div>
   </div>
@@ -96,7 +96,7 @@ const s = settings.pilotesSection;
       height: auto !important;
       padding-top: 4rem !important;
       padding-bottom: 4rem !important;
-      border-bottom: 1px solid rgba(13, 13, 13, 0.08);
+      border-bottom: 1px solid rgba(27, 35, 71, 0.08);
     }
     .pilote-slide:last-child { border-bottom: none; }
     .pilote-slide > div { grid-template-columns: 1fr !important; gap: 2rem !important; }

@@ -124,8 +124,8 @@ export function RaceCountdown({ race }: Props) {
 
       <style>{`
         @keyframes race-pulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(236, 45, 124, 0.5); }
-          50% { box-shadow: 0 0 0 8px rgba(236, 45, 124, 0); }
+          0%, 100% { box-shadow: 0 0 0 0 rgba(255, 30, 124, 0.5); }
+          50% { box-shadow: 0 0 0 8px rgba(255, 30, 124, 0); }
         }
       `}</style>
     </div>

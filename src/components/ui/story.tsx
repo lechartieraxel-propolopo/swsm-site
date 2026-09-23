@@ -69,7 +69,7 @@ export function StoriesRow({ stories, slideDuration = 5000 }: Props) {
                 style={{
                   background: seen
                     ? "rgba(247,247,245,0.25)"
-                    : `conic-gradient(from 0deg, ${s.accentColor || "#EC2D7C"}, #5B21B6, ${s.accentColor || "#EC2D7C"})`,
+                    : `conic-gradient(from 0deg, ${s.accentColor || "#FF1E7C"}, #5B21B6, ${s.accentColor || "#FF1E7C"})`,
                 }}
               >
                 <span className="block bg-swsm-black p-[2px] rounded-full">

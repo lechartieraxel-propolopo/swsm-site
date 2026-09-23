@@ -11,13 +11,13 @@ interface DynamicHeroProps {
 }
 
 export function DynamicHero({
-  eyebrow = "Partenariat 2026",
+  eyebrow = "Partenariat 2027",
   heading = "Faites partie de l'écurie.",
   tagline = "Cinq partenaires nous accompagnent déjà. Associez votre marque à SWSM Racing Team — trois pilotes en Championnat de France de Supermotard.",
-  primaryCtaLabel = "Télécharger le dossier",
-  primaryCtaHref = "/dossier-sponsor/dossier-sponsoring-swsm-2026.pdf",
-  secondaryCtaLabel = "Découvrir les niveaux",
-  secondaryCtaHref = "#niveaux",
+  primaryCtaLabel = "Découvrir le dossier 2027",
+  primaryCtaHref = "/espace-partenaire/index.html",
+  secondaryCtaLabel = "Télécharger le PDF",
+  secondaryCtaHref = "/dossier-sponsor/SWSM-Racing-Team-Dossier-Partenariat-2027.pdf",
 }: DynamicHeroProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -63,8 +63,8 @@ export function DynamicHero({
 
     if (opacity <= 0) return;
 
-    // Couleur SWSM pink (#EC2D7C) — cohérent charte
-    ctx.strokeStyle = `rgba(236, 45, 124, ${opacity})`;
+    // Couleur SWSM pink (#FF1E7C) — cohérent charte
+    ctx.strokeStyle = `rgba(255, 30, 124, ${opacity})`;
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
 
@@ -187,7 +187,6 @@ export function DynamicHero({
           <a
             ref={targetRef}
             href={primaryCtaHref}
-            download
             className="dh-cta-primary group relative inline-flex items-center justify-center gap-2 font-display font-bold text-sm uppercase tracking-[0.05em] px-8 py-4 bg-swsm-pink text-swsm-white rounded-sm transition-transform duration-200 hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-swsm-pink focus-visible:ring-offset-2 focus-visible:ring-offset-swsm-black"
           >
             <span>{primaryCtaLabel}</span>
@@ -196,10 +195,11 @@ export function DynamicHero({
 
           <a
             href={secondaryCtaHref}
+            download="SWSM-Racing-Team-Dossier-Partenariat-2027.pdf"
             className="inline-flex items-center justify-center gap-2 font-display font-bold text-sm uppercase tracking-[0.05em] px-8 py-4 border border-swsm-white/30 text-swsm-white rounded-sm backdrop-blur-sm hover:bg-swsm-white/10 hover:border-swsm-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-swsm-white"
           >
             <span>{secondaryCtaLabel}</span>
-            <span>↓</span>
+            <span aria-hidden="true">↓</span>
           </a>
         </div>
       </div>
@@ -233,7 +233,7 @@ export function DynamicHero({
         }
         .dh-blob-1 {
           width: 84vw; height: 84vw; top: -25%; left: -20%;
-          background: radial-gradient(circle, rgba(236,45,124,1) 0%, rgba(236,45,124,0) 65%);
+          background: radial-gradient(circle, rgba(255,30,124,1) 0%, rgba(255,30,124,0) 65%);
           animation: dh-flow-1 7s ease-in-out infinite;
         }
         .dh-blob-2 {

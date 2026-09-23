@@ -16,10 +16,26 @@ const links = [
     <nav class="flex items-center justify-between h-16 md:h-20 text-swsm-white">
       <a
         href="/"
-        class="font-display font-bold text-lg md:text-xl tracking-caps-loose uppercase hover:opacity-80 transition-opacity"
+        class="swsm-brand hover:opacity-80 transition-opacity"
         aria-label="SWSM Racing Team — Accueil"
       >
-        SWSM
+        <img
+          class="swsm-logo-blanc"
+          src="/images/logo/swsm-blanc.png"
+          alt="SWSM Racing Team"
+          width="600"
+          height="200"
+          style="height:20px;width:auto;display:block;"
+        />
+        <img
+          class="swsm-logo-marine"
+          src="/images/logo/swsm-marine.png"
+          alt=""
+          aria-hidden="true"
+          width="600"
+          height="202"
+          style="height:20px;width:auto;display:block;position:absolute;left:0;top:50%;transform:translateY(-50%);opacity:0;pointer-events:none;"
+        />
       </a>
 
       <!-- Nav desktop -->
@@ -69,15 +85,18 @@ const links = [
   <div
     class="absolute inset-0 pointer-events-none"
     aria-hidden="true"
-    style="background: radial-gradient(ellipse at 80% 10%, rgba(236,45,124,0.20) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(91,33,182,0.20) 0%, transparent 55%);"
+    style="background: radial-gradient(ellipse at 80% 10%, rgba(255,30,124,0.20) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(91,33,182,0.20) 0%, transparent 55%);"
   ></div>
 
   <div class="relative flex items-center justify-between h-16 px-5">
-    <a
-      href="/"
-      class="font-display font-bold text-lg tracking-caps-loose uppercase"
-    >
-      SWSM
+    <a href="/" class="swsm-brand" aria-label="SWSM Racing Team — Accueil">
+      <img
+        src="/images/logo/swsm-blanc.png"
+        alt="SWSM Racing Team"
+        width="600"
+        height="200"
+        style="height:20px;width:auto;display:block;"
+      />
     </a>
     <button
       id="swsm-burger-close"
@@ -133,24 +152,30 @@ const links = [
 </div>
 
 <style>
+  .swsm-brand { display: inline-flex; align-items: center; position: relative; }
+  .swsm-logo-blanc, .swsm-logo-marine { transition: opacity 0.3s ease; }
+  /* Hero clair : on bascule sur le logo marine tant qu'on est en haut de page */
+  body.light-navbar #swsm-navbar[data-state="top"] .swsm-logo-marine { opacity: 1 !important; }
+  body.light-navbar #swsm-navbar[data-state="top"] .swsm-logo-blanc { opacity: 0 !important; }
+
   /* Sur les pages à hero clair (body.light-navbar) en haut de page → texte foncé. */
   body.light-navbar #swsm-navbar[data-state="top"] nav {
-    color: #0D0D0D;
+    color: #1B2347;
   }
   /* Burger sur fond clair : fond noir translucide pour contraste */
   body.light-navbar #swsm-navbar[data-state="top"] .swsm-burger {
-    background-color: rgba(13, 13, 13, 0.06);
-    border-color: rgba(13, 13, 13, 0.12);
+    background-color: rgba(27, 35, 71, 0.06);
+    border-color: rgba(27, 35, 71, 0.12);
   }
   body.light-navbar #swsm-navbar[data-state="top"] .swsm-burger:hover {
-    background-color: rgba(13, 13, 13, 0.12);
+    background-color: rgba(27, 35, 71, 0.12);
   }
 
   /* ─── Drawer mobile : OPACITÉ TOTALE, jamais transparent ─── */
   .swsm-drawer {
     position: fixed;
     inset: 0;
-    background-color: #0D0D0D; /* swsm-black 100% opaque */
+    background-color: #1B2347; /* swsm-black 100% opaque */
     z-index: 9999;
     visibility: hidden;
     opacity: 0;
@@ -197,7 +222,7 @@ const links = [
 
     const backdrop = document.createElement("div");
     backdrop.style.cssText =
-      "position:absolute;inset:0;background:rgba(13,13,13,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transition:opacity 80ms linear;pointer-events:none;z-index:-1;";
+      "position:absolute;inset:0;background:rgba(27,35,71,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transition:opacity 80ms linear;pointer-events:none;z-index:-1;";
     navbar.style.position = navbar.style.position || "fixed";
     navbar.appendChild(backdrop);
 

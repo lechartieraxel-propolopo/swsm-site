@@ -134,7 +134,7 @@ export function ZoomParallax({ images, manifesto }: ZoomParallaxProps) {
                 zIndex: 50,
                 opacity: 0,
                 background:
-                  "linear-gradient(90deg, rgba(13,13,13,1) 0%, rgba(13,13,13,0.75) 45%, rgba(13,13,13,0.4) 100%)",
+                  "linear-gradient(90deg, rgba(27,35,71,1) 0%, rgba(27,35,71,0.75) 45%, rgba(27,35,71,0.4) 100%)",
                 willChange: "opacity",
               }}
               aria-hidden="true"

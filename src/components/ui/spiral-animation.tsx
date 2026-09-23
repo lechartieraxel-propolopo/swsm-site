@@ -136,7 +136,7 @@ class AnimationController {
     for (let i = 0; i < this.trailLength; i++) {
       const f = this.map(i, 0, this.trailLength, 1.1, 0.1);
       const sw = (1.3 * (1 - t1) + 3.0 * Math.sin(Math.PI * t1)) * f;
-      this.ctx.fillStyle = "#EC2D7C"; // SWSM pink for trail
+      this.ctx.fillStyle = "#FF1E7C"; // SWSM pink for trail
       this.ctx.lineWidth = sw;
       const pos = this.spiralPath(t1 - 0.00015 * i);
       this.ctx.beginPath();

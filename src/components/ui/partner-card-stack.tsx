@@ -146,7 +146,7 @@ function StackedCard({
         x: "-50%",
         bottom: 0,
       }}
-      className="absolute flex h-[390px] w-[420px] items-center justify-center overflow-hidden rounded-t-md border-x border-t border-swsm-white/15 bg-[#171717] p-1.5 shadow-[0_-12px_40px_-10px_rgba(236,45,124,0.25)] will-change-transform sm:w-[665px]"
+      className="absolute flex h-[390px] w-[420px] items-center justify-center overflow-hidden rounded-t-md border-x border-t border-swsm-white/15 bg-[#171717] p-1.5 shadow-[0_-12px_40px_-10px_rgba(255,30,124,0.25)] will-change-transform sm:w-[665px]"
     >
       <PartnerCard partner={item.partner} />
     </motion.div>

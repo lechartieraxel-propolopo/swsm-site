@@ -6,9 +6,9 @@
 /* ─── Thème SWSM Racing Team (Tailwind v4) ─── */
 @theme {
   /* Palette */
-  --color-swsm-black: #0D0D0D;
+  --color-swsm-black: #1B2347;
   --color-swsm-white: #F7F7F5;
-  --color-swsm-pink: #EC2D7C;
+  --color-swsm-pink: #FF1E7C;
   --color-swsm-violet: #5B21B6;
 
   /* Polices */
@@ -16,7 +16,7 @@
   --font-body: "Inter", sans-serif;
 
   /* Dégradé signature */
-  --background-image-gradient-signature: linear-gradient(135deg, #EC2D7C 0%, #5B21B6 100%);
+  --background-image-gradient-signature: linear-gradient(135deg, #FF1E7C 0%, #5B21B6 100%);
 
   /* Letter-spacing */
   --tracking-eyebrow: 0.15em;
@@ -26,11 +26,11 @@
 
 /* ─── Variables CSS de base ─── */
 :root {
-  --swsm-black: #0D0D0D;
+  --swsm-black: #1B2347;
   --swsm-white: #F7F7F5;
-  --swsm-pink: #EC2D7C;
+  --swsm-pink: #FF1E7C;
   --swsm-violet: #5B21B6;
-  --gradient-signature: linear-gradient(135deg, #EC2D7C 0%, #5B21B6 100%);
+  --gradient-signature: linear-gradient(135deg, #FF1E7C 0%, #5B21B6 100%);
 }
 
 html {
@@ -169,14 +169,14 @@ html.lenis body {
  * d'écraser le background gradient.
  */
 .btn-cta-pink {
-  background: linear-gradient(180deg, #ff4f9c 0%, #ec2d7c 55%, #c4205c 100%);
+  background: linear-gradient(180deg, #ff4f9c 0%, #FF1E7C 55%, #c4205c 100%);
   color: #F7F7F5;
   border: none;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.40) inset,
     0 -2px 0 rgba(0, 0, 0, 0.20) inset,
     0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-    0 8px 24px -4px rgba(236, 45, 124, 0.50),
+    0 8px 24px -4px rgba(255, 30, 124, 0.50),
     0 2px 8px rgba(0, 0, 0, 0.20),
     0 0 16px rgba(255, 100, 180, 0.20);
 }
@@ -185,7 +185,7 @@ html.lenis body {
     0 1px 0 rgba(255, 255, 255, 0.50) inset,
     0 -2px 0 rgba(0, 0, 0, 0.22) inset,
     0 0 0 1px rgba(255, 255, 255, 0.28) inset,
-    0 16px 40px -6px rgba(236, 45, 124, 0.65),
+    0 16px 40px -6px rgba(255, 30, 124, 0.65),
     0 4px 14px rgba(0, 0, 0, 0.25),
     0 0 24px rgba(255, 100, 180, 0.30);
 }
@@ -193,7 +193,7 @@ html.lenis body {
 /* ─── Variante BLANC — CTA primaire sur fond foncé/dégradé ─── */
 .btn-cta-light {
   background: linear-gradient(180deg, #ffffff 0%, #f0f0ec 100%);
-  color: #0D0D0D;
+  color: #1B2347;
   border: none;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.85) inset,
@@ -234,9 +234,9 @@ html.lenis body {
 
 /* ─── Variante GLASS-DARK — pour fonds clairs ─── */
 .btn-cta-glass-dark {
-  background: rgba(13, 13, 13, 0.04);
-  color: #0D0D0D;
-  border: 1px solid rgba(13, 13, 13, 0.25);
+  background: rgba(27, 35, 71, 0.04);
+  color: #1B2347;
+  border: 1px solid rgba(27, 35, 71, 0.25);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow:
@@ -245,8 +245,8 @@ html.lenis body {
     0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .btn-cta-glass-dark:hover {
-  background: rgba(13, 13, 13, 0.08);
-  border-color: rgba(13, 13, 13, 0.50);
+  background: rgba(27, 35, 71, 0.08);
+  border-color: rgba(27, 35, 71, 0.50);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.6) inset,
     0 8px 24px -4px rgba(0, 0, 0, 0.20);

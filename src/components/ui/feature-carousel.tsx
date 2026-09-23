@@ -196,7 +196,7 @@ export function FeatureCarousel({ features, intervalMs = 4000 }: Props) {
                       isActive ? "opacity-100" : "opacity-0",
                     )}
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-swsm-pink shadow-[0_0_8px_#EC2D7C]" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-swsm-pink shadow-[0_0_8px_#FF1E7C]" />
                     <span className="text-swsm-white/85 text-[10px] font-display font-medium uppercase tracking-[0.3em]">
                       Saison 2026
                     </span>
